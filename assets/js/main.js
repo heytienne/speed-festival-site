@@ -24,6 +24,35 @@
     return { name: name, stage: sc.stage, color: sc.color, h: p[0] + 'H', m: p[1] || '00', time: from + ' → ' + to,
       size: name.length > 14 ? 'clamp(26px, 2.6vw, 36px)' : 'clamp(32px, 3.4vw, 46px)' };
   }
+
+  /* ---------- Fiches artistes ----------
+     Pour chaque artiste : photo (chemin d'image, sinon visuel provisoire), bio,
+     et liens d'écoute. Tant qu'un lien officiel n'est pas renseigné, le bouton
+     ouvre une recherche du nom sur la plateforme.
+     Remplacer les textes marqués « à valider » / « à venir » par les vrais. */
+  var ARTISTES = {
+    'Tremplin': { bio: 'Le lauréat du tremplin Speed ouvre le circuit : un talent local repéré par l’équipe, qui prend la pole avant tout le monde. Nom dévoilé bientôt.', noLinks: true },
+    'DJ Stiff': { bio: 'Présentation de l’artiste à venir.' },
+    'Europe': { bio: 'Présentation de l’artiste à venir.' },
+    'Notinbed': { bio: 'Présentation de l’artiste à venir.' },
+    'St Graal': { bio: 'Artiste français révélé en 2021 par le titre viral « Les dauphins », entre électro et pop aérienne. (Texte à valider)' },
+    'Noel Minitel': { bio: 'Présentation de l’artiste à venir.' },
+    'Benwal': { bio: 'DJ et producteur néerlandais originaire de Groningue : des sets trance, hard house et techno à très haute énergie, passés par Pukkelpop et les grands clubs européens. (Texte à valider)' },
+    'Sheriff': { bio: 'Présentation de l’artiste à venir.' },
+    'Velvet Brothers': { bio: 'Présentation de l’artiste à venir.' },
+    'DJ Minou': { bio: 'Présentation de l’artiste à venir.' },
+    'Arone': { bio: 'Présentation de l’artiste à venir.' },
+    'Solar Boys': { bio: 'Présentation de l’artiste à venir.' },
+    'Camoufly': { bio: 'Producteur et DJ masqué venu d’Italie : house, UK garage et sons expérimentaux, un mélange de genres qui ne tient jamais en place. (Texte à valider)' },
+    'Snoritz': { bio: 'DJ et producteur de Münster : du garage à la hard house en passant par les breaks, des sets qui accélèrent sans prévenir. (Texte à valider)' },
+    'Speed All Stars End Show': { bio: 'Le grand final du Speed : toute l’écurie monte sur la Speed Arena pour le dernier tour de piste. Programme surprise.', noLinks: true }
+  };
+  var PLATEFORMES = [
+    { key: 'spotify', label: 'Spotify', color: '#1DB954', search: function (q) { return 'https://open.spotify.com/search/' + encodeURIComponent(q); } },
+    { key: 'deezer', label: 'Deezer', color: '#A238FF', search: function (q) { return 'https://www.deezer.com/search/' + encodeURIComponent(q); } },
+    { key: 'soundcloud', label: 'SoundCloud', color: '#FF5500', search: function (q) { return 'https://soundcloud.com/search?q=' + encodeURIComponent(q); } },
+    { key: 'youtube', label: 'YouTube', color: '#FF0000', search: function (q) { return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q); } }
+  ];
   var VEN = [
     slot('Tremplin', BV, '19h00', '19h30'),
     slot('DJ Stiff', BV, '19h30', '20h30'),
@@ -44,18 +73,58 @@
     slot('Speed All Stars End Show', ALL, '02h00', '02h45')
   ];
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function plaque(a, i) {
-    return '<div class="' + (i % 2 ? 'stg' : '') + '" style="display:flex;align-items:stretch;border:4px solid #000;box-shadow:0 0 0 6px ' + a.color + ';border-radius:6px;background:' + a.color + ';overflow:hidden;">' +
+  function plaque(day) { return function (a, i) {
+    return '<button type="button" class="artist-btn' + (i % 2 ? ' stg' : '') + '" data-day="' + day + '" data-i="' + i + '" aria-haspopup="dialog" aria-label="' + esc(a.name) + ' : voir la fiche artiste">' +
+      '<div style="display:flex;align-items:stretch;border:4px solid #000;box-shadow:0 0 0 6px ' + a.color + ';border-radius:6px;background:' + a.color + ';overflow:hidden;">' +
       '<div class="t" style="width:clamp(78px,8vw,104px);flex:none;background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;line-height:.9;">' +
         '<span style="font-size:clamp(30px,3vw,40px);font-weight:900;font-style:italic;">' + a.h + '</span>' +
         '<span style="font-size:clamp(18px,1.8vw,22px);font-weight:800;color:' + a.color + ';">' + a.m + '</span></div>' +
       '<div style="flex:1;min-width:0;display:flex;flex-direction:column;">' +
         '<div class="t plaque-u" style="flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:' + a.size + ';line-height:1;font-weight:900;font-style:italic;text-transform:uppercase;padding:14px 10px 16px;">' + esc(a.name) + '</div>' +
-        '<div class="bar" style="background:#000;color:' + a.color + ';padding:6px 14px;font-size:clamp(12px,1.2vw,15px);font-weight:600;"><span>→ ' + a.stage + '</span><span>' + a.time + '</span></div>' +
-      '</div></div>';
+        '<div class="bar" style="background:#000;color:' + a.color + ';padding:6px 14px;font-size:clamp(12px,1.2vw,15px);font-weight:600;"><span>→ ' + a.stage + '</span><span class="am-hint">+ FICHE ARTISTE</span><span>' + a.time + '</span></div>' +
+      '</div></div></button>';
+  }; }
+  var JOURS = { ven: { list: VEN, label: 'Vendredi 28' }, sam: { list: SAM, label: 'Samedi 29' } };
+  document.getElementById('ven-list').innerHTML = VEN.map(plaque('ven')).join('');
+  document.getElementById('sam-list').innerHTML = SAM.map(plaque('sam')).join('');
+
+  /* ---------- Popup fiche artiste ---------- */
+  var am = document.getElementById('artist-modal'), amOpener = null;
+  function initials(name) { return name.split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 3).toUpperCase(); }
+  function openArtist(dayKey, i, btn) {
+    var a = JOURS[dayKey].list[i], info = ARTISTES[a.name] || {};
+    amOpener = btn;
+    am.style.setProperty('--am-color', a.color);
+    document.getElementById('am-kicker').textContent = '→ LINE-UP 2027 · ' + a.stage;
+    document.getElementById('am-name').textContent = a.name;
+    document.getElementById('am-day').textContent = JOURS[dayKey].label;
+    document.getElementById('am-time').textContent = a.time;
+    document.getElementById('am-stage').textContent = a.stage;
+    document.getElementById('am-bio').textContent = info.bio || 'Présentation de l’artiste à venir.';
+    var photo = document.getElementById('am-photo');
+    photo.innerHTML = info.photo
+      ? '<img src="' + esc(info.photo) + '" alt="' + esc(a.name) + ', photo presse">'
+      : '<div class="am-ph" aria-hidden="true"><span class="am-ph-init">' + esc(initials(a.name)) + '</span><span class="am-ph-note">PHOTO PRESSE À VENIR</span></div>';
+    var links = document.getElementById('am-links'), title = document.querySelector('.am-listen-title');
+    if (info.noLinks) { links.innerHTML = ''; title.hidden = true; }
+    else {
+      title.hidden = false;
+      links.innerHTML = PLATEFORMES.map(function (p) {
+        var url = (info.links && info.links[p.key]) || p.search(a.name);
+        return '<a href="' + esc(url) + '" target="_blank" rel="noopener"><span class="dot" style="background:' + p.color + '"></span>' + p.label + ' ↗</a>';
+      }).join('');
+    }
+    am.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('am-close').focus();
   }
-  document.getElementById('ven-list').innerHTML = VEN.map(plaque).join('');
-  document.getElementById('sam-list').innerHTML = SAM.map(plaque).join('');
+  function closeArtist() { am.hidden = true; document.body.style.overflow = ''; if (amOpener) amOpener.focus(); }
+  document.getElementById('grille').addEventListener('click', function (e) {
+    var b = e.target.closest('.artist-btn'); if (b) openArtist(b.getAttribute('data-day'), +b.getAttribute('data-i'), b);
+  });
+  document.getElementById('am-close').addEventListener('click', closeArtist);
+  am.addEventListener('click', function (e) { if (e.target === am) closeArtist(); });
+  document.addEventListener('keydown', function (e) { if (!am.hidden && e.key === 'Escape') closeArtist(); });
 
   /* ---------- Replay 2025 + visionneuse ---------- */
   var PHOTOS = [

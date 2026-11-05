@@ -22,6 +22,10 @@ Direction artistique « Grand Prix » : affiche orange, grille de départ, menu 
 ## Mettre à jour le contenu
 
 - **Line-up** : listes `VEN` et `SAM` en haut de `assets/js/main.js` (nom, scène, horaires). Couleurs : orange = Speed Arena, vert = Boiler Vroom.
+- **Fiches artistes (popup au clic sur une plaque)** : objet `ARTISTES` dans `assets/js/main.js`. Pour chaque artiste :
+  - `bio` : texte de présentation (les textes « à valider » / « à venir » sont provisoires) ;
+  - `photo` : chemin d'une photo presse (ex. `'assets/img/artistes/benwal.jpg'`). Sans photo, un visuel provisoire aux initiales s'affiche ;
+  - `links` : liens officiels, ex. `{ spotify: 'https://open.spotify.com/artist/…', soundcloud: '…', deezer: '…', youtube: '…' }`. Sans lien officiel, le bouton ouvre une recherche du nom sur la plateforme.
 - **Date du compte à rebours** : constante `DEPART` dans `assets/js/main.js` (0 = ouverture du vendredi à 18h).
 - **Photos du Replay** : liste `PHOTOS` dans `assets/js/main.js`.
 

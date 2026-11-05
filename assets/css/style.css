@@ -121,3 +121,46 @@ a{color:inherit}a:hover{color:#FF5500}
 /* Visionneuse photo : affichée seulement quand elle est ouverte */
 #lightbox{display:flex}
 #lightbox[hidden]{display:none !important}
+
+/* ---------- Plaques artistes cliquables ---------- */
+.artist-btn{appearance:none;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:inherit;box-sizing:border-box;display:block;width:auto;cursor:pointer;border-radius:6px;transition:transform .18s cubic-bezier(.3,1.6,.5,1)}
+.artist-btn > div{pointer-events:none}
+.artist-btn:hover{transform:translateY(-4px)}
+.artist-btn:focus-visible{outline:4px solid #000;outline-offset:10px}
+.artist-btn .am-hint{font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.85}
+
+/* ---------- Fiche artiste (popup) ---------- */
+#artist-modal{position:fixed;inset:0;z-index:110;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;padding:clamp(10px,3vw,40px);overflow-y:auto}
+#artist-modal[hidden]{display:none !important}
+.am-card{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);width:min(1040px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#FFF8E6;border:5px solid #000;border-radius:12px;box-shadow:0 0 0 8px var(--am-color,#FF5500),14px 14px 0 8px #000;font-family:Inter,system-ui,sans-serif}
+.am-close{position:absolute;right:14px;top:14px;z-index:2;min-height:44px;padding:0 16px;border:3px solid #000;border-radius:999px;background:var(--am-color,#FF5500);color:#000;font-size:20px;font-weight:900;cursor:pointer}
+.am-close:hover{background:#000;color:#fff}
+.am-photo{position:relative;min-height:420px;background:#000;border-right:5px solid #000;overflow:hidden}
+.am-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.am-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--am-color,#FF5500);background-image:radial-gradient(circle,rgba(0,0,0,.35) 1.6px,transparent 2px);background-size:10px 10px;color:#000;text-align:center;padding:20px}
+.am-ph-init{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:clamp(90px,12vw,160px);font-weight:900;font-style:italic;line-height:.85;-webkit-text-stroke:3px #000;color:#FFF8E6}
+.am-ph-note{background:#000;color:var(--am-color,#FF5500);padding:4px 12px;font-size:12px;font-weight:700;letter-spacing:.08em}
+.am-body{padding:clamp(24px,3.4vw,44px);display:flex;flex-direction:column;gap:16px}
+.am-kicker{margin:0;font-size:13px;font-weight:700;letter-spacing:.12em;color:#555;padding-right:120px}
+.am-name{margin:0;font-size:clamp(44px,6vw,84px);line-height:.85;font-weight:900;font-style:italic;text-transform:uppercase;text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.14em;text-decoration-color:var(--am-color,#FF5500)}
+.am-slot{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:3px solid #000;border-radius:8px;overflow:hidden}
+.am-slot > div{padding:10px 12px;border-right:3px solid #000;background:#fff}
+.am-slot > div:last-child{border-right:0;background:var(--am-color,#FF5500)}
+.am-slot dt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#555}
+.am-slot > div:last-child dt{color:#000}
+.am-slot dd{margin:2px 0 0;font-size:clamp(20px,2.2vw,28px);font-weight:900;line-height:1}
+.am-bio{margin:0;font-size:16px;line-height:1.6}
+.am-listen-title{margin:6px 0 0;font-size:22px;font-weight:900;font-style:italic;text-transform:uppercase}
+.am-links{display:flex;flex-wrap:wrap;gap:10px}
+.am-links a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 16px;border:3px solid #000;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:19px;font-weight:800;text-transform:uppercase;transition:transform .15s,background .15s}
+.am-links a:hover{background:#000;color:#fff;transform:translateY(-2px)}
+.am-links a .dot{width:12px;height:12px;border-radius:50%;flex:none}
+@media (max-width:760px){
+  .am-card{grid-template-columns:minmax(0,1fr);max-height:none}
+  .am-photo{min-height:240px;border-right:0;border-bottom:5px solid #000}
+  .am-slot{grid-template-columns:minmax(0,1fr)}
+  .am-slot > div{border-right:0;border-bottom:3px solid #000;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .am-slot > div:last-child{border-bottom:0}
+  .am-kicker{padding-right:0;margin-top:34px}
+  #artist-modal{align-items:flex-start}
+}

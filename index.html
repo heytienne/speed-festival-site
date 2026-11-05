@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/img/s-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body>
 <div style="background: #FF5500; padding: clamp(6px, 1.2vw, 14px); font-family: Inter, system-ui, sans-serif; color: #000;">
@@ -312,6 +312,27 @@
 
 </div>
 </div>
-<script src="assets/js/main.js?v=2"></script>
+
+<!-- Fiche artiste (s'ouvre au clic sur une plaque de la grille de départ) -->
+<div id="artist-modal" hidden role="dialog" aria-modal="true" aria-labelledby="am-name">
+  <div class="am-card">
+    <button type="button" id="am-close" class="t am-close" aria-label="Fermer la fiche artiste">FERMER ✕</button>
+    <div class="am-photo" id="am-photo"></div>
+    <div class="am-body">
+      <p class="am-kicker" id="am-kicker"></p>
+      <h2 class="t am-name" id="am-name"></h2>
+      <dl class="am-slot">
+        <div><dt>Jour</dt><dd class="t" id="am-day"></dd></div>
+        <div><dt>Horaire</dt><dd class="t" id="am-time"></dd></div>
+        <div><dt>Scène</dt><dd class="t" id="am-stage"></dd></div>
+      </dl>
+      <p class="am-bio" id="am-bio"></p>
+      <p class="am-listen-title t">Écouter avant le départ</p>
+      <div class="am-links" id="am-links"></div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js?v=3"></script>
 </body>
 </html>
