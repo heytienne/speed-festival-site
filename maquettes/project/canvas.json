@@ -9,7 +9,8 @@
       "w": 1440,
       "x": 0,
       "y": 0,
-      "page": "directions"
+      "page": "directions",
+      "is_interactive": true
     },
     "PitWall.dc.html": {
       "expand": "fill",
@@ -87,6 +88,44 @@
       "y": 0,
       "page": "site",
       "radius": 32
+    },
+    "BODashboard.dc.html": {
+      "expand": "fill",
+      "h": 1000,
+      "title": "Back-office · Tableau de bord",
+      "w": 1440,
+      "x": 0,
+      "y": 0,
+      "page": "backoffice"
+    },
+    "BOPages.dc.html": {
+      "expand": "fill",
+      "h": 1000,
+      "title": "Back-office · Pages & blocs",
+      "w": 1440,
+      "x": 1520,
+      "y": 0,
+      "page": "backoffice",
+      "is_interactive": true
+    },
+    "BOProgrammation.dc.html": {
+      "expand": "fill",
+      "h": 1000,
+      "title": "Back-office · Programmation",
+      "w": 1440,
+      "x": 3040,
+      "y": 0,
+      "page": "backoffice",
+      "is_interactive": true
+    },
+    "BOBilletterie.dc.html": {
+      "expand": "fill",
+      "h": 1000,
+      "title": "Back-office · Billetterie",
+      "w": 1440,
+      "x": 4560,
+      "y": 0,
+      "page": "backoffice"
     }
   },
   "createdOnFiles": {
@@ -96,7 +135,7 @@
   "designSystems": [],
   "launch": {
     "view": "canvas",
-    "page": "site"
+    "page": "backoffice"
   },
   "notes": {
     "titre": {
@@ -107,6 +146,14 @@
       "x": -1315,
       "y": -291,
       "page": "directions"
+    },
+    "titrebo": {
+      "kind": "title1",
+      "maxW": 6000,
+      "text": "Back-office — administrer le site Speed sans toucher au code",
+      "x": 0,
+      "y": -320,
+      "page": "backoffice"
     },
     "titresite": {
       "kind": "title1",
@@ -126,11 +173,16 @@
     "Infos.dc.html",
     "Benevoles.dc.html",
     "MobileAccueil.dc.html",
-    "MobileProgramme.dc.html"
+    "MobileProgramme.dc.html",
+    "BODashboard.dc.html",
+    "BOPages.dc.html",
+    "BOProgrammation.dc.html",
+    "BOBilletterie.dc.html"
   ],
   "pages": [
     {"id": "directions", "name": "Directions"},
-    {"id": "site", "name": "Site C complet"}
+    {"id": "site", "name": "Site C complet"},
+    {"id": "backoffice", "name": "Back-office"}
   ],
   "title": "Speed Festival — Maquettes site 2026"
 }

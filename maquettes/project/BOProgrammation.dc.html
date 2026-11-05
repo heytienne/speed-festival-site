@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Back-office — Programmation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F5F2}
+a{color:#17171A}a:hover{color:#C23F00}
+.app{display:flex;flex-wrap:wrap;min-height:100vh;color:#17171A;font:14px/1.5 Inter,system-ui,sans-serif}
+.side{flex:0 0 240px;background:#fff;border-right:1px solid #E7E4DE;padding:18px 12px;display:flex;flex-direction:column;gap:18px;box-sizing:border-box}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 10px;border-bottom:1px solid #EFEDE8}
+.brand small{display:block;font-size:11px;color:#8A867F;font-weight:500}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:10px;min-height:38px;padding:0 10px;border-radius:8px;color:#3B3936;text-decoration:none;font-weight:500}
+.nav a:hover{background:#F3F1EC;color:#17171A}
+.nav a.on{background:#FFF0E8;color:#17171A;font-weight:600}
+.nav a.on svg{stroke:#FF5500}
+.nav svg{flex:none;stroke:#8A867F}
+.cnt{margin-left:auto;font-size:11px;font-weight:600;background:#F3F1EC;border-radius:999px;padding:1px 8px;color:#6E6B66}
+.cnt.warn{background:#FFF4D6;color:#8A5A00}
+.lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9A968F;padding:0 10px;margin:6px 0 2px}
+.who{margin-top:auto;display:flex;align-items:center;gap:10px;padding:10px;border-top:1px solid #EFEDE8}
+.av{width:30px;height:30px;border-radius:50%;background:#17171A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 28px;background:#fff;border-bottom:1px solid #E7E4DE}
+.crumb{color:#8A867F;font-size:12px}
+.top h1{margin:0;font-size:20px;font-weight:650;letter-spacing:-.01em}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 14px;border-radius:8px;border:1px solid #DAD6CF;background:#fff;color:#17171A;font:600 13px Inter,system-ui,sans-serif;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:#F6F5F2;color:#17171A}
+.btn-dark{background:#17171A;color:#fff;border-color:#17171A}
+.btn-dark:hover{background:#000;color:#fff}
+.card{background:#fff;border:1px solid #E7E4DE;border-radius:12px}
+.card-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:14px 18px;border-bottom:1px solid #EFEDE8}
+.card-h h2{margin:0;font-size:15px;font-weight:650}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.muted{color:#6E6B66}
+.seg{display:inline-flex;padding:3px;background:#F0EFEC;border-radius:9px;gap:2px}
+.seg button{min-height:32px;padding:0 12px;border:0;border-radius:7px;background:transparent;font:600 13px Inter,system-ui,sans-serif;color:#55524D;cursor:pointer}
+.seg button.on{background:#fff;color:#17171A;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:12px;font-weight:600;color:#6E6B66;padding:10px 14px;border-bottom:1px solid #EFEDE8;white-space:nowrap}
+td{padding:0 14px;border-bottom:1px solid #F1EFEA;height:52px}
+tr.r{cursor:pointer}
+tr.r:hover td{background:#FAF9F7}
+tr.r.sel td{background:#FFF0E8}
+.chk{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-size:12px;font-weight:700}
+.chk.y{background:#E7F6EE;color:#14774A}.chk.n{background:#F0EFEC;color:#9A968F}.chk.w{background:#FFF4D6;color:#7A4F00}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600}
+.inp{font:inherit;border:1px solid #DAD6CF;border-radius:8px;padding:9px 12px;background:#fff;color:#17171A;min-height:40px;box-sizing:border-box;width:100%}
+.hint{font-size:12px;color:#6E6B66}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:150px;border:1.5px dashed #CFCAC2;border-radius:12px;background:#FAF9F7;text-align:center;padding:16px}
+</style>
+</helmet>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <img src="/_blob/9ef3bf5a40d30efa3652df1bbf47c9ff" alt="Speed Festival" style="height: 30px; width: auto;">
+      <div><strong style="font-size: 13px;">Back-office</strong><small>Édition 2027</small></div>
+    </div>
+    <nav class="nav" aria-label="Navigation du back-office">
+      <a href="BODashboard.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V21H3z"></path><path d="M9 21v-6h6v6"></path></svg>Tableau de bord</a>
+      <p class="lbl">Contenus</p>
+      <a href="BOPages.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="6" rx="1.5"></rect><rect x="3" y="12" width="18" height="9" rx="1.5"></rect></svg>Pages &amp; blocs</a>
+      <a href="BOProgrammation.dc.html" class="on" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle></svg>Programmation<span class="cnt">15</span></a>
+      <a href="BOBilletterie.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 0 0 4v4h18v-4a2 2 0 0 1 0-4V4H3z"></path><path d="M14 4v12"></path></svg>Billetterie<span class="cnt">3</span></a>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>Infos pratiques<span class="cnt warn">5</span></a>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg>Médias</a>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v6c0 4 3.4 7.4 8 8 4.6-.6 8-4 8-8V7z"></path></svg>Partenaires</a>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path></svg>Bénévoles</a>
+      <p class="lbl">Site</p>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>Réglages</a>
+    </nav>
+    <div class="who"><span class="av">SF</span><div style="line-height: 1.3;"><strong style="font-size: 13px;">Équipe Speed</strong><br><span class="muted" style="font-size: 12px;">Administrateur</span></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div><div class="crumb">Contenus / Programmation</div><h1>Programmation 2027</h1></div>
+      <div class="acts">
+        <button type="button" class="btn">Importer un tableur</button>
+        <button type="button" class="btn btn-dark">＋ Ajouter un artiste</button>
+      </div>
+    </header>
+
+    <main style="padding: 24px 28px 40px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; box-sizing: border-box; max-width: 1320px; width: 100%;">
+      <!-- Liste -->
+      <section class="card" style="flex: 999 1 560px; min-width: 0;">
+        <div class="card-h">
+          <div class="seg" role="group" aria-label="Jour">
+            <button type="button" class="{{dayAll}}" onClick="{{setAll}}">Tous · 15</button>
+            <button type="button" class="{{dayVen}}" onClick="{{setVen}}">Vendredi 28 · 7</button>
+            <button type="button" class="{{daySam}}" onClick="{{setSam}}">Samedi 29 · 8</button>
+          </div>
+          <div style="display: flex; gap: 14px; font-size: 12px;" class="muted"><span><span class="dot" style="display: inline-block; background: #FF5500;"></span> Speed Arena</span><span><span class="dot" style="display: inline-block; background: #00C47A;"></span> Boiler Vroom</span></div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead><tr><th>Horaire</th><th>Artiste</th><th>Scène</th><th title="Photo">Photo</th><th title="Présentation">Bio</th><th title="Lien d'écoute">Écoute</th><th>Statut</th></tr></thead>
+            <tbody>
+              <sc-for list="{{rows}}" as="a" hint-placeholder-count="8">
+                <tr class="{{a.cls}}" onClick="{{a.pick}}">
+                  <td style="font-variant-numeric: tabular-nums; white-space: nowrap;"><span class="muted" style="font-size: 12px;">{{a.dayShort}}</span> <strong>{{a.from}}</strong><span class="muted"> → {{a.to}}</span></td>
+                  <td><button type="button" onClick="{{a.pick}}" style="border: 0; background: none; padding: 0; font: 600 14px Inter, system-ui, sans-serif; color: #17171A; cursor: pointer; text-align: left;">{{a.name}}</button></td>
+                  <td style="white-space: nowrap;"><span class="dot" style="display: inline-block; background: {{a.dot}};"></span> {{a.stage}}</td>
+                  <td><span class="{{a.photo}}" aria-label="Photo">{{a.photoTxt}}</span></td>
+                  <td><span class="{{a.bio}}" aria-label="Bio">{{a.bioTxt}}</span></td>
+                  <td><span class="{{a.listen}}" aria-label="Lien d'écoute">{{a.listenTxt}}</span></td>
+                  <td><span class="pill" style="background: #E7F6EE; color: #14774A;">Publié</span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin: 0; padding: 12px 18px; font-size: 12px;">✓ renseigné · ! à valider · – manquant. Le site publié se met à jour au clic sur « Publier ».</p>
+      </section>
+
+      <!-- Fiche d'édition -->
+      <section class="card" style="flex: 1 1 380px; min-width: 0;">
+        <div class="card-h">
+          <div><div class="muted" style="font-size: 12px;">Fiche artiste</div><h2 style="font-size: 18px;">{{cur.name}}</h2></div>
+          <span class="pill" style="background: {{cur.tint}}; color: #17171A;"><span class="dot" style="background: {{cur.dot}};"></span>{{cur.stage}}</span>
+        </div>
+        <div style="padding: 18px; display: flex; flex-direction: column; gap: 16px;">
+          <div class="drop">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8A867F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"></path><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"></path></svg>
+            <strong>Photo presse</strong>
+            <span class="hint">Glisser une image ou <a href="#">parcourir</a> · JPG/PNG, format portrait ou carré</span>
+          </div>
+          <div class="field"><label for="f-name">Nom de l'artiste</label><input id="f-name" class="inp" type="text" value="{{cur.name}}"></div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+            <div class="field"><label for="f-day">Jour</label><select id="f-day" class="inp"><option>{{cur.day}}</option><option>Vendredi 28</option><option>Samedi 29</option></select></div>
+            <div class="field"><label>Scène</label>
+              <div class="seg" role="radiogroup" aria-label="Scène" style="width: 100%; box-sizing: border-box;">
+                <button type="button" class="{{cur.isSA}}" style="flex: 1;">Speed Arena</button>
+                <button type="button" class="{{cur.isBV}}" style="flex: 1;">Boiler Vroom</button>
+              </div>
+            </div>
+            <div class="field"><label for="f-from">Début</label><input id="f-from" class="inp" type="time" value="{{cur.fromT}}"></div>
+            <div class="field"><label for="f-to">Fin</label><input id="f-to" class="inp" type="time" value="{{cur.toT}}"></div>
+          </div>
+          <div class="field"><label for="f-bio">Présentation</label><textarea id="f-bio" class="inp" rows="4" style="resize: vertical;">{{cur.bioVal}}</textarea><span class="hint">2 ou 3 phrases, avec le ton maison. S'affiche dans la fiche artiste du site.</span></div>
+          <div class="field"><label for="f-listen">Lien d'écoute (magic link)</label><input id="f-listen" class="inp" type="url" placeholder="https://… (page qui propose Spotify, Deezer, Apple Music…)"><span class="hint">Alimente le bouton « Écouter sur les plateformes ». Vide = bouton « bientôt disponible ».</span></div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; padding-top: 6px; border-top: 1px solid #EFEDE8;">
+            <button type="button" class="btn" style="color: #B42318;">Retirer de la programmation</button>
+            <div style="display: flex; gap: 8px;"><button type="button" class="btn">Annuler</button><button type="button" class="btn btn-dark">Enregistrer</button></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { day: 'all', sel: 'Benwal' }; }
+  renderVals() {
+    const SA = { stage: 'Speed Arena', dot: '#FF5500', tint: '#FFE4D6' };
+    const BV = { stage: 'Boiler Vroom', dot: '#00C47A', tint: '#D9F7EA' };
+    const BIOS = {
+      'St Graal': 'Artiste français révélé en 2021 par le titre viral « Les dauphins », entre électro et pop aérienne.',
+      'Benwal': 'DJ et producteur néerlandais originaire de Groningue : des sets trance, hard house et techno à très haute énergie.',
+      'Camoufly': 'Producteur et DJ masqué venu d’Italie : house, UK garage et sons expérimentaux.',
+      'Snoritz': 'DJ et producteur de Münster : du garage à la hard house en passant par les breaks.'
+    };
+    const mk = (day, name, sc, from, to, noListen) => Object.assign({ day, name, from, to, noListen: !!noListen }, sc);
+    const all = [
+      mk('ven', 'Tremplin', BV, '19:00', '19:30', true), mk('ven', 'DJ Stiff', BV, '19:30', '20:30'), mk('ven', 'Europe', SA, '21:30', '22:30'),
+      mk('ven', 'Notinbed', BV, '22:30', '23:30'), mk('ven', 'St Graal', SA, '23:30', '00:30'), mk('ven', 'Noel Minitel', BV, '00:30', '01:30'),
+      mk('ven', 'Benwal', SA, '01:30', '02:50'),
+      mk('sam', 'Sheriff', BV, '19:00', '19:55'), mk('sam', 'Velvet Brothers', SA, '20:00', '21:00'), mk('sam', 'DJ Minou', BV, '21:00', '21:55'),
+      mk('sam', 'Arone', SA, '22:00', '22:50'), mk('sam', 'Solar Boys', BV, '23:00', '23:55'), mk('sam', 'Camoufly', SA, '00:00', '01:00'),
+      mk('sam', 'Snoritz', SA, '01:00', '02:00'), mk('sam', 'Speed All Stars End Show', SA, '02:00', '02:45', true)
+    ];
+    const st = this.state;
+    const rows = all.filter(a => st.day === 'all' || a.day === st.day).map(a => ({
+      name: a.name, stage: a.stage, dot: a.dot, from: a.from, to: a.to,
+      dayShort: a.day === 'ven' ? 'VEN' : 'SAM',
+      cls: st.sel === a.name ? 'r sel' : 'r',
+      photo: 'chk n', photoTxt: '–',
+      bio: BIOS[a.name] ? 'chk w' : 'chk n', bioTxt: BIOS[a.name] ? '!' : '–',
+      listen: a.noListen ? 'chk y' : 'chk n', listenTxt: a.noListen ? '✓' : '–',
+      pick: () => this.setState({ sel: a.name })
+    }));
+    const c = all.find(a => a.name === st.sel) || all[6];
+    return {
+      rows,
+      dayAll: st.day === 'all' ? 'on' : '', dayVen: st.day === 'ven' ? 'on' : '', daySam: st.day === 'sam' ? 'on' : '',
+      setAll: () => this.setState({ day: 'all' }), setVen: () => this.setState({ day: 'ven' }), setSam: () => this.setState({ day: 'sam' }),
+      cur: {
+        name: c.name, stage: c.stage, dot: c.dot, tint: c.tint,
+        day: c.day === 'ven' ? 'Vendredi 28' : 'Samedi 29',
+        isSA: c.stage === 'Speed Arena' ? 'on' : '', isBV: c.stage === 'Boiler Vroom' ? 'on' : '',
+        fromT: c.from, toT: c.to,
+        bioVal: BIOS[c.name] || ''
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

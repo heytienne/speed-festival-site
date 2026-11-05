@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Back-office — Pages et blocs</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F5F2}
+a{color:#17171A}a:hover{color:#C23F00}
+.app{display:flex;flex-wrap:wrap;min-height:100vh;color:#17171A;font:14px/1.5 Inter,system-ui,sans-serif}
+.side{flex:0 0 240px;background:#fff;border-right:1px solid #E7E4DE;padding:18px 12px;display:flex;flex-direction:column;gap:18px;box-sizing:border-box}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 10px;border-bottom:1px solid #EFEDE8}
+.brand small{display:block;font-size:11px;color:#8A867F;font-weight:500}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:10px;min-height:38px;padding:0 10px;border-radius:8px;color:#3B3936;text-decoration:none;font-weight:500}
+.nav a:hover{background:#F3F1EC;color:#17171A}
+.nav a.on{background:#FFF0E8;color:#17171A;font-weight:600}
+.nav a.on svg{stroke:#FF5500}
+.nav svg{flex:none;stroke:#8A867F}
+.cnt{margin-left:auto;font-size:11px;font-weight:600;background:#F3F1EC;border-radius:999px;padding:1px 8px;color:#6E6B66}
+.cnt.warn{background:#FFF4D6;color:#8A5A00}
+.lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9A968F;padding:0 10px;margin:6px 0 2px}
+.who{margin-top:auto;display:flex;align-items:center;gap:10px;padding:10px;border-top:1px solid #EFEDE8}
+.av{width:30px;height:30px;border-radius:50%;background:#17171A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 28px;background:#fff;border-bottom:1px solid #E7E4DE}
+.crumb{color:#8A867F;font-size:12px}
+.top h1{margin:0;font-size:20px;font-weight:650;letter-spacing:-.01em}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 14px;border-radius:8px;border:1px solid #DAD6CF;background:#fff;color:#17171A;font:600 13px Inter,system-ui,sans-serif;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:#F6F5F2;color:#17171A}
+.btn-dark{background:#17171A;color:#fff;border-color:#17171A}
+.btn-dark:hover{background:#000;color:#fff}
+.card{background:#fff;border:1px solid #E7E4DE;border-radius:12px}
+.card-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:14px 18px;border-bottom:1px solid #EFEDE8}
+.card-h h2{margin:0;font-size:15px;font-weight:650}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.warn{background:#FFF4D6;color:#7A4F00}.draft{background:#F0EFEC;color:#55524D}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.muted{color:#6E6B66}
+.tabs{display:flex;gap:4px;border-bottom:1px solid #E7E4DE;padding:0 28px;background:#fff}
+.tabs a{padding:10px 12px;font-weight:600;color:#6E6B66;text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs a.on{color:#17171A;border-color:#17171A}
+.blk{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:8px 12px;border:1px solid transparent;border-radius:10px;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.blk:hover{background:#F6F5F2}
+.blk.sel{background:#FFF0E8;border-color:#FFC9AE}
+.grip{color:#B5B1AA;cursor:grab;letter-spacing:-2px;font-weight:700}
+.btype{font-size:11px;color:#6E6B66;background:#F3F1EC;border-radius:6px;padding:1px 6px}
+.sw{width:34px;height:20px;border-radius:999px;border:0;position:relative;cursor:pointer;flex:none;padding:0}
+.sw::after{content:"";position:absolute;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .15s}
+.sw.on{background:#17171A}.sw.on::after{left:17px}
+.sw.off{background:#D5D1CA}.sw.off::after{left:3px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600}
+.inp{font:inherit;border:1px solid #DAD6CF;border-radius:8px;padding:9px 12px;background:#fff;color:#17171A;min-height:40px;box-sizing:border-box;width:100%}
+.inp:focus{outline:2px solid #17171A;outline-offset:1px;border-color:#17171A}
+.hint{font-size:12px;color:#6E6B66}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.libi{display:flex;flex-direction:column;gap:6px;padding:12px;border:1px solid #E7E4DE;border-radius:10px;background:#fff;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.libi:hover{border-color:#17171A}
+.thumb{height:46px;border-radius:6px;background:#F3F1EC;display:flex;align-items:center;justify-content:center;gap:4px}
+</style>
+</helmet>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <img src="/_blob/9ef3bf5a40d30efa3652df1bbf47c9ff" alt="Speed Festival" style="height: 30px; width: auto;">
+      <div><strong style="font-size: 13px;">Back-office</strong><small>Édition 2027</small></div>
+    </div>
+    <nav class="nav" aria-label="Navigation du back-office">
+      <a href="BODashboard.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V21H3z"></path><path d="M9 21v-6h6v6"></path></svg>Tableau de bord</a>
+      <p class="lbl">Contenus</p>
+      <a href="BOPages.dc.html" class="on" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="6" rx="1.5"></rect><rect x="3" y="12" width="18" height="9" rx="1.5"></rect></svg>Pages &amp; blocs</a>
+      <a href="BOProgrammation.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle></svg>Programmation<span class="cnt">15</span></a>
+      <a href="BOBilletterie.dc.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 0 0 4v4h18v-4a2 2 0 0 1 0-4V4H3z"></path><path d="M14 4v12"></path></svg>Billetterie<span class="cnt">3</span></a>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>Infos pratiques<span class="cnt warn">5</span></a>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg>Médias</a>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v6c0 4 3.4 7.4 8 8 4.6-.6 8-4 8-8V7z"></path></svg>Partenaires</a>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path></svg>Bénévoles</a>
+      <p class="lbl">Site</p>
+      <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>Réglages</a>
+    </nav>
+    <div class="who"><span class="av">SF</span><div style="line-height: 1.3;"><strong style="font-size: 13px;">Équipe Speed</strong><br><span class="muted" style="font-size: 12px;">Administrateur</span></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div><div class="crumb">Contenus / Pages &amp; blocs</div><h1>Page d'accueil</h1></div>
+      <div class="acts">
+        <span class="pill warn"><span class="dot" style="background: #E0A100;"></span>Brouillon modifié</span>
+        <a class="btn" href="https://heytienne.github.io/speed-festival-site/">Prévisualiser ↗</a>
+        <button type="button" class="btn btn-dark">Publier</button>
+      </div>
+    </header>
+    <nav class="tabs" aria-label="Pages du site">
+      <a href="#" class="on" aria-current="page">Accueil</a>
+      <a href="#">Mentions légales</a>
+      <a href="#">CGV</a>
+      <a href="#" class="muted" style="font-weight: 500;">＋ Nouvelle page</a>
+    </nav>
+
+    <main style="padding: 24px 28px 40px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; box-sizing: border-box; max-width: 1240px; width: 100%;">
+      <!-- Liste des blocs -->
+      <section class="card" style="flex: 1 1 340px; min-width: 0;">
+        <div class="card-h"><h2>Blocs de la page</h2><span class="muted" style="font-size: 12px;">Glisser pour réordonner</span></div>
+        <div style="padding: 8px; display: flex; flex-direction: column; gap: 2px;">
+          <sc-for list="{{blocks}}" as="b" hint-placeholder-count="10">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <button type="button" class="{{b.cls}}" onClick="{{b.select}}" aria-pressed="{{b.pressed}}">
+                <span class="grip" aria-hidden="true">⋮⋮</span>
+                <span style="flex: 1; min-width: 0;"><span style="display: block; font-weight: 600; opacity: {{b.op}};">{{b.name}}</span><span class="btype">{{b.type}}</span></span>
+              </button>
+              <button type="button" class="{{b.swcls}}" onClick="{{b.toggle}}" aria-label="Afficher ou masquer {{b.name}}" aria-pressed="{{b.visible}}"></button>
+            </div>
+          </sc-for>
+          <button type="button" onClick="{{toggleLib}}" class="btn" style="margin: 8px 4px 4px; justify-content: center; border-style: dashed;">＋ Ajouter un bloc</button>
+        </div>
+      </section>
+
+      <!-- Inspecteur / bibliothèque -->
+      <section class="card" style="flex: 999 1 480px; min-width: 0;">
+        <sc-if value="{{showLib}}" hint-placeholder-val="{{false}}">
+          <div class="card-h"><h2>Ajouter un bloc</h2><button type="button" class="btn" onClick="{{toggleLib}}">Annuler</button></div>
+          <div style="padding: 18px;">
+            <p class="muted" style="margin: 0 0 14px;">Choisis un type de bloc : il s'ajoute sous le bloc sélectionné, aux couleurs de la charte.</p>
+            <div class="lib">
+              <sc-for list="{{library}}" as="l" hint-placeholder-count="10">
+                <button type="button" class="libi"><span class="thumb" aria-hidden="true"><span style="width: 40%; height: 8px; border-radius: 4px; background: {{l.c}};"></span><span style="width: 20%; height: 8px; border-radius: 4px; background: #D5D1CA;"></span></span><strong>{{l.name}}</strong><span class="hint">{{l.desc}}</span></button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{showEditor}}" hint-placeholder-val="{{true}}">
+          <div class="card-h">
+            <div><div class="muted" style="font-size: 12px;">{{cur.type}}</div><h2 style="font-size: 18px;">{{cur.name}}</h2></div>
+            <div class="acts"><button type="button" class="btn">Dupliquer</button><button type="button" class="btn" style="color: #B42318;">Supprimer</button></div>
+          </div>
+          <div style="padding: 20px 18px; display: flex; flex-direction: column; gap: 16px;">
+            <sc-for list="{{cur.fields}}" as="f" hint-placeholder-count="3">
+              <div class="field">
+                <label>{{f.label}}</label>
+                <sc-if value="{{f.isText}}" hint-placeholder-val="{{true}}"><input class="inp" type="text" value="{{f.value}}" aria-label="{{f.label}}"></sc-if>
+                <sc-if value="{{f.isArea}}" hint-placeholder-val="{{false}}"><textarea class="inp" rows="3" aria-label="{{f.label}}" style="resize: vertical;">{{f.value}}</textarea></sc-if>
+                <sc-if value="{{f.isDate}}" hint-placeholder-val="{{false}}"><input class="inp" type="datetime-local" value="{{f.value}}" aria-label="{{f.label}}" style="max-width: 280px;"></sc-if>
+                <sc-if value="{{f.isLink}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 8px; flex-wrap: wrap;"><input class="inp" type="text" value="{{f.value}}" aria-label="{{f.label}} : texte" style="flex: 1 1 160px; width: auto;"><input class="inp" type="url" value="{{f.url}}" aria-label="{{f.label}} : lien" style="flex: 2 1 220px; width: auto;"></div></sc-if>
+                <sc-if value="{{f.isImage}}" hint-placeholder-val="{{false}}"><div style="display: flex; align-items: center; gap: 12px; padding: 10px; border: 1px dashed #CFCAC2; border-radius: 10px;"><img src="{{f.src}}" alt="" style="width: 96px; height: 64px; object-fit: cover; border-radius: 6px;"><div style="flex: 1;"><strong>{{f.value}}</strong><div class="hint">JPG ou PNG · 1600 px conseillé</div></div><button type="button" class="btn">Remplacer</button></div></sc-if>
+                <sc-if value="{{f.isSource}}" hint-placeholder-val="{{false}}"><div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; background: #F6F5F2; border-radius: 10px;"><span>{{f.value}}</span><a class="btn" href="{{f.url}}">Gérer →</a></div></sc-if>
+                <sc-if value="{{f.hint}}" hint-placeholder-val="{{false}}"><span class="hint">{{f.hint}}</span></sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: 'countdown', lib: false, hidden: { stars: true } };
+  }
+  renderVals() {
+    const T = (label, value, hint) => ({ label, value, hint: hint || '', isText: true });
+    const A = (label, value, hint) => ({ label, value, hint: hint || '', isArea: true });
+    const D = (label, value, hint) => ({ label, value, hint: hint || '', isDate: true });
+    const L = (label, value, url, hint) => ({ label, value, url, hint: hint || '', isLink: true });
+    const I = (label, value, src) => ({ label, value, src, isImage: true });
+    const S = (label, value, url) => ({ label, value, url, isSource: true });
+    const defs = [
+      { key: 'bandeau', name: 'Bandeau affiche', type: 'Bandeau', fields: [T('Texte de gauche', '→ 28/29 AOÛT 2026'), T('Texte de droite', 'SAINT-PAUL-DU-BOIS (49)')] },
+      { key: 'hero', name: 'Accueil (photo + logo)', type: 'Grand visuel', fields: [I('Image de fond', 'scene-compteur.jpg', '/_blob/7cd6216c9f56643953dafb86c3f0e328'), T('Accroche', 'Le festival de vitesse'), L('Bouton', 'BILLETTERIE', '#billetterie')] },
+      { key: 'countdown', name: 'Compte à rebours', type: 'Compte à rebours', fields: [T('Titre', '→ Départ de la course dans'), D('Date et heure du départ', '2026-08-28T18:00', 'Le compteur arrive à 0 à cette heure (heure de Paris).'), A('Texte', '4 feux allumés sur 5, il ne manque plus que toi pour allumer le dernier.')] },
+      { key: 'grille', name: 'Grille de départ', type: 'Programmation', fields: [T('Sur-titre', '→ LINE-UP 2027'), T('Titre', 'Grille de départ'), A('Introduction', 'Ouverture du site à 18h, extinction des moteurs à 3h. Entre les deux : 15 départs sur deux circuits.'), S('Contenu', '15 artistes · 2 scènes · mis à jour depuis Programmation', 'BOProgrammation.dc.html')] },
+      { key: 'briefing', name: 'Briefing pilotes', type: 'Cartes + popups', fields: [T('Titre', 'Briefing pilotes'), S('Cartes', '4 cartes : Accès, Horaires, Camping, Objets interdits', '#')] },
+      { key: 'replay', name: 'Le replay', type: 'Galerie photo', fields: [T('Titre', 'Le replay'), S('Photos', '9 photos · crédit Morisseau Steeve Photographie', '#'), L('Bouton', 'VOIR LES 700+ PHOTOS', 'https://morisseausteevephotographie.pixieset.com/speedfestival/')] },
+      { key: 'billet', name: 'Billetterie', type: 'Offres', fields: [T('Titre', 'Prends ton ticket'), A('Texte', 'Les places partent plus vite qu’un arrêt au stand.'), S('Pass affichés', '3 pass · gérés dans Billetterie', 'BOBilletterie.dc.html')] },
+      { key: 'benev', name: 'Rejoins le stand', type: 'Texte + photo', fields: [T('Titre', 'Rejoins le stand'), A('Texte', 'Bar, accueil, montage, déco : on cherche des mécanos motivés.'), L('Bouton', 'DEVENIR BÉNÉVOLE', 'https://…'), I('Photo', 'benevoles.jpg', '/_blob/fd286a2b3057ad0aa34c35650cf2dc57')] },
+      { key: 'partenaires', name: 'Partenaires', type: 'Logos', fields: [T('Titre', 'Sponsors officiels sur la combinaison'), S('Logos', '0 / 6 logos ajoutés', '#'), L('Bouton', 'DEVENIR PARTENAIRE', 'mailto:', 'Adresse e-mail à renseigner.')] },
+      { key: 'stars', name: 'Étoiles décoratives', type: 'Décor', fields: [T('Nombre', '2', 'Bloc masqué : il n’apparaît pas sur le site publié.')] },
+      { key: 'footer', name: 'Pied de page', type: 'Pied de page', fields: [A('Texte', 'Festival de vitesse depuis 2021. 28/29 août 2026 · Saint-Paul-du-Bois (49)'), L('Newsletter', 'GO', 'https://…')] }
+    ];
+    const st = this.state;
+    const blocks = defs.map(d => {
+      const visible = !st.hidden[d.key];
+      const sel = st.sel === d.key && !st.lib;
+      return {
+        name: d.name, type: d.type,
+        cls: sel ? 'blk sel' : 'blk', pressed: sel ? 'true' : 'false',
+        op: visible ? '1' : '.45', visible: visible ? 'true' : 'false',
+        swcls: visible ? 'sw on' : 'sw off',
+        select: () => this.setState({ sel: d.key, lib: false }),
+        toggle: () => this.setState({ hidden: Object.assign({}, st.hidden, { [d.key]: visible }) })
+      };
+    });
+    const cur = defs.find(d => d.key === st.sel) || defs[0];
+    const norm = f => Object.assign({ isText: false, isArea: false, isDate: false, isLink: false, isImage: false, isSource: false, url: '', src: '', hint: '' }, f);
+    const library = [
+      { name: 'Texte', desc: 'Titre + paragraphe', c: '#17171A' },
+      { name: 'Texte + image', desc: 'Deux colonnes', c: '#17171A' },
+      { name: 'Grand visuel', desc: 'Photo plein écran', c: '#FF5500' },
+      { name: 'Galerie photo', desc: 'Mosaïque + visionneuse', c: '#FF5500' },
+      { name: 'Bouton / appel', desc: 'Plaque cliquable', c: '#FF5500' },
+      { name: 'Compte à rebours', desc: 'Jusqu’au départ', c: '#17171A' },
+      { name: 'Programmation', desc: 'Grille des artistes', c: '#00C47A' },
+      { name: 'Cartes + popups', desc: 'Infos avec « En savoir plus »', c: '#2F6FED' },
+      { name: 'FAQ', desc: 'Questions dépliables', c: '#2F6FED' },
+      { name: 'Vidéo', desc: 'YouTube ou fichier', c: '#17171A' },
+      { name: 'Logos', desc: 'Partenaires', c: '#8A867F' },
+      { name: 'Formulaire', desc: 'Newsletter, contact', c: '#8A867F' }
+    ];
+    return {
+      blocks, library,
+      cur: { name: cur.name, type: cur.type, fields: cur.fields.map(norm) },
+      showLib: st.lib, showEditor: !st.lib,
+      toggleLib: () => this.setState({ lib: !st.lib })
+    };
+  }
+}
+</script>
+</body>
+</html>
