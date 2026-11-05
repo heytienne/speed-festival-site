@@ -25,7 +25,7 @@ Direction artistique « Grand Prix » : affiche orange, grille de départ, menu 
 - **Fiches artistes (popup au clic sur une plaque)** : objet `ARTISTES` dans `assets/js/main.js`. Pour chaque artiste :
   - `bio` : texte de présentation (les textes « à valider » / « à venir » sont provisoires) ;
   - `photo` : chemin d'une photo presse (ex. `'assets/img/artistes/benwal.jpg'`). Sans photo, un visuel provisoire aux initiales s'affiche ;
-  - `links` : liens officiels, ex. `{ spotify: 'https://open.spotify.com/artist/…', soundcloud: '…', deezer: '…', youtube: '…' }`. Sans lien officiel, le bouton ouvre une recherche du nom sur la plateforme.
+  - `listen` : le « magic link » de l'artiste (une page qui laisse choisir sa plateforme : Spotify, Deezer, Apple Music…), ex. `listen: 'https://…'`. Il alimente le bouton unique « Écouter sur les plateformes ». Sans lien, le bouton s'affiche grisé avec « Lien d'écoute bientôt disponible ».
 - **Date du compte à rebours** : constante `DEPART` dans `assets/js/main.js` (0 = ouverture du vendredi à 18h).
 - **Photos du Replay** : liste `PHOTOS` dans `assets/js/main.js`.
 

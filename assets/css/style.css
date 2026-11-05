@@ -150,11 +150,6 @@ a{color:inherit}a:hover{color:#FF5500}
 .am-slot > div:last-child dt{color:#000}
 .am-slot dd{margin:2px 0 0;font-size:clamp(20px,2.2vw,28px);font-weight:900;line-height:1}
 .am-bio{margin:0;font-size:16px;line-height:1.6}
-.am-listen-title{margin:6px 0 0;font-size:22px;font-weight:900;font-style:italic;text-transform:uppercase}
-.am-links{display:flex;flex-wrap:wrap;gap:10px}
-.am-links a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 16px;border:3px solid #000;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:19px;font-weight:800;text-transform:uppercase;transition:transform .15s,background .15s}
-.am-links a:hover{background:#000;color:#fff;transform:translateY(-2px)}
-.am-links a .dot{width:12px;height:12px;border-radius:50%;flex:none}
 @media (max-width:760px){
   .am-card{grid-template-columns:minmax(0,1fr);max-height:none}
   .am-photo{min-height:240px;border-right:0;border-bottom:5px solid #000}
@@ -164,3 +159,11 @@ a{color:inherit}a:hover{color:#FF5500}
   .am-kicker{padding-right:0;margin-top:34px}
   #artist-modal{align-items:flex-start}
 }
+
+/* Bouton d'écoute unique (lien multi-plateformes) */
+.am-listen{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:4px}
+.am-listen-btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:8px 22px 8px 12px;border:4px solid #000;border-radius:999px;background:var(--am-color,#FF5500);color:#000;text-decoration:none;font-size:clamp(20px,2vw,24px);font-weight:900;font-style:italic;text-transform:uppercase;box-shadow:5px 5px 0 #000;transition:transform .15s,box-shadow .15s}
+a.am-listen-btn:hover{color:#000;transform:translate(-2px,-2px);box-shadow:8px 8px 0 #000}
+a.am-listen-btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 #000}
+.am-listen-btn.is-soon{background:#e8e2d2;color:#555;box-shadow:none;cursor:not-allowed;border-style:dashed}
+.am-soon{font-size:13px;font-weight:600;color:#555}

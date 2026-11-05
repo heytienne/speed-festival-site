@@ -47,12 +47,9 @@
     'Snoritz': { bio: 'DJ et producteur de Münster : du garage à la hard house en passant par les breaks, des sets qui accélèrent sans prévenir. (Texte à valider)' },
     'Speed All Stars End Show': { bio: 'Le grand final du Speed : toute l’écurie monte sur la Speed Arena pour le dernier tour de piste. Programme surprise.', noLinks: true }
   };
-  var PLATEFORMES = [
-    { key: 'spotify', label: 'Spotify', color: '#1DB954', search: function (q) { return 'https://open.spotify.com/search/' + encodeURIComponent(q); } },
-    { key: 'deezer', label: 'Deezer', color: '#A238FF', search: function (q) { return 'https://www.deezer.com/search/' + encodeURIComponent(q); } },
-    { key: 'soundcloud', label: 'SoundCloud', color: '#FF5500', search: function (q) { return 'https://soundcloud.com/search?q=' + encodeURIComponent(q); } },
-    { key: 'youtube', label: 'YouTube', color: '#FF0000', search: function (q) { return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q); } }
-  ];
+  /* Écoute : un seul lien « magic link » par artiste (page qui laisse choisir sa plateforme :
+     Spotify, Deezer, Apple Music…). À renseigner dans ARTISTES[nom].listen = 'https://…'.
+     Sans lien, le bouton s'affiche en « bientôt disponible ». */
   var VEN = [
     slot('Tremplin', BV, '19h00', '19h30'),
     slot('DJ Stiff', BV, '19h30', '20h30'),
@@ -105,14 +102,16 @@
     photo.innerHTML = info.photo
       ? '<img src="' + esc(info.photo) + '" alt="' + esc(a.name) + ', photo presse">'
       : '<div class="am-ph" aria-hidden="true"><span class="am-ph-init">' + esc(initials(a.name)) + '</span><span class="am-ph-note">PHOTO PRESSE À VENIR</span></div>';
-    var links = document.getElementById('am-links'), title = document.querySelector('.am-listen-title');
-    if (info.noLinks) { links.innerHTML = ''; title.hidden = true; }
-    else {
-      title.hidden = false;
-      links.innerHTML = PLATEFORMES.map(function (p) {
-        var url = (info.links && info.links[p.key]) || p.search(a.name);
-        return '<a href="' + esc(url) + '" target="_blank" rel="noopener"><span class="dot" style="background:' + p.color + '"></span>' + p.label + ' ↗</a>';
-      }).join('');
+    var listen = document.getElementById('am-listen');
+    if (info.noLinks) { listen.innerHTML = ''; }
+    else if (info.listen) {
+      listen.innerHTML = '<a class="am-listen-btn t" href="' + esc(info.listen) + '" target="_blank" rel="noopener">' +
+        '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#000"></circle><path d="M10 7.5v9l7-4.5z" fill="#fff"></path></svg>' +
+        'Écouter sur les plateformes <span aria-hidden="true">↗</span></a>';
+    } else {
+      listen.innerHTML = '<span class="am-listen-btn t is-soon" aria-disabled="true">' +
+        '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#000"></circle><path d="M10 7.5v9l7-4.5z" fill="#fff"></path></svg>' +
+        'Écouter sur les plateformes</span><span class="am-soon">Lien d’écoute bientôt disponible</span>';
     }
     am.hidden = false;
     document.body.style.overflow = 'hidden';
