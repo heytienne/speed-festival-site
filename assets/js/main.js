@@ -78,7 +78,7 @@
         '<span style="font-size:clamp(18px,1.8vw,22px);font-weight:800;color:' + a.color + ';">' + a.m + '</span></div>' +
       '<div style="flex:1;min-width:0;display:flex;flex-direction:column;">' +
         '<div class="t plaque-u" style="flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:' + a.size + ';line-height:1;font-weight:900;font-style:italic;text-transform:uppercase;padding:14px 10px 16px;">' + esc(a.name) + '</div>' +
-        '<div class="bar" style="background:#000;color:' + a.color + ';padding:6px 14px;font-size:clamp(12px,1.2vw,15px);font-weight:600;"><span>→ ' + a.stage + '</span><span class="am-hint">+ FICHE ARTISTE</span><span>' + a.time + '</span></div>' +
+        '<div class="bar" style="background:#000;color:' + a.color + ';padding:6px 14px;font-size:clamp(12px,1.2vw,15px);font-weight:600;"><span>→ ' + a.stage + '</span><span>' + a.time + '</span></div>' +
       '</div></div></button>';
   }; }
   var JOURS = { ven: { list: VEN, label: 'Vendredi 28' }, sam: { list: SAM, label: 'Samedi 29' } };
