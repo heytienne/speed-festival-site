@@ -1,0 +1,13 @@
+{
+  "lien": "",
+  "hero_sous_titre": "→ PASS WEEKEND + CAMPING",
+  "hero_statut": "OUVERTE",
+  "titre": "Prends ton ticket",
+  "texte": "Les places partent plus vite qu'un arrêt au stand. Paiement en ligne sécurisé, e-billet direct dans ta poche.",
+  "photo": "assets/img/p444.jpg",
+  "pass": [
+    { "nom": "Weekend + Camping", "prix": "", "couleur": "orange", "en_vedette": true, "statut": "vente", "bandeau": "→ VEN + SAM + PADDOCK", "bandeau_droite": "DODO SUR PLACE", "lien": "" },
+    { "nom": "Vendredi", "prix": "", "couleur": "bleu", "en_vedette": false, "statut": "vente", "bandeau": "→ PASS 1 JOUR", "bandeau_droite": "", "lien": "" },
+    { "nom": "Samedi", "prix": "", "couleur": "rose", "en_vedette": false, "statut": "vente", "bandeau": "→ PASS 1 JOUR", "bandeau_droite": "", "lien": "" }
+  ]
+}

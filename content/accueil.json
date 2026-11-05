@@ -1,0 +1,20 @@
+{
+  "blocs": [
+    { "type": "compte-a-rebours", "visible": true },
+    { "type": "programmation", "visible": true },
+    { "type": "infos", "visible": true },
+    { "type": "replay", "visible": true },
+    { "type": "billetterie", "visible": true },
+    {
+      "type": "benevoles",
+      "visible": true,
+      "surtitre": "→ RECRUTEMENT ÉCURIE",
+      "titre": "Rejoins le stand",
+      "texte": "Bar, accueil, montage, déco : on cherche des mécanos motivés. Le t-shirt rose est offert, le pass aussi, les crampes en bonus.",
+      "bouton_texte": "Devenir bénévole",
+      "bouton_lien": "",
+      "photo": "assets/img/p022.jpg"
+    },
+    { "type": "partenaires", "visible": true }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "surtitre": "→ RALENTI DE L'ÉDITION 2025",
+  "titre": "Le replay",
+  "bouton_texte": "VOIR LES 700+ PHOTOS →",
+  "lien_galerie": "https://morisseausteevephotographie.pixieset.com/speedfestival/",
+  "credit": "Morisseau Steeve Photographie",
+  "photos": [
+    { "image": "assets/img/p723.jpg", "description": "Drapeau à damier brandi au-dessus de la foule devant la scène", "format": "grand", "etiquette": "DRAPEAU À DAMIER", "couleur": "orange" },
+    { "image": "assets/img/p166.jpg", "description": "La scène Boiler Vroom montée sur une voiture rose", "format": "normal", "etiquette": "", "couleur": "orange" },
+    { "image": "assets/img/p373.jpg", "description": "Gobelets Speed remplis de bière", "format": "normal", "etiquette": "", "couleur": "orange" },
+    { "image": "assets/img/p090.jpg", "description": "Bande de potes au camping en combinaisons orange", "format": "large", "etiquette": "LE PADDOCK", "couleur": "vert" },
+    { "image": "assets/img/p255.jpg", "description": "Bénévole au bar en t-shirt rose servant un pichet", "format": "normal", "etiquette": "", "couleur": "orange" },
+    { "image": "assets/img/p448.jpg", "description": "Foule devant la scène avec des étincelles", "format": "haut", "etiquette": "", "couleur": "orange" },
+    { "image": "assets/img/p159.jpg", "description": "Festivaliers qui dansent en plein jour", "format": "normal", "etiquette": "", "couleur": "orange" },
+    { "image": "assets/img/p655.jpg", "description": "Festivaliers en lunettes de soleil", "format": "normal", "etiquette": "", "couleur": "orange" },
+    { "image": "assets/img/p471.jpg", "description": "Festivalière en veste Racing", "format": "normal", "etiquette": "", "couleur": "orange" }
+  ]
+}

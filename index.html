@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/img/s-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=8">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
 </head>
 <body>
 <div style="background: #FF5500; padding: clamp(6px, 1.2vw, 14px); font-family: Inter, system-ui, sans-serif; color: #000;">
@@ -20,9 +20,9 @@
 
   <!-- Bandeau affiche -->
   <div style="background: #000; color: #FF5500; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 12px; padding: 12px clamp(14px, 2.5vw, 28px); font-size: clamp(12px, 1.5vw, 18px); font-weight: 500; letter-spacing: .02em;">
-    <span>→ 28/29 AOÛT 2026</span>
+    <span>→ <span data-c="general.dates_bandeau">28/29 AOÛT 2026</span></span>
     <span class="bandeau-stars" style="font-size: 26px; letter-spacing: -2px;">★★★</span>
-    <span>SAINT-PAUL-DU-BOIS (49)</span>
+    <span data-c="general.lieu">SAINT-PAUL-DU-BOIS (49)</span>
   </div>
 
   <!-- Navigation -->
@@ -66,7 +66,7 @@
 
     <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: clamp(10px, 1.6vw, 18px);">
       <img src="assets/img/logo-orange.png" alt="Speed Festival" style="width: min(820px, 92%); height: auto; filter: drop-shadow(0 10px 0 rgba(0,0,0,.35));">
-      <p class="t" style="margin: 0; font-size: clamp(26px, 3.2vw, 44px); font-weight: 800; font-style: italic; text-transform: uppercase; text-align: center; line-height: 1.05; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.6);">Le festival de vitesse</p>
+      <p class="t" style="margin: 0; font-size: clamp(26px, 3.2vw, 44px); font-weight: 800; font-style: italic; text-transform: uppercase; text-align: center; line-height: 1.05; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.6);" data-c="general.accroche">Le festival de vitesse</p>
     </div>
 
     <!-- Polaroid radar -->
@@ -85,21 +85,21 @@
         <div class="hex" style="position: absolute; inset: 8px; background: #fff;"></div>
         <div class="hex dots-sm" style="position: absolute; inset: 8px; opacity: .12;"></div>
         <div class="t" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; line-height: .85;">
-          <span class="hex-d" style="font-size: clamp(36px, 3.6vw, 52px);">28-29</span><span class="hex-m" style="font-size: clamp(24px, 2.3vw, 33px);">AOÛT</span>
+          <span class="hex-d" style="font-size: clamp(36px, 3.6vw, 52px);" data-c="general.hexagone_jours">28-29</span><span class="hex-m" style="font-size: clamp(24px, 2.3vw, 33px);" data-c="general.hexagone_mois">AOÛT</span>
         </div>
       </div>
       <a href="#billetterie" style="position: relative; display: block; flex: 0 1 400px; min-width: 0; width: 100%; max-width: 400px; text-decoration: none; color: #000; background: #FF5500; border: 4px solid #000; box-shadow: 0 0 0 6px #FF5500; border-radius: 8px; overflow: hidden;">
         <div class="splat" style="position: absolute; right: -20px; top: -8px; width: 60%; height: 90px; opacity: .9;"></div>
         <div class="t plaque-u cta-title" style="position: relative; text-align: center; font-size: clamp(36px, 4vw, 52px); font-weight: 900; font-style: italic; padding: 10px 0 12px; line-height: 1;">BILLETTERIE</div>
         <div class="bar cta-bar" style="position: relative; background: #000; color: #FF5500; padding: 7px 14px; font-size: clamp(12px, 1.1vw, 14px); font-weight: 500;">
-          <span>→ PASS WEEKEND + CAMPING</span><span class="cta-stars">★★★</span><span>OUVERTE</span>
+          <span data-c="billetterie.hero_sous_titre">→ PASS WEEKEND + CAMPING</span><span class="cta-stars">★★★</span><span data-c="billetterie.hero_statut">OUVERTE</span>
         </div>
       </a>
     </div>
   </header>
 
   <!-- FEUX DE DÉPART -->
-  <section aria-label="Compte à rebours" style="background: #000; color: #fff; padding: clamp(40px, 5vw, 56px) clamp(16px, 2.5vw, 28px); display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: clamp(24px, 4vw, 56px);">
+  <section id="compte-a-rebours" aria-label="Compte à rebours" style="background: #000; color: #fff; padding: clamp(40px, 5vw, 56px) clamp(16px, 2.5vw, 28px); display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: clamp(24px, 4vw, 56px);">
     <div class="lights" style="display: flex; gap: 14px; background: #1a1a1a; border: 4px solid #333; border-radius: 14px; padding: 16px 20px;">
       <div style="display: flex; flex-direction: column; gap: 10px;"><span style="width: clamp(26px, 3.4vw, 46px); aspect-ratio: 1; border-radius: 50%; background: #FF5500; box-shadow: 0 0 22px #FF5500;"></span><span style="width: clamp(26px, 3.4vw, 46px); aspect-ratio: 1; border-radius: 50%; background: #FF5500; box-shadow: 0 0 22px #FF5500;"></span></div>
       <div style="display: flex; flex-direction: column; gap: 10px;"><span style="width: clamp(26px, 3.4vw, 46px); aspect-ratio: 1; border-radius: 50%; background: #FF5500; box-shadow: 0 0 22px #FF5500;"></span><span style="width: clamp(26px, 3.4vw, 46px); aspect-ratio: 1; border-radius: 50%; background: #FF5500; box-shadow: 0 0 22px #FF5500;"></span></div>
@@ -108,14 +108,14 @@
       <div style="display: flex; flex-direction: column; gap: 10px;"><span style="width: clamp(26px, 3.4vw, 46px); aspect-ratio: 1; border-radius: 50%; background: #3a3a3a;"></span><span style="width: clamp(26px, 3.4vw, 46px); aspect-ratio: 1; border-radius: 50%; background: #3a3a3a;"></span></div>
     </div>
     <div style="min-width: 0;">
-      <p style="margin: 0 0 6px; color: #FF5500; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em;">→ DÉPART DE LA COURSE DANS</p>
+      <p style="margin: 0 0 6px; color: #FF5500; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em;" data-c="general.depart_titre">→ DÉPART DE LA COURSE DANS</p>
       <div class="t" style="display: flex; flex-wrap: wrap; gap: 6px clamp(14px, 2vw, 26px); align-items: baseline; font-weight: 900; line-height: .9;">
         <span style="font-size: clamp(64px, 9vw, 120px); font-variant-numeric: tabular-nums;"><span id="cd-j">000</span><small style="font-size: clamp(22px, 2.6vw, 36px); color: #FF5500;"> J</small></span>
         <span style="font-size: clamp(64px, 9vw, 120px); font-variant-numeric: tabular-nums;"><span id="cd-h">00</span><small style="font-size: clamp(22px, 2.6vw, 36px); color: #FF5500;"> H</small></span>
         <span style="font-size: clamp(64px, 9vw, 120px); font-variant-numeric: tabular-nums;"><span id="cd-m">00</span><small style="font-size: clamp(22px, 2.6vw, 36px); color: #FF5500;"> MIN</small></span>
       </div>
-      <p style="margin: 6px 0 0; color: #FF5500; font-size: 14px; font-weight: 600; letter-spacing: .08em;">→ DÉPART : VENDREDI 28 AOÛT, 18H</p>
-      <p style="margin: 8px 0 0; color: #bbb; font-size: clamp(14px, 1.4vw, 16px); line-height: 1.45;">4 feux allumés sur 5, il ne manque plus que toi pour allumer le dernier.</p>
+      <p style="margin: 6px 0 0; color: #FF5500; font-size: 14px; font-weight: 600; letter-spacing: .08em;" data-c="general.depart_texte">→ DÉPART : VENDREDI 28 AOÛT, 18H</p>
+      <p style="margin: 8px 0 0; color: #bbb; font-size: clamp(14px, 1.4vw, 16px); line-height: 1.45;" data-c="general.depart_phrase">4 feux allumés sur 5, il ne manque plus que toi pour allumer le dernier.</p>
     </div>
   </section>
 
@@ -124,10 +124,10 @@
     <div style="max-width: 1240px; margin: 0 auto;">
       <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 18px 24px; margin-bottom: 30px;">
         <div>
-          <p style="margin: 0 0 6px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em; color: #FF5500;">→ LINE-UP 2027</p>
-          <h2 class="t" style="margin: 0; font-size: clamp(56px, 8.5vw, 120px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;">Grille de départ</h2>
+          <p style="margin: 0 0 6px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em; color: #FF5500;" data-c="programmation.surtitre">→ LINE-UP 2027</p>
+          <h2 class="t" style="margin: 0; font-size: clamp(56px, 8.5vw, 120px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;" data-c="programmation.titre">Grille de départ</h2>
         </div>
-        <p style="margin: 0; max-width: 380px; font-size: clamp(15px, 1.5vw, 17px); line-height: 1.5;">Ouverture du site à 18h, extinction des moteurs à 3h. Entre les deux : 15 départs sur deux circuits.</p>
+        <p style="margin: 0; max-width: 380px; font-size: clamp(15px, 1.5vw, 17px); line-height: 1.5;" data-c="programmation.intro">Ouverture du site à 18h, extinction des moteurs à 3h. Entre les deux : 15 départs sur deux circuits.</p>
       </div>
 
       <!-- Légende des scènes -->
@@ -145,13 +145,13 @@
       <div class="grid2">
         <!-- Vendredi -->
         <div style="display: flex; flex-direction: column; gap: clamp(18px, 2.2vw, 28px); min-width: 0;">
-          <div class="t" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: clamp(30px, 3vw, 40px); font-weight: 900; text-transform: uppercase;"><span style="background: #000; color: #FF5500; padding: 2px 14px; border-radius: 4px;">VENDREDI 28</span> Qualifs</div>
+          <div class="t" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: clamp(30px, 3vw, 40px); font-weight: 900; text-transform: uppercase;"><span style="background: #000; color: #FF5500; padding: 2px 14px; border-radius: 4px;" data-c="programmation.vendredi">VENDREDI 28</span> <span data-c="programmation.vendredi_nom">Qualifs</span></div>
           <div id="ven-list" style="display: contents;"></div>
         </div>
 
         <!-- Samedi décalé (aligné sur mobile) -->
         <div class="sam-offset" style="display: flex; flex-direction: column; gap: clamp(18px, 2.2vw, 28px); min-width: 0;">
-          <div class="t" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: clamp(30px, 3vw, 40px); font-weight: 900; text-transform: uppercase;"><span style="background: #000; color: #FF5500; padding: 2px 14px; border-radius: 4px;">SAMEDI 29</span> Course</div>
+          <div class="t" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: clamp(30px, 3vw, 40px); font-weight: 900; text-transform: uppercase;"><span style="background: #000; color: #FF5500; padding: 2px 14px; border-radius: 4px;" data-c="programmation.samedi">SAMEDI 29</span> <span data-c="programmation.samedi_nom">Course</span></div>
           <div id="sam-list" style="display: contents;"></div>
         </div>
       </div>
@@ -161,15 +161,15 @@
     </div>
   </section>
 
-  <div class="checker-flat" aria-hidden="true" style="height: clamp(26px, 3vw, 42px);"></div>
+  <div class="checker-flat" data-suit="programmation" aria-hidden="true" style="height: clamp(26px, 3vw, 42px);"></div>
 
   <!-- INFOS PRATIQUES -->
   <section id="infos" style="position: relative; background: #FF5500; padding: clamp(56px, 7vw, 90px) clamp(16px, 2.5vw, 28px); overflow: hidden;">
     <div class="dots-w" style="position: absolute; inset: 0; opacity: .5;"></div>
     <div style="position: relative; max-width: 1240px; margin: 0 auto;">
-      <p style="margin: 0 0 6px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em;">→ AVANT DE PRENDRE LA PISTE</p>
-      <h2 class="t" style="margin: 0 0 clamp(30px, 4vw, 50px); font-size: clamp(56px, 8.5vw, 120px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase; color: #fff; -webkit-text-stroke: clamp(2px, .25vw, 3px) #000;">Briefing pilotes</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 22px;">
+      <p style="margin: 0 0 6px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em;" data-c="infos.surtitre">→ AVANT DE PRENDRE LA PISTE</p>
+      <h2 class="t" style="margin: 0 0 clamp(30px, 4vw, 50px); font-size: clamp(56px, 8.5vw, 120px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase; color: #fff; -webkit-text-stroke: clamp(2px, .25vw, 3px) #000;" data-c="infos.titre">Briefing pilotes</h2>
+      <div id="info-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 22px;">
         <a href="#infos" class="info-card" data-info="acces" aria-haspopup="dialog" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
           <div style="position: relative; height: 170px; border-bottom: 4px solid #000;"><img src="assets/img/p603.jpg" alt="Le site du festival en journée" class="ph">
             <svg viewBox="0 0 120 104" width="70" height="61" aria-hidden="true" style="position: absolute; right: 10px; bottom: -30px;"><polygon points="60,6 114,98 6,98" fill="#00BFFF" stroke="#000" stroke-width="7" stroke-linejoin="round"></polygon><text x="60" y="84" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-style="italic" font-size="44">!!!</text></svg></div>
@@ -199,10 +199,10 @@
     <div style="max-width: 1240px; margin: 0 auto;">
       <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 18px 20px; margin-bottom: clamp(24px, 3vw, 36px);">
         <div>
-          <p style="margin: 0 0 6px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em; color: #FF5500;">→ RALENTI DE L'ÉDITION 2025</p>
-          <h2 class="t" style="margin: 0; font-size: clamp(56px, 8.5vw, 120px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;">Le replay</h2>
+          <p style="margin: 0 0 6px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em; color: #FF5500;" data-c="replay.surtitre">→ RALENTI DE L'ÉDITION 2025</p>
+          <h2 class="t" style="margin: 0; font-size: clamp(56px, 8.5vw, 120px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;" data-c="replay.titre">Le replay</h2>
         </div>
-        <a href="https://morisseausteevephotographie.pixieset.com/speedfestival/" class="t" style="text-decoration: none; color: #000; background: #FF5500; border-radius: 6px; padding: 12px 24px; font-size: clamp(20px, 2vw, 26px); font-weight: 900; font-style: italic;">VOIR LES 700+ PHOTOS →</a>
+        <a href="https://morisseausteevephotographie.pixieset.com/speedfestival/" data-c="replay.bouton_texte" data-href="replay.lien_galerie" class="t" style="text-decoration: none; color: #000; background: #FF5500; border-radius: 6px; padding: 12px 24px; font-size: clamp(20px, 2vw, 26px); font-weight: 900; font-style: italic;">VOIR LES 700+ PHOTOS →</a>
       </div>
       <div class="replay" id="replay-grid"></div>
 
@@ -210,13 +210,13 @@
       <div id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo agrandie" style="position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.92); align-items: center; justify-content: center; padding: clamp(12px, 3vw, 40px);">
           <figure style="margin: 0; position: relative; max-width: min(1400px, 100%); max-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px;">
             <img id="lb-img" alt="" style="display: block; max-width: 100%; max-height: calc(100vh - 140px); width: auto; height: auto; object-fit: contain; border: 4px solid #FF5500; border-radius: 6px; background: #000;">
-            <figcaption style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; width: 100%; color: #fff; font-size: 14px;"><span id="lb-alt"></span><span style="color: #FF5500; font-weight: 600;"><span id="lb-count"></span> · Photo : Morisseau Steeve Photographie</span></figcaption>
+            <figcaption style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; width: 100%; color: #fff; font-size: 14px;"><span id="lb-alt"></span><span style="color: #FF5500; font-weight: 600;"><span id="lb-count"></span> · Photo : <span data-c="replay.credit">Morisseau Steeve Photographie</span></span></figcaption>
           </figure>
           <button type="button" id="lb-prev" aria-label="Photo précédente" class="t" style="position: absolute; left: clamp(6px, 2vw, 24px); top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; border: 3px solid #fff; background: #000; color: #fff; font-size: 28px; font-weight: 900; cursor: pointer;">←</button>
           <button type="button" id="lb-next" aria-label="Photo suivante" class="t" style="position: absolute; right: clamp(6px, 2vw, 24px); top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; border: 3px solid #fff; background: #000; color: #fff; font-size: 28px; font-weight: 900; cursor: pointer;">→</button>
           <button type="button" id="lb-close" aria-label="Fermer la photo" class="t" style="position: absolute; right: clamp(8px, 2vw, 24px); top: clamp(8px, 2vw, 24px); min-height: 48px; padding: 0 18px; border-radius: 999px; border: 0; background: #FF5500; color: #000; font-size: 22px; font-weight: 900; cursor: pointer;">FERMER ✕</button>
         </div>
-      <p style="margin: 14px 0 0; font-size: 13px; color: #888;">Photos : Morisseau Steeve Photographie</p>
+      <p style="margin: 14px 0 0; font-size: 13px; color: #888;">Photos : <span data-c="replay.credit">Morisseau Steeve Photographie</span></p>
     </div>
   </section>
 
@@ -225,13 +225,13 @@
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: clamp(36px, 5vw, 60px); align-items: center;">
       <div style="flex: 1 1 min(380px, 100%); min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 20px;">
         <div style="position: relative; width: 100%; max-width: 460px;">
-          <div class="tile" style="height: clamp(220px, 24vw, 300px); transform: rotate(-3deg);"><img src="assets/img/p444.jpg" alt="La foule vue depuis la scène" class="ph"></div>
+          <div class="tile" style="height: clamp(220px, 24vw, 300px); transform: rotate(-3deg);"><img src="assets/img/p444.jpg" data-src="billetterie.photo" alt="La foule vue depuis la scène" class="ph"></div>
           <img src="assets/img/star-badge.png" alt="" style="position: absolute; right: -10px; top: -36px; width: clamp(90px, 10vw, 140px); height: auto;">
         </div>
-        <h2 class="t" style="margin: 10px 0 0; font-size: clamp(56px, 8vw, 110px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;">Prends ton ticket</h2>
-        <p style="margin: 0; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.5; max-width: 420px;">Les places partent plus vite qu'un arrêt au stand. Paiement en ligne sécurisé, e-billet direct dans ta poche.</p>
+        <h2 class="t" style="margin: 10px 0 0; font-size: clamp(56px, 8vw, 110px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;" data-c="billetterie.titre">Prends ton ticket</h2>
+        <p style="margin: 0; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.5; max-width: 420px;" data-c="billetterie.texte">Les places partent plus vite qu'un arrêt au stand. Paiement en ligne sécurisé, e-billet direct dans ta poche.</p>
       </div>
-      <div style="flex: 1 1 min(560px, 100%); min-width: 0; display: flex; flex-direction: column; gap: 26px; padding: 8px;">
+      <div id="pass-list" style="flex: 1 1 min(560px, 100%); min-width: 0; display: flex; flex-direction: column; gap: 26px; padding: 8px;">
         <a href="#billetterie" style="text-decoration: none; color: #000; display: block; border: 4px solid #000; box-shadow: 0 0 0 7px #FF5500; border-radius: 6px; background: #FF5500; overflow: hidden;">
           <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 16px; padding: 14px 22px;"><span class="t plaque-u" style="font-size: clamp(36px, 4.4vw, 60px); font-weight: 900; font-style: italic;">WEEKEND + CAMPING</span><span class="t" style="font-size: clamp(30px, 3.4vw, 48px); font-weight: 900;">[PRIX]</span></div>
           <div class="bar" style="background: #000; color: #FF5500; padding: 8px 22px; font-size: clamp(12px, 1.2vw, 15px);"><span>→ VEN + SAM + PADDOCK</span><span>★★★</span><span>DODO SUR PLACE</span></div>
@@ -253,22 +253,22 @@
   <!-- BÉNÉVOLES -->
   <section id="benevoles" style="background: #FC8AFD; border-top: 5px solid #000; border-bottom: 5px solid #000; display: flex; flex-wrap: wrap; overflow: hidden;">
     <div style="flex: 1 1 min(520px, 100%); padding: clamp(44px, 6vw, 70px) clamp(16px, 4vw, 56px); display: flex; flex-direction: column; justify-content: center; gap: 16px;">
-      <p style="margin: 0; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em;">→ RECRUTEMENT ÉCURIE</p>
-      <h2 class="t" style="margin: 0; font-size: clamp(52px, 7vw, 96px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;">Rejoins le stand</h2>
-      <p style="margin: 0; font-size: clamp(16px, 1.6vw, 18px); max-width: 520px; line-height: 1.5;">Bar, accueil, montage, déco : on cherche des mécanos motivés. Le t-shirt rose est offert, le pass aussi, les crampes en bonus.</p>
-      <a href="#benevoles" class="t btn-funky" style="align-self: flex-start; margin-top: 8px; font-size: clamp(24px, 2.6vw, 32px);">        <span>Devenir bénévole</span>
+      <p style="margin: 0; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em;" data-c="benevoles.surtitre">→ RECRUTEMENT ÉCURIE</p>
+      <h2 class="t" style="margin: 0; font-size: clamp(52px, 7vw, 96px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;" data-c="benevoles.titre">Rejoins le stand</h2>
+      <p style="margin: 0; font-size: clamp(16px, 1.6vw, 18px); max-width: 520px; line-height: 1.5;" data-c="benevoles.texte">Bar, accueil, montage, déco : on cherche des mécanos motivés. Le t-shirt rose est offert, le pass aussi, les crampes en bonus.</p>
+      <a href="#benevoles" data-href="benevoles.bouton_lien" class="t btn-funky" style="align-self: flex-start; margin-top: 8px; font-size: clamp(24px, 2.6vw, 32px);">        <span data-c="benevoles.bouton_texte">Devenir bénévole</span>
         <span class="bf-arrow" aria-hidden="true">→</span>      </a>
     </div>
     <div class="ben-photo" style="flex: 1 1 min(560px, 100%); min-height: clamp(280px, 36vw, 460px); position: relative;">
-      <img src="assets/img/p022.jpg" alt="L'équipe des bénévoles en t-shirts roses devant le logo Speed" class="ph" style="position: absolute; inset: 0;">
+      <img src="assets/img/p022.jpg" data-src="benevoles.photo" alt="L'équipe des bénévoles en t-shirts roses devant le logo Speed" class="ph" style="position: absolute; inset: 0;">
     </div>
   </section>
 
   <!-- PARTENAIRES -->
   <section id="partenaires" style="background: #FFF8E6; padding: clamp(56px, 6vw, 80px) clamp(16px, 2.5vw, 28px);">
     <div style="max-width: 1240px; margin: 0 auto;">
-      <h2 class="t" style="margin: 0 0 clamp(22px, 3vw, 34px); font-size: clamp(36px, 4.6vw, 64px); line-height: .95; font-weight: 900; font-style: italic; text-transform: uppercase; text-align: center;">Sponsors officiels sur la combinaison</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr)); gap: clamp(10px, 1.4vw, 18px);">
+      <h2 class="t" style="margin: 0 0 clamp(22px, 3vw, 34px); font-size: clamp(36px, 4.6vw, 64px); line-height: .95; font-weight: 900; font-style: italic; text-transform: uppercase; text-align: center;" data-c="partenaires.titre">Sponsors officiels sur la combinaison</h2>
+      <div id="logos" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr)); gap: clamp(10px, 1.4vw, 18px);">
         <div style="height: clamp(80px, 8vw, 110px); border: 3px dashed #000; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #555;">[LOGO]</div>
         <div style="height: clamp(80px, 8vw, 110px); border: 3px dashed #000; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #555;">[LOGO]</div>
         <div style="height: clamp(80px, 8vw, 110px); border: 3px dashed #000; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #555;">[LOGO]</div>
@@ -277,8 +277,8 @@
         <div style="height: clamp(80px, 8vw, 110px); border: 3px dashed #000; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #555;">[LOGO]</div>
       </div>
       <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 14px; margin-top: 28px; text-align: center;">
-        <p style="margin: 0; font-size: 15px; font-weight: 500; color: #444;">Votre logo sur la combinaison du Speed ?</p>
-        <a href="mailto:[EMAIL PARTENARIATS]" class="t" style="display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: #FFF8E6; background: #000; border: 2px solid #000; border-radius: 999px; padding: 4px 16px; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em;">Devenir partenaire →</a>
+        <p style="margin: 0; font-size: 15px; font-weight: 500; color: #444;" data-c="partenaires.appel">Votre logo sur la combinaison du Speed ?</p>
+        <a href="mailto:[EMAIL PARTENARIATS]" id="partner-mail" class="t" style="display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: #FFF8E6; background: #000; border: 2px solid #000; border-radius: 999px; padding: 4px 16px; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em;">Devenir partenaire →</a>
       </div>
     </div>
   </section>
@@ -289,13 +289,13 @@
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
       <div style="display: flex; flex-direction: column; gap: 16px; flex: 1 1 260px; min-width: 0;">
         <img src="assets/img/logo-orange.png" alt="Speed Festival" style="width: min(320px, 100%); height: auto;">
-        <p style="margin: 0; color: #bbb; max-width: 340px; line-height: 1.5;">Festival de vitesse depuis 2021.<br>28/29 août 2026 · Saint-Paul-du-Bois (49)</p>
+        <p style="margin: 0; color: #bbb; max-width: 340px; line-height: 1.5;"><span data-c="general.pied_de_page">Festival de vitesse depuis 2021.</span><br><span data-c="general.dates_bandeau">28/29 août 2026</span> · <span data-c="general.lieu">Saint-Paul-du-Bois (49)</span></p>
       </div>
       <div class="t" style="display: flex; flex-direction: column; gap: 4px; font-size: 24px; font-weight: 700; text-transform: uppercase;">
         <a class="navlink" href="#billetterie" style="min-height: 40px; display: flex; align-items: center;">Billetterie</a>
         <a class="navlink" href="#infos" style="min-height: 40px; display: flex; align-items: center;">FAQ</a>
-        <a class="navlink" href="#" style="min-height: 40px; display: flex; align-items: center;">Contact</a>
-        <a class="navlink" href="#" style="min-height: 40px; display: flex; align-items: center;">Mentions légales</a>
+        <a class="navlink" href="#" data-href="general.lien_contact" style="min-height: 40px; display: flex; align-items: center;">Contact</a>
+        <a class="navlink" href="#" data-href="general.lien_mentions" style="min-height: 40px; display: flex; align-items: center;">Mentions légales</a>
       </div>
       <form style="display: flex; flex-direction: column; gap: 10px; flex: 1 1 300px; min-width: 0; max-width: 420px;">
         <label for="nl-a" class="t" style="font-size: clamp(24px, 2.4vw, 28px); font-weight: 900; font-style: italic; text-transform: uppercase; color: #FF5500;">La newsletter des pilotes</label>
@@ -306,7 +306,7 @@
       </form>
     </div>
     <div class="bar" style="max-width: 1240px; margin: 40px auto 0; border-top: 1px solid #333; padding-top: 16px; color: #FF5500; font-size: 14px;">
-      <span>→ 28/29 AOÛT 2026</span><span>★★★</span><span>SAINT-PAUL-DU-BOIS (49)</span>
+      <span>→ <span data-c="general.dates_bandeau">28/29 AOÛT 2026</span></span><span>★★★</span><span data-c="general.lieu">SAINT-PAUL-DU-BOIS (49)</span>
     </div>
   </footer>
 
@@ -347,6 +347,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js?v=7"></script>
+<script src="assets/js/main.js?v=8"></script>
 </body>
 </html>

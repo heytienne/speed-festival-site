@@ -1,164 +1,219 @@
-/* Speed Festival — scripts du site (grille 2027, replay + visionneuse, compte à rebours) */
+/* Speed Festival — scripts du site
+   Tous les contenus viennent des fichiers du dossier content/ (modifiables depuis le back-office Pages CMS).
+   Ce script les charge puis remplit la page : textes, line-up, billetterie, infos, replay, partenaires, ordre des blocs. */
 (function () {
   'use strict';
 
-  /* ---------- Compte à rebours : 0 = ouverture du vendredi 18h (heure de Paris) ---------- */
-  var DEPART = '2026-08-28T18:00:00+02:00';
-  function pad(n, w) { n = String(n); while (n.length < w) n = '0' + n; return n; }
-  function tick() {
-    var left = Math.max(0, Date.parse(DEPART) - Date.now());
-    var totalMin = Math.floor(left / 60000);
-    document.getElementById('cd-j').textContent = pad(Math.floor(totalMin / 1440), 3);
-    document.getElementById('cd-h').textContent = pad(Math.floor((totalMin % 1440) / 60), 2);
-    document.getElementById('cd-m').textContent = pad(totalMin % 60, 2);
-  }
-  tick();
-  setInterval(tick, 30000);
+  var FICHIERS = ['general', 'accueil', 'programmation', 'billetterie', 'infos', 'replay', 'partenaires'];
+  var COULEURS = { orange: '#FF5500', jaune: '#F1FF00', vert: '#00FF97', rose: '#FC8AFD', bleu: '#00BFFF', marron: '#804240', noir: '#000000', creme: '#FFF8E6', blanc: '#FFFFFF' };
+  var SCENES = { arena: { stage: 'SPEED ARENA', color: '#FF5500' }, boiler: { stage: 'BOILER VROOM', color: '#00FF97' } };
 
-  /* ---------- Grille de départ 2027 ---------- */
-  var SA = { stage: 'SPEED ARENA', color: '#FF5500' };
-  var BV = { stage: 'BOILER VROOM', color: '#00FF97' };
-  var ALL = { stage: 'SPEED ARENA', color: '#FF5500' };
-  function slot(name, sc, from, to) {
-    var p = from.split('h');
-    return { name: name, stage: sc.stage, color: sc.color, h: p[0] + 'H', m: p[1] || '00', time: from + ' → ' + to,
-      size: name.length > 14 ? 'clamp(26px, 2.6vw, 36px)' : 'clamp(32px, 3.4vw, 46px)' };
+  /* ---------- Outils ---------- */
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  /* Texte saisi dans le back-office : [[...]] = passage à compléter (surligné), retours à la ligne conservés */
+  function txt(s) { return esc(s).replace(/\[\[(.+?)\]\]/g, '<span class="im-todo">$1</span>').replace(/\n/g, '<br>'); }
+  function col(name, fallback) { return COULEURS[name] || (/^#[0-9a-f]{3,8}$/i.test(name || '') ? name : (fallback || '#FF5500')); }
+  /* Les images envoyées par le back-office arrivent en « /assets/img/... » : on les rend relatives (le site vit dans un sous-dossier sur GitHub Pages) */
+  function img(p) { return p ? String(p).replace(/^\/+/, '') : ''; }
+  function get(obj, path) { return path.split('.').reduce(function (o, k) { return o == null ? undefined : o[k]; }, obj); }
+  function $(id) { return document.getElementById(id); }
+
+  function charger() {
+    return Promise.all(FICHIERS.map(function (f) {
+      return fetch('content/' + f + '.json', { cache: 'no-cache' })
+        .then(function (r) { if (!r.ok) throw new Error(f + ' : ' + r.status); return r.json(); });
+    })).then(function (list) {
+      var d = {};
+      FICHIERS.forEach(function (f, i) { d[f] = list[i]; });
+      d.benevoles = (d.accueil.blocs || []).filter(function (b) { return b.type === 'benevoles'; })[0] || {};
+      return d;
+    });
   }
 
-  /* ---------- Fiches artistes ----------
-     Pour chaque artiste : photo (chemin d'image, sinon visuel provisoire), bio,
-     et liens d'écoute. Tant qu'un lien officiel n'est pas renseigné, le bouton
-     ouvre une recherche du nom sur la plateforme.
-     Remplacer les textes marqués « à valider » / « à venir » par les vrais. */
-  var ARTISTES = {
-    'Tremplin': { bio: 'Le lauréat du tremplin Speed ouvre le circuit : un talent local repéré par l’équipe, qui prend la pole avant tout le monde. Nom dévoilé bientôt.', noLinks: true },
-    'DJ Stiff': { bio: 'Présentation de l’artiste à venir.' },
-    'Europe': { bio: 'Présentation de l’artiste à venir.' },
-    'Notinbed': { bio: 'Présentation de l’artiste à venir.' },
-    'St Graal': { bio: 'Artiste français révélé en 2021 par le titre viral « Les dauphins », entre électro et pop aérienne. (Texte à valider)' },
-    'Noel Minitel': { bio: 'Présentation de l’artiste à venir.' },
-    'Benwal': { bio: 'DJ et producteur néerlandais originaire de Groningue : des sets trance, hard house et techno à très haute énergie, passés par Pukkelpop et les grands clubs européens. (Texte à valider)' },
-    'Sheriff': { bio: 'Présentation de l’artiste à venir.' },
-    'Velvet Brothers': { bio: 'Présentation de l’artiste à venir.' },
-    'DJ Minou': { bio: 'Présentation de l’artiste à venir.' },
-    'Arone': { bio: 'Présentation de l’artiste à venir.' },
-    'Solar Boys': { bio: 'Présentation de l’artiste à venir.' },
-    'Camoufly': { bio: 'Producteur et DJ masqué venu d’Italie : house, UK garage et sons expérimentaux, un mélange de genres qui ne tient jamais en place. (Texte à valider)' },
-    'Snoritz': { bio: 'DJ et producteur de Münster : du garage à la hard house en passant par les breaks, des sets qui accélèrent sans prévenir. (Texte à valider)' },
-    'Speed All Stars End Show': { bio: 'Le grand final du Speed : toute l’écurie monte sur la Speed Arena pour le dernier tour de piste. Programme surprise.', noLinks: true }
-  };
-  /* Écoute : un seul lien « magic link » par artiste (page qui laisse choisir sa plateforme :
-     Spotify, Deezer, Apple Music…). À renseigner dans ARTISTES[nom].listen = 'https://…'.
-     Sans lien, le bouton s'affiche en « bientôt disponible ». */
-  var VEN = [
-    slot('Tremplin', BV, '19h00', '19h30'),
-    slot('DJ Stiff', BV, '19h30', '20h30'),
-    slot('Europe', SA, '21h30', '22h30'),
-    slot('Notinbed', BV, '22h30', '23h30'),
-    slot('St Graal', SA, '23h30', '00h30'),
-    slot('Noel Minitel', BV, '00h30', '01h30'),
-    slot('Benwal', SA, '01h30', '02h50')
-  ];
-  var SAM = [
-    slot('Sheriff', BV, '19h00', '19h55'),
-    slot('Velvet Brothers', SA, '20h00', '21h00'),
-    slot('DJ Minou', BV, '21h00', '21h55'),
-    slot('Arone', SA, '22h00', '22h50'),
-    slot('Solar Boys', BV, '23h00', '23h55'),
-    slot('Camoufly', SA, '00h00', '01h00'),
-    slot('Snoritz', SA, '01h00', '02h00'),
-    slot('Speed All Stars End Show', ALL, '02h00', '02h45')
-  ];
-  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  /* ---------- Textes simples (attributs data-c / data-href / data-src) ---------- */
+  function remplirTextes(d) {
+    document.querySelectorAll('[data-c]').forEach(function (el) {
+      var v = get(d, el.getAttribute('data-c'));
+      if (typeof v === 'string' && v !== '') el.textContent = v;
+    });
+    document.querySelectorAll('[data-href]').forEach(function (el) {
+      var v = get(d, el.getAttribute('data-href'));
+      if (v) { el.href = v; if (/^https?:/.test(v)) { el.target = '_blank'; el.rel = 'noopener'; } }
+    });
+    document.querySelectorAll('[data-src]').forEach(function (el) {
+      var v = get(d, el.getAttribute('data-src')); if (v) el.src = img(v);
+    });
+  }
+
+  /* ---------- Compte à rebours : 0 = ouverture (heure de Paris) ---------- */
+  function compteARebours(depart) {
+    var iso = depart || '2026-08-28T18:00';
+    if (!/[+-]\d\d:?\d\d$|Z$/.test(iso)) iso += (iso.length <= 16 ? ':00' : '') + '+02:00'; /* heure d'été de Paris */
+    var cible = Date.parse(iso);
+    function pad(n, w) { n = String(n); while (n.length < w) n = '0' + n; return n; }
+    function tick() {
+      var left = Math.max(0, (cible || 0) - Date.now()), totalMin = Math.floor(left / 60000);
+      $('cd-j').textContent = pad(Math.floor(totalMin / 1440), 3);
+      $('cd-h').textContent = pad(Math.floor((totalMin % 1440) / 60), 2);
+      $('cd-m').textContent = pad(totalMin % 60, 2);
+    }
+    tick(); setInterval(tick, 30000);
+  }
+
+  /* ---------- Ordre et visibilité des blocs de l'accueil ---------- */
+  var SECTIONS = { 'compte-a-rebours': 'compte-a-rebours', programmation: 'grille', infos: 'infos', replay: 'replay', billetterie: 'billetterie', benevoles: 'benevoles', partenaires: 'partenaires' };
+  function blocLibre(b) {
+    var fond = col(b.fond, '#FFF8E6'), sombre = /^(noir|marron)$/.test(b.fond || '');
+    var s = document.createElement('section');
+    s.className = 'bloc-libre' + (sombre ? ' is-dark' : '') + (b.type === 'annonce' ? ' bloc-annonce' : '');
+    s.style.background = fond;
+    if (b.type === 'annonce') {
+      s.innerHTML = '<div class="bl-in"><p class="t bl-annonce">' + txt(b.texte) + '</p>' +
+        (b.bouton_texte ? '<a class="t bl-btn" href="' + esc(b.bouton_lien || '#') + '">' + esc(b.bouton_texte) + '</a>' : '') + '</div>';
+    } else {
+      s.innerHTML = '<div class="bl-in' + (b.image ? ' has-img' : '') + '"><div class="bl-txt">' +
+        (b.surtitre ? '<p class="bl-kicker">' + esc(b.surtitre) + '</p>' : '') +
+        (b.titre ? '<h2 class="t bl-title">' + esc(b.titre) + '</h2>' : '') +
+        (b.texte ? '<p class="bl-p">' + txt(b.texte) + '</p>' : '') +
+        (b.bouton_texte ? '<a class="t bl-btn" href="' + esc(b.bouton_lien || '#') + '">' + esc(b.bouton_texte) + '</a>' : '') +
+        '</div>' + (b.image ? '<div class="bl-img"><img src="' + esc(img(b.image)) + '" alt="" class="ph"></div>' : '') + '</div>';
+    }
+    return s;
+  }
+  function ordonnerBlocs(blocs) {
+    if (!blocs || !blocs.length) return;
+    var footer = document.querySelector('footer'), parent = footer.parentNode, vus = {};
+    Object.keys(SECTIONS).forEach(function (k) { var el = $(SECTIONS[k]); if (el) el.hidden = true; });
+    blocs.forEach(function (b) {
+      var id = SECTIONS[b.type], el;
+      if (id) {
+        if (vus[id] || !(el = $(id))) return;
+        vus[id] = true;
+        el.hidden = b.visible === false;
+        parent.insertBefore(el, footer);
+        var suite = document.querySelector('[data-suit="' + b.type + '"]');
+        if (suite) { suite.hidden = el.hidden; parent.insertBefore(suite, footer); }
+      } else if ((b.type === 'texte-libre' || b.type === 'annonce') && b.visible !== false) {
+        parent.insertBefore(blocLibre(b), footer);
+      }
+    });
+    /* Les rubriques masquées disparaissent aussi du menu */
+    Object.keys(SECTIONS).forEach(function (k) {
+      var el = $(SECTIONS[k]); if (!el || !el.hidden) return;
+      var c = document.querySelector('[data-suit="' + k + '"]'); if (c) c.hidden = true;
+      document.querySelectorAll('nav a[href="#' + SECTIONS[k] + '"]').forEach(function (a) { var li = a.closest('li'); if (li) li.hidden = true; });
+    });
+  }
+
+  /* ---------- Grille de départ ---------- */
+  var JOURS = {};
+  function minutes(h) { var p = String(h || '0').toLowerCase().split(/[h:]/); var m = (+p[0] || 0) * 60 + (+p[1] || 0); return m < 12 * 60 ? m + 1440 : m; }
+  function slot(a) {
+    var sc = SCENES[a.scene] || SCENES.arena, p = String(a.debut || '').toLowerCase().split(/[h:]/);
+    return { name: a.nom, stage: sc.stage, color: sc.color, h: (p[0] || '--') + 'H', m: p[1] || '00', time: (a.debut || '') + ' → ' + (a.fin || ''),
+      size: (a.nom || '').length > 14 ? 'clamp(26px, 2.6vw, 36px)' : 'clamp(32px, 3.4vw, 46px)', info: a };
+  }
   function plaque(day) { return function (a, i) {
     return '<button type="button" class="artist-btn' + (i % 2 ? ' stg' : '') + '" data-day="' + day + '" data-i="' + i + '" aria-haspopup="dialog" aria-label="' + esc(a.name) + ' : voir la fiche artiste">' +
       '<div style="display:flex;align-items:stretch;border:4px solid #000;box-shadow:0 0 0 6px ' + a.color + ';border-radius:6px;background:' + a.color + ';overflow:hidden;">' +
       '<div class="t" style="width:clamp(78px,8vw,104px);flex:none;background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;line-height:.9;">' +
-        '<span style="font-size:clamp(30px,3vw,40px);font-weight:900;font-style:italic;">' + a.h + '</span>' +
-        '<span style="font-size:clamp(18px,1.8vw,22px);font-weight:800;color:' + a.color + ';">' + a.m + '</span></div>' +
+        '<span style="font-size:clamp(30px,3vw,40px);font-weight:900;font-style:italic;">' + esc(a.h) + '</span>' +
+        '<span style="font-size:clamp(18px,1.8vw,22px);font-weight:800;color:' + a.color + ';">' + esc(a.m) + '</span></div>' +
       '<div style="flex:1;min-width:0;display:flex;flex-direction:column;">' +
         '<div class="t plaque-u" style="flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:' + a.size + ';line-height:1;font-weight:900;font-style:italic;text-transform:uppercase;padding:14px 10px 16px;">' + esc(a.name) + '</div>' +
-        '<div class="bar" style="background:#000;color:' + a.color + ';padding:6px 14px;font-size:clamp(12px,1.2vw,15px);font-weight:600;"><span>→ ' + a.stage + '</span><span>' + a.time + '</span></div>' +
+        '<div class="bar" style="background:#000;color:' + a.color + ';padding:6px 14px;font-size:clamp(12px,1.2vw,15px);font-weight:600;"><span>→ ' + a.stage + '</span><span>' + esc(a.time) + '</span></div>' +
       '</div></div></button>';
   }; }
-  var JOURS = { ven: { list: VEN, label: 'Vendredi 28' }, sam: { list: SAM, label: 'Samedi 29' } };
-  document.getElementById('ven-list').innerHTML = VEN.map(plaque('ven')).join('');
-  document.getElementById('sam-list').innerHTML = SAM.map(plaque('sam')).join('');
+  function grille(p) {
+    ['ven', 'sam'].forEach(function (day) {
+      var list = (p.artistes || []).filter(function (a) { return a.jour === day && a.nom && a.publie !== false; })
+        .sort(function (x, y) { return minutes(x.debut) - minutes(y.debut); }).map(slot);
+      JOURS[day] = { list: list, label: day === 'ven' ? p.vendredi : p.samedi };
+      $(day + '-list').innerHTML = list.map(plaque(day)).join('');
+    });
+  }
 
   /* ---------- Popup fiche artiste ---------- */
-  var am = document.getElementById('artist-modal'), amOpener = null;
+  var am = $('artist-modal'), amOpener = null;
   function initials(name) { return name.split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 3).toUpperCase(); }
+  var PLAY = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#000"></circle><path d="M10 7.5v9l7-4.5z" fill="#fff"></path></svg>';
   function openArtist(dayKey, i, btn) {
-    var a = JOURS[dayKey].list[i], info = ARTISTES[a.name] || {};
+    var a = JOURS[dayKey].list[i], info = a.info;
     amOpener = btn;
     am.style.setProperty('--am-color', a.color);
-    document.getElementById('am-kicker').textContent = '→ LINE-UP 2027 · ' + a.stage;
-    document.getElementById('am-name').textContent = a.name;
-    document.getElementById('am-day').textContent = JOURS[dayKey].label;
-    document.getElementById('am-time').textContent = a.time;
-    document.getElementById('am-stage').textContent = a.stage;
-    document.getElementById('am-bio').textContent = info.bio || 'Présentation de l’artiste à venir.';
-    var photo = document.getElementById('am-photo');
-    photo.innerHTML = info.photo
-      ? '<img src="' + esc(info.photo) + '" alt="' + esc(a.name) + ', photo presse">'
+    $('am-kicker').textContent = '→ LINE-UP · ' + a.stage;
+    $('am-name').textContent = a.name;
+    $('am-day').textContent = JOURS[dayKey].label || '';
+    $('am-time').textContent = a.time;
+    $('am-stage').textContent = a.stage;
+    $('am-bio').innerHTML = txt(info.bio || 'Présentation de l’artiste à venir.');
+    $('am-photo').innerHTML = info.photo
+      ? '<img src="' + esc(img(info.photo)) + '" alt="' + esc(a.name) + ', photo presse">'
       : '<div class="am-ph" aria-hidden="true"><span class="am-ph-init">' + esc(initials(a.name)) + '</span><span class="am-ph-note">PHOTO PRESSE À VENIR</span></div>';
-    var listen = document.getElementById('am-listen');
-    if (info.noLinks) { listen.innerHTML = ''; }
-    else if (info.listen) {
-      listen.innerHTML = '<a class="am-listen-btn t" href="' + esc(info.listen) + '" target="_blank" rel="noopener">' +
-        '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#000"></circle><path d="M10 7.5v9l7-4.5z" fill="#fff"></path></svg>' +
-        'Écouter sur les plateformes <span aria-hidden="true">↗</span></a>';
-    } else {
-      listen.innerHTML = '<span class="am-listen-btn t is-soon" aria-disabled="true">' +
-        '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#000"></circle><path d="M10 7.5v9l7-4.5z" fill="#fff"></path></svg>' +
-        'Écouter sur les plateformes</span><span class="am-soon">Lien d’écoute bientôt disponible</span>';
-    }
+    var listen = $('am-listen');
+    if (info.sans_ecoute) listen.innerHTML = '';
+    else if (info.ecoute) listen.innerHTML = '<a class="am-listen-btn t" href="' + esc(info.ecoute) + '" target="_blank" rel="noopener">' + PLAY + 'Écouter sur les plateformes <span aria-hidden="true">↗</span></a>';
+    else listen.innerHTML = '<span class="am-listen-btn t is-soon" aria-disabled="true">' + PLAY + 'Écouter sur les plateformes</span><span class="am-soon">Lien d’écoute bientôt disponible</span>';
     am.hidden = false;
     document.body.style.overflow = 'hidden';
-    document.getElementById('am-close').focus();
+    $('am-close').focus();
   }
   function closeArtist() { am.hidden = true; document.body.style.overflow = ''; if (amOpener) amOpener.focus(); }
-  document.getElementById('grille').addEventListener('click', function (e) {
+  $('grille').addEventListener('click', function (e) {
     var b = e.target.closest('.artist-btn'); if (b) openArtist(b.getAttribute('data-day'), +b.getAttribute('data-i'), b);
   });
-  document.getElementById('am-close').addEventListener('click', closeArtist);
+  $('am-close').addEventListener('click', closeArtist);
   am.addEventListener('click', function (e) { if (e.target === am) closeArtist(); });
   document.addEventListener('keydown', function (e) { if (!am.hidden && e.key === 'Escape') closeArtist(); });
 
-  /* ---------- Replay 2025 + visionneuse ---------- */
-  var PHOTOS = [
-    { src: 'assets/img/p723.jpg', alt: 'Drapeau à damier brandi au-dessus de la foule devant la scène', cls: 'span-c2 span-r2', label: 'DRAPEAU À DAMIER', bg: '#FF5500' },
-    { src: 'assets/img/p166.jpg', alt: 'La scène Boiler Vroom montée sur une voiture rose', cls: '' },
-    { src: 'assets/img/p373.jpg', alt: 'Gobelets Speed remplis de bière', cls: '' },
-    { src: 'assets/img/p090.jpg', alt: 'Bande de potes au camping en combinaisons orange', cls: 'span-c2', label: 'LE PADDOCK', bg: '#00FF97' },
-    { src: 'assets/img/p255.jpg', alt: 'Bénévole au bar en t-shirt rose servant un pichet', cls: '' },
-    { src: 'assets/img/p448.jpg', alt: 'Foule devant la scène avec des étincelles', cls: 'span-r2' },
-    { src: 'assets/img/p159.jpg', alt: 'Festivaliers qui dansent en plein jour', cls: '' },
-    { src: 'assets/img/p655.jpg', alt: 'Festivaliers en lunettes de soleil', cls: '' },
-    { src: 'assets/img/p471.jpg', alt: 'Festivalière en veste Racing', cls: '' }
-  ];
-  var grid = document.getElementById('replay-grid');
-  grid.innerHTML = PHOTOS.map(function (p, i) {
-    return '<button type="button" class="tile zoomable ' + p.cls + '" data-i="' + i + '" aria-label="Agrandir la photo : ' + esc(p.alt) + '" style="padding:0;cursor:zoom-in;display:block;width:100%;height:100%;">' +
-      '<img src="' + p.src + '" alt="' + esc(p.alt) + '" class="ph" loading="lazy">' +
-      (p.label ? '<span class="t" style="position:absolute;left:12px;bottom:10px;background:' + p.bg + ';color:#000;padding:2px 12px;font-size:clamp(18px,2vw,26px);font-weight:900;font-style:italic;">' + p.label + '</span>' : '') +
-      '<span aria-hidden="true" class="zoom-ico" style="position:absolute;right:10px;top:10px;width:38px;height:38px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M20 20l-4.8-4.8M10.5 7.5v6M7.5 10.5h6"></path></svg></span>' +
-      '</button>';
-  }).join('');
+  /* ---------- Billetterie ---------- */
+  var STATUTS = { bientot: 'BIENTÔT', complet: 'COMPLET' };
+  function billetterie(b) {
+    var pass = b.pass || [], lienGen = b.lien || '#billetterie';
+    function lien(p) { return p.lien || lienGen; }
+    function ext(u) { return /^https?:/.test(u) ? ' target="_blank" rel="noopener"' : ''; }
+    function prix(p) { return p.statut === 'complet' ? 'COMPLET' : (p.prix ? esc(p.prix) : (STATUTS[p.statut] || 'BIENTÔT')); }
+    var vedettes = pass.filter(function (p) { return p.en_vedette; }), autres = pass.filter(function (p) { return !p.en_vedette; });
+    var html = vedettes.map(function (p) {
+      var c = col(p.couleur);
+      return '<a class="pass' + (p.statut === 'complet' ? ' is-sold' : '') + '" href="' + esc(lien(p)) + '"' + ext(lien(p)) + ' style="text-decoration: none; color: #000; display: block; border: 4px solid #000; box-shadow: 0 0 0 7px ' + c + '; border-radius: 6px; background: ' + c + '; overflow: hidden;">' +
+        '<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 16px; padding: 14px 22px;"><span class="t plaque-u" style="font-size: clamp(36px, 4.4vw, 60px); font-weight: 900; font-style: italic; text-transform: uppercase;">' + esc(p.nom) + '</span><span class="t" style="font-size: clamp(30px, 3.4vw, 48px); font-weight: 900;">' + prix(p) + '</span></div>' +
+        '<div class="bar" style="background: #000; color: ' + c + '; padding: 8px 22px; font-size: clamp(12px, 1.2vw, 15px);"><span>' + esc(p.bandeau) + '</span><span>★★★</span><span>' + esc(p.bandeau_droite) + '</span></div></a>';
+    }).join('');
+    if (autres.length) html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 26px;">' + autres.map(function (p) {
+      var c = col(p.couleur);
+      return '<a class="pass' + (p.statut === 'complet' ? ' is-sold' : '') + '" href="' + esc(lien(p)) + '"' + ext(lien(p)) + ' style="text-decoration: none; color: #000; display: block; border: 4px solid #000; box-shadow: 0 0 0 7px ' + c + '; border-radius: 6px; background: ' + c + '; overflow: hidden;">' +
+        '<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 18px;"><span class="t plaque-u" style="font-size: clamp(32px, 3vw, 40px); font-weight: 900; font-style: italic; text-transform: uppercase;">' + esc(p.nom) + '</span><span class="t" style="font-size: clamp(26px, 2.4vw, 32px); font-weight: 900;">' + prix(p) + '</span></div>' +
+        '<div style="background: #000; color: ' + c + '; padding: 6px 18px; font-size: 14px;">' + esc(p.bandeau) + '</div></a>';
+    }).join('') + '</div>';
+    $('pass-list').innerHTML = html;
+  }
 
-  var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img'),
-      lbAlt = document.getElementById('lb-alt'), lbCount = document.getElementById('lb-count'), cur = -1, opener = null;
+  /* ---------- Replay + visionneuse ---------- */
+  var FORMATS = { normal: '', large: 'span-c2', haut: 'span-r2', grand: 'span-c2 span-r2' };
+  var PHOTOS = [], grid = $('replay-grid');
+  function replay(r) {
+    PHOTOS = (r.photos || []).filter(function (p) { return p.image; });
+    grid.innerHTML = PHOTOS.map(function (p, i) {
+      return '<button type="button" class="tile zoomable ' + (FORMATS[p.format] || '') + '" data-i="' + i + '" aria-label="Agrandir la photo : ' + esc(p.description) + '" style="padding:0;cursor:zoom-in;display:block;width:100%;height:100%;">' +
+        '<img src="' + esc(img(p.image)) + '" alt="' + esc(p.description) + '" class="ph" loading="lazy">' +
+        (p.etiquette ? '<span class="t" style="position:absolute;left:12px;bottom:10px;background:' + col(p.couleur) + ';color:#000;padding:2px 12px;font-size:clamp(18px,2vw,26px);font-weight:900;font-style:italic;">' + esc(p.etiquette) + '</span>' : '') +
+        '<span aria-hidden="true" class="zoom-ico" style="position:absolute;right:10px;top:10px;width:38px;height:38px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M20 20l-4.8-4.8M10.5 7.5v6M7.5 10.5h6"></path></svg></span>' +
+        '</button>';
+    }).join('');
+  }
+  var lb = $('lightbox'), lbImg = $('lb-img'), lbAlt = $('lb-alt'), lbCount = $('lb-count'), cur = -1, opener = null;
   function show(i) {
     cur = (i + PHOTOS.length) % PHOTOS.length;
-    lbImg.src = PHOTOS[cur].src; lbImg.alt = PHOTOS[cur].alt;
-    lbAlt.textContent = PHOTOS[cur].alt; lbCount.textContent = (cur + 1) + ' / ' + PHOTOS.length;
+    lbImg.src = img(PHOTOS[cur].image); lbImg.alt = PHOTOS[cur].description || '';
+    lbAlt.textContent = PHOTOS[cur].description || ''; lbCount.textContent = (cur + 1) + ' / ' + PHOTOS.length;
   }
-  function open(i, btn) { opener = btn; show(i); lb.hidden = false; document.body.style.overflow = 'hidden'; document.getElementById('lb-close').focus(); }
+  function open(i, btn) { opener = btn; show(i); lb.hidden = false; document.body.style.overflow = 'hidden'; $('lb-close').focus(); }
   function close() { lb.hidden = true; cur = -1; document.body.style.overflow = ''; if (opener) opener.focus(); }
   grid.addEventListener('click', function (e) { var b = e.target.closest('button[data-i]'); if (b) open(+b.getAttribute('data-i'), b); });
-  document.getElementById('lb-prev').addEventListener('click', function (e) { e.stopPropagation(); show(cur - 1); });
-  document.getElementById('lb-next').addEventListener('click', function (e) { e.stopPropagation(); show(cur + 1); });
-  document.getElementById('lb-close').addEventListener('click', function (e) { e.stopPropagation(); close(); });
+  $('lb-prev').addEventListener('click', function (e) { e.stopPropagation(); show(cur - 1); });
+  $('lb-next').addEventListener('click', function (e) { e.stopPropagation(); show(cur + 1); });
+  $('lb-close').addEventListener('click', function (e) { e.stopPropagation(); close(); });
   lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
   document.addEventListener('keydown', function (e) {
     if (lb.hidden) return;
@@ -167,81 +222,100 @@
     else if (e.key === 'ArrowRight') show(cur + 1);
   });
 
-  /* ---------- Popups « Briefing pilotes » ----------
-     Contenus modifiables ci-dessous. Les passages en <span class="im-todo"> sont à compléter. */
-  function todo(t) { return '<span class="im-todo">' + t + '</span>'; }
-  function row(k, v) { return '<div class="im-row"><span class="im-k">' + k + '</span><div class="im-v">' + v + '</div></div>'; }
-  var NO = '<svg viewBox="0 0 110 110" width="64" height="64" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg>';
-  var INFOS = {
-    acces: {
-      title: 'Accès & covoit’', color: '#00BFFF', photo: 'assets/img/p603.jpg',
-      body: function () {
-        return row('Adresse', 'Saint-Paul-du-Bois (49), Maine-et-Loire. Adresse exacte du site : ' + todo('à compléter') + '.') +
-          row('En voiture', 'Depuis Angers ou Cholet, suivez les panneaux Speed à l’approche du village. Itinéraire détaillé : ' + todo('à compléter') + '.') +
-          row('Covoiturage', 'La solution la plus rapide (et la plus fun) : moins de voitures, plus de place au paddock. Groupe de covoiturage : ' + todo('lien à ajouter') + '.') +
-          row('Navettes', todo('Points de départ, horaires et tarifs à compléter') + '.') +
-          row('Parking', 'Parking à proximité du site. Conditions : ' + todo('à préciser') + '.') +
-          '<div class="im-actions"><a class="im-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Saint-Paul-du-Bois%2C%20Maine-et-Loire" target="_blank" rel="noopener">Ouvrir le plan ↗</a></div>';
-      }
-    },
-    horaires: {
-      title: 'Horaires', color: '#FF5500', photo: 'assets/img/p013.jpg',
-      body: function () {
-        return '<table class="im-sched"><thead><tr><th>Jour</th><th>Ouverture</th><th>Premier départ</th><th>Fermeture</th></tr></thead><tbody>' +
-          '<tr><td>Vendredi 28</td><td data-l="Ouverture">18h00</td><td data-l="Premier départ">19h00 · Boiler Vroom</td><td data-l="Fermeture">03h00</td></tr>' +
-          '<tr><td>Samedi 29</td><td data-l="Ouverture">18h00</td><td data-l="Premier départ">19h00 · Boiler Vroom</td><td data-l="Fermeture">03h00</td></tr>' +
-          '</tbody></table>' +
-          row('Derniers tours', 'Vendredi : Benwal jusqu’à 02h50 sur la Speed Arena. Samedi : le Speed All Stars End Show jusqu’à 02h45.') +
-          row('Camping', 'Horaires d’ouverture et de départ du camping : ' + todo('à compléter') + '.') +
-          row('Sortie définitive', 'Entre le festival et le camping, la sortie est définitive : pas d’aller-retour une fois sorti.') +
-          '<div class="im-actions"><a class="im-btn im-go" href="#grille">Voir la programmation →</a></div>';
-      }
-    },
-    camping: {
-      title: 'Camping', color: '#00FF97', photo: 'assets/img/p082.jpg',
-      body: function () {
-        return row('Le paddock', 'Le camping des festivaliers : plante ta tente, recharge les batteries, repars en piste. Accès avec le Pass Weekend + Camping.') +
-          row('Sortie définitive', 'Une fois sorti du festival vers le camping, pas de retour sur le site le même soir.') +
-          row('Interdits au camping', 'Verres, boissons et nourriture apportées, gaz, réchauds et barbecue, sound systems.') +
-          row('Sur place', 'Sanitaires, points d’eau, horaires : ' + todo('à compléter') + '.') +
-          '<div class="im-actions"><a class="im-btn im-go" href="#billetterie">Prendre le Pass Weekend + Camping →</a></div>';
-      }
-    },
-    interdits: {
-      title: 'Objets interdits', color: '#00FF97', photo: 'assets/img/p041.jpg',
-      body: function () {
-        var list = ['Couteaux et objets coupants', 'Animaux', 'Substances illicites et drogues', 'Armes', 'Projectiles potentiels', 'Substances explosives ou inflammables',
-          'Engins pyrotechniques', 'Boissons et nourriture (camping)', 'Drones, lasers et perches à selfies', 'Gaz, réchauds et barbecue', 'Sound systems', 'Verres (camping)'];
-        return '<p class="im-v" style="margin:0;">Ce qui reste au garage. Les contrôles se font à l’entrée du site et du camping.</p>' +
-          '<div class="im-ban">' + list.map(function (t) { return '<div>' + NO + '<span>' + t + '</span></div>'; }).join('') + '</div>';
-      }
+  /* ---------- Briefing pilotes : cartes + popups ---------- */
+  function picto(c) {
+    var fill = col(c.couleur), t = esc(c.texte_pictogramme || '');
+    switch (c.pictogramme) {
+      case 'triangle': return '<svg viewBox="0 0 120 104" width="70" height="61" aria-hidden="true" style="position: absolute; right: 10px; bottom: -30px;"><polygon points="60,6 114,98 6,98" fill="' + fill + '" stroke="#000" stroke-width="7" stroke-linejoin="round"></polygon><text x="60" y="84" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-style="italic" font-size="44">' + t + '</text></svg>';
+      case 'hexagone': return '<svg viewBox="0 0 120 104" width="70" height="61" aria-hidden="true" style="position: absolute; right: 10px; bottom: -30px;"><polygon points="32,4 88,4 116,52 88,100 32,100 4,52" fill="' + fill + '" stroke="#000" stroke-width="7" stroke-linejoin="round"></polygon><text x="60" y="68" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="46">' + t + '</text></svg>';
+      case 'tente': return '<svg viewBox="0 0 104 104" width="62" height="62" aria-hidden="true" style="position: absolute; right: 12px; bottom: -30px;"><circle cx="52" cy="52" r="46" fill="' + fill + '" stroke="#000" stroke-width="7"></circle><path d="M24 72 L52 30 L80 72 Z" fill="none" stroke="#000" stroke-width="6" stroke-linejoin="round"></path><path d="M52 30 V72" stroke="#000" stroke-width="5"></path></svg>';
+      case 'interdit': return '<svg viewBox="0 0 104 104" width="62" height="62" aria-hidden="true" style="position: absolute; right: 12px; bottom: -30px;"><circle cx="52" cy="52" r="46" fill="' + fill + '" stroke="#000" stroke-width="7"></circle><path d="M20 20 L84 84" stroke="#000" stroke-width="7"></path></svg>';
+      default: return t ? '<svg viewBox="0 0 104 104" width="62" height="62" aria-hidden="true" style="position: absolute; right: 12px; bottom: -30px;"><circle cx="52" cy="52" r="46" fill="' + fill + '" stroke="#000" stroke-width="7"></circle><text x="52" y="66" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="40">' + t + '</text></svg>' : '';
     }
-  };
-  var im = document.getElementById('info-modal'), imOpener = null;
-  function openInfo(key, opener) {
-    var d = INFOS[key]; if (!d) return;
+  }
+  var CARTES = [];
+  function infos(inf) {
+    CARTES = inf.cartes || [];
+    $('info-cards').innerHTML = CARTES.map(function (c, i) {
+      return '<a href="#infos" class="info-card" data-i="' + i + '" aria-haspopup="dialog" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">' +
+        '<div style="position: relative; height: 170px; border-bottom: 4px solid #000;">' + (c.photo ? '<img src="' + esc(img(c.photo)) + '" alt="" class="ph">' : '<div class="dots" style="position:absolute;inset:0;opacity:.3;"></div>') + picto(c) + '</div>' +
+        '<div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">' + esc(c.titre) + '</span><span style="font-size: 15px; line-height: 1.5;">' + txt(c.resume) + '</span><span class="info-more t">En savoir plus →</span></div></a>';
+    }).join('');
+  }
+  var NO = '<svg viewBox="0 0 110 110" width="64" height="64" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg>';
+  function corpsPopup(c) {
+    var h = '';
+    if (c.intro) h += '<p class="im-v" style="margin:0;">' + txt(c.intro) + '</p>';
+    if (c.horaires && c.horaires.length) {
+      h += '<table class="im-sched"><thead><tr><th>Jour</th><th>Ouverture</th><th>Premier départ</th><th>Fermeture</th></tr></thead><tbody>' +
+        c.horaires.map(function (r) {
+          return '<tr><td>' + esc(r.jour) + '</td><td data-l="Ouverture">' + esc(r.ouverture) + '</td><td data-l="Premier départ">' + esc(r.premier_depart) + '</td><td data-l="Fermeture">' + esc(r.fermeture) + '</td></tr>';
+        }).join('') + '</tbody></table>';
+    }
+    (c.lignes || []).forEach(function (r) { h += '<div class="im-row"><span class="im-k">' + esc(r.titre) + '</span><div class="im-v">' + txt(r.texte) + '</div></div>'; });
+    if (c.interdits && c.interdits.length) h += '<div class="im-ban">' + c.interdits.map(function (t) { return '<div>' + NO + '<span>' + esc(t) + '</span></div>'; }).join('') + '</div>';
+    if (c.bouton_texte && c.bouton_lien) {
+      var interne = c.bouton_lien.charAt(0) === '#';
+      h += '<div class="im-actions"><a class="im-btn' + (interne ? ' im-go' : '') + '" href="' + esc(c.bouton_lien) + '"' + (interne ? '' : ' target="_blank" rel="noopener"') + '>' + esc(c.bouton_texte) + '</a></div>';
+    }
+    return h;
+  }
+  var im = $('info-modal'), imOpener = null;
+  function openInfo(i, opener) {
+    var c = CARTES[i]; if (!c) return;
     imOpener = opener;
-    im.style.setProperty('--am-color', d.color);
-    document.getElementById('im-title').textContent = d.title;
-    document.getElementById('im-photo').innerHTML = d.photo ? '<img src="' + d.photo + '" alt="">' : '';
-    document.getElementById('im-body').innerHTML = d.body();
+    im.style.setProperty('--am-color', col(c.couleur));
+    $('im-title').textContent = c.titre;
+    $('im-photo').innerHTML = c.photo ? '<img src="' + esc(img(c.photo)) + '" alt="">' : '';
+    $('im-body').innerHTML = corpsPopup(c);
     im.hidden = false;
     document.body.style.overflow = 'hidden';
-    document.getElementById('im-close').focus();
+    $('im-close').focus();
   }
   function closeInfo(restore) { im.hidden = true; document.body.style.overflow = ''; if (restore !== false && imOpener) imOpener.focus(); }
-  document.querySelectorAll('.info-card').forEach(function (c) {
-    c.addEventListener('click', function (e) { e.preventDefault(); openInfo(c.getAttribute('data-info'), c); });
+  $('info-cards').addEventListener('click', function (e) {
+    var c = e.target.closest('.info-card'); if (!c) return;
+    e.preventDefault(); openInfo(+c.getAttribute('data-i'), c);
   });
-  document.getElementById('im-close').addEventListener('click', function () { closeInfo(); });
+  $('im-close').addEventListener('click', function () { closeInfo(); });
   im.addEventListener('click', function (e) {
     if (e.target === im) closeInfo();
     var go = e.target.closest('.im-go'); if (go) closeInfo(false); /* lien interne : on ferme et on laisse défiler */
   });
   document.addEventListener('keydown', function (e) { if (!im.hidden && e.key === 'Escape') closeInfo(); });
 
+  /* ---------- Partenaires ---------- */
+  function partenaires(p) {
+    var logos = (p.logos || []).filter(function (l) { return l.logo || l.nom; });
+    if (logos.length) {
+      $('logos').innerHTML = logos.map(function (l) {
+        var inner = l.logo ? '<img src="' + esc(img(l.logo)) + '" alt="' + esc(l.nom || 'Partenaire') + '">' : '<span>' + esc(l.nom) + '</span>';
+        return l.lien ? '<a class="logo-cell" href="' + esc(l.lien) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="logo-cell">' + inner + '</div>';
+      }).join('');
+    }
+    var mail = $('partner-mail');
+    if (p.email) mail.href = 'mailto:' + p.email; else mail.href = '#partenaires';
+  }
+
   /* Le menu mobile se referme après un clic sur une rubrique */
   document.querySelectorAll('.nav-drop a').forEach(function (a) {
     a.addEventListener('click', function () { var d = document.querySelector('.nav-burger'); if (d) d.open = false; });
+  });
+
+  /* ---------- Lancement ---------- */
+  charger().then(function (d) {
+    remplirTextes(d);
+    compteARebours(d.general.depart);
+    ordonnerBlocs(d.accueil.blocs);
+    grille(d.programmation);
+    billetterie(d.billetterie);
+    replay(d.replay);
+    infos(d.infos);
+    partenaires(d.partenaires);
+    document.documentElement.classList.add('contenus-ok');
+    try { var t = location.hash && document.querySelector(location.hash); if (t) t.scrollIntoView(); } catch (e) {}
+  }).catch(function (err) {
+    console.error('Speed : contenus non chargés', err);
+    compteARebours();
   });
 })();

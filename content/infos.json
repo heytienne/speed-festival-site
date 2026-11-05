@@ -1,0 +1,80 @@
+{
+  "surtitre": "→ AVANT DE PRENDRE LA PISTE",
+  "titre": "Briefing pilotes",
+  "cartes": [
+    {
+      "titre": "Accès & covoit'",
+      "resume": "Saint-Paul-du-Bois (49). Navettes, parkings et la ligne droite la plus rapide depuis Angers et Cholet.",
+      "photo": "assets/img/p603.jpg",
+      "couleur": "bleu",
+      "pictogramme": "triangle",
+      "texte_pictogramme": "!!!",
+      "intro": "",
+      "lignes": [
+        { "titre": "Adresse", "texte": "Saint-Paul-du-Bois (49), Maine-et-Loire. Adresse exacte du site : [[à compléter]]." },
+        { "titre": "En voiture", "texte": "Depuis Angers ou Cholet, suivez les panneaux Speed à l’approche du village. Itinéraire détaillé : [[à compléter]]." },
+        { "titre": "Covoiturage", "texte": "La solution la plus rapide (et la plus fun) : moins de voitures, plus de place au paddock. Groupe de covoiturage : [[lien à ajouter]]." },
+        { "titre": "Navettes", "texte": "[[Points de départ, horaires et tarifs à compléter]]." },
+        { "titre": "Parking", "texte": "Parking à proximité du site. Conditions : [[à préciser]]." }
+      ],
+      "horaires": [],
+      "interdits": [],
+      "bouton_texte": "Ouvrir le plan ↗",
+      "bouton_lien": "https://www.google.com/maps/search/?api=1&query=Saint-Paul-du-Bois%2C%20Maine-et-Loire"
+    },
+    {
+      "titre": "Horaires",
+      "resume": "Ouverture des portes, premiers sets, dernier tour de piste. Tout le timing, sans pénalité.",
+      "photo": "assets/img/p013.jpg",
+      "couleur": "orange",
+      "pictogramme": "hexagone",
+      "texte_pictogramme": "00h",
+      "intro": "",
+      "horaires": [
+        { "jour": "Vendredi 28", "ouverture": "18h00", "premier_depart": "19h00 · Boiler Vroom", "fermeture": "03h00" },
+        { "jour": "Samedi 29", "ouverture": "18h00", "premier_depart": "19h00 · Boiler Vroom", "fermeture": "03h00" }
+      ],
+      "lignes": [
+        { "titre": "Derniers tours", "texte": "Vendredi : Benwal jusqu’à 02h50 sur la Speed Arena. Samedi : le Speed All Stars End Show jusqu’à 02h45." },
+        { "titre": "Camping", "texte": "Horaires d’ouverture et de départ du camping : [[à compléter]]." },
+        { "titre": "Sortie définitive", "texte": "Entre le festival et le camping, la sortie est définitive : pas d’aller-retour une fois sorti." }
+      ],
+      "interdits": [],
+      "bouton_texte": "Voir la programmation →",
+      "bouton_lien": "#grille"
+    },
+    {
+      "titre": "Camping",
+      "resume": "Le paddock des festivaliers. Plante ta tente, recharge les batteries, repars en piste.",
+      "photo": "assets/img/p082.jpg",
+      "couleur": "vert",
+      "pictogramme": "tente",
+      "texte_pictogramme": "",
+      "intro": "",
+      "lignes": [
+        { "titre": "Le paddock", "texte": "Le camping des festivaliers : plante ta tente, recharge les batteries, repars en piste. Accès avec le Pass Weekend + Camping." },
+        { "titre": "Sortie définitive", "texte": "Une fois sorti du festival vers le camping, pas de retour sur le site le même soir." },
+        { "titre": "Interdits au camping", "texte": "Verres, boissons et nourriture apportées, gaz, réchauds et barbecue, sound systems." },
+        { "titre": "Sur place", "texte": "Sanitaires, points d’eau, horaires : [[à compléter]]." }
+      ],
+      "horaires": [],
+      "interdits": [],
+      "bouton_texte": "Prendre le Pass Weekend + Camping →",
+      "bouton_lien": "#billetterie"
+    },
+    {
+      "titre": "Objets interdits",
+      "resume": "Pas de verre, pas de sound system perso, pas de drone. Ta perche à selfie reste au stand.",
+      "photo": "assets/img/p041.jpg",
+      "couleur": "vert",
+      "pictogramme": "interdit",
+      "texte_pictogramme": "",
+      "intro": "Ce qui reste au garage. Les contrôles se font à l’entrée du site et du camping.",
+      "lignes": [],
+      "horaires": [],
+      "interdits": ["Couteaux et objets coupants", "Animaux", "Substances illicites et drogues", "Armes", "Projectiles potentiels", "Substances explosives ou inflammables", "Engins pyrotechniques", "Boissons et nourriture (camping)", "Drones, lasers et perches à selfies", "Gaz, réchauds et barbecue", "Sound systems", "Verres (camping)"],
+      "bouton_texte": "",
+      "bouton_lien": ""
+    }
+  ]
+}

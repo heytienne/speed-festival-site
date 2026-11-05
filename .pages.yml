@@ -1,0 +1,304 @@
+# Back-office du site Speed Festival (Pages CMS : https://app.pagescms.org)
+# Chaque entrée ci-dessous devient une rubrique du back-office et modifie un fichier du dossier content/.
+
+media:
+  input: assets/img
+  output: /assets/img
+
+components:
+  couleur:
+    type: select
+    label: Couleur
+    options:
+      values:
+        - { name: orange, label: "Orange (#FF5500)" }
+        - { name: vert, label: "Vert (#00FF97)" }
+        - { name: bleu, label: "Bleu (#00BFFF)" }
+        - { name: rose, label: "Rose (#FC8AFD)" }
+        - { name: jaune, label: "Jaune (#F1FF00)" }
+        - { name: marron, label: "Marron (#804240)" }
+  fond:
+    type: select
+    label: Couleur de fond
+    options:
+      values:
+        - { name: creme, label: "Crème" }
+        - { name: orange, label: "Orange" }
+        - { name: vert, label: "Vert" }
+        - { name: bleu, label: "Bleu" }
+        - { name: rose, label: "Rose" }
+        - { name: jaune, label: "Jaune" }
+        - { name: noir, label: "Noir" }
+
+content:
+  # ------------------------------------------------------------------
+  - name: accueil
+    label: Pages & blocs
+    type: file
+    path: content/accueil.json
+    format: json
+    fields:
+      - name: blocs
+        label: Blocs de la page d'accueil
+        description: "Glisse les blocs pour changer leur ordre, décoche « Visible » pour masquer un bloc (il disparaît aussi du menu). Le bandeau, l'en-tête et le pied de page restent fixes."
+        type: block
+        list: true
+        blockKey: type
+        blocks:
+          - name: compte-a-rebours
+            label: Compte à rebours
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+          - name: programmation
+            label: Grille de départ (line-up)
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+          - name: infos
+            label: Briefing pilotes (infos pratiques)
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+          - name: replay
+            label: Replay (photos)
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+          - name: billetterie
+            label: Billetterie
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+          - name: benevoles
+            label: Rejoins le stand (bénévoles)
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+              - { name: surtitre, label: Surtitre, type: string }
+              - { name: titre, label: Titre, type: string }
+              - { name: texte, label: Texte, type: text }
+              - { name: bouton_texte, label: Texte du bouton, type: string }
+              - { name: bouton_lien, label: Lien du bouton, type: string, description: "Lien du formulaire d'inscription bénévole (https://…)" }
+              - { name: photo, label: Photo, type: image }
+          - name: partenaires
+            label: Partenaires
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+          - name: texte-libre
+            label: "+ Bloc texte (avec image)"
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+              - { name: fond, component: fond }
+              - { name: surtitre, label: Surtitre, type: string, description: "Ex. : → NOUVEAUTÉ 2027" }
+              - { name: titre, label: Titre, type: string }
+              - { name: texte, label: Texte, type: text }
+              - { name: image, label: Image, type: image }
+              - { name: bouton_texte, label: Texte du bouton, type: string }
+              - { name: bouton_lien, label: Lien du bouton, type: string }
+          - name: annonce
+            label: "+ Bandeau annonce"
+            fields:
+              - { name: visible, label: Visible, type: boolean, default: true }
+              - { name: fond, component: fond }
+              - { name: texte, label: Message, type: string, description: "Ex. : Les pass samedi sont presque complets !" }
+              - { name: bouton_texte, label: Texte du bouton, type: string }
+              - { name: bouton_lien, label: Lien du bouton, type: string }
+
+  # ------------------------------------------------------------------
+  - name: programmation
+    label: Programmation
+    type: file
+    path: content/programmation.json
+    format: json
+    fields:
+      - { name: surtitre, label: Surtitre, type: string }
+      - { name: titre, label: Titre de la section, type: string }
+      - { name: intro, label: Texte d'intro, type: text }
+      - { name: vendredi, label: "Libellé du vendredi (ex. Vendredi 28)", type: string }
+      - { name: vendredi_nom, label: "Surnom du vendredi", type: string }
+      - { name: samedi, label: "Libellé du samedi (ex. Samedi 29)", type: string }
+      - { name: samedi_nom, label: "Surnom du samedi", type: string }
+      - name: artistes
+        label: Artistes
+        description: "Les artistes sont triés automatiquement par heure de passage sur le site. Dans les textes, [[…]] s'affiche surligné « à compléter »."
+        type: object
+        list: true
+        fields:
+          - { name: nom, label: Nom, type: string, required: true }
+          - name: jour
+            label: Jour
+            type: select
+            options:
+              values:
+                - { name: ven, label: Vendredi }
+                - { name: sam, label: Samedi }
+          - name: scene
+            label: Scène
+            type: select
+            options:
+              values:
+                - { name: arena, label: "Speed Arena (orange)" }
+                - { name: boiler, label: "Boiler Vroom (vert)" }
+          - { name: debut, label: "Début (ex. 23h30)", type: string, pattern: { regex: "^\\d{2}h\\d{2}$", message: "Format attendu : 23h30" } }
+          - { name: fin, label: "Fin (ex. 00h30)", type: string, pattern: { regex: "^\\d{2}h\\d{2}$", message: "Format attendu : 00h30" } }
+          - { name: photo, label: Photo presse, type: image }
+          - { name: bio, label: Présentation, type: text }
+          - { name: ecoute, label: "Lien d'écoute (magic link)", type: string, description: "Page qui laisse choisir sa plateforme (Spotify, Deezer…). Vide = « bientôt disponible »." }
+          - { name: sans_ecoute, label: "Pas de bouton d'écoute (tremplin, end show…)", type: boolean }
+          - { name: publie, label: Publié sur le site, type: boolean, default: true }
+
+  # ------------------------------------------------------------------
+  - name: billetterie
+    label: Billetterie
+    type: file
+    path: content/billetterie.json
+    format: json
+    fields:
+      - { name: lien, label: Lien de la billetterie, type: string, description: "Utilisé par tous les pass qui n'ont pas leur propre lien (https://…)" }
+      - { name: hero_sous_titre, label: "Plaque d'accueil : texte gauche", type: string }
+      - { name: hero_statut, label: "Plaque d'accueil : statut (OUVERTE, BIENTÔT…)", type: string }
+      - { name: titre, label: Titre de la section, type: string }
+      - { name: texte, label: Texte, type: text }
+      - { name: photo, label: Photo, type: image }
+      - name: pass
+        label: Pass
+        type: object
+        list: true
+        fields:
+          - { name: nom, label: Nom du pass, type: string, required: true }
+          - { name: prix, label: "Prix (ex. 49 €)", type: string, description: "Vide = « BIENTÔT »" }
+          - { name: couleur, component: couleur }
+          - { name: en_vedette, label: "Grande plaque (en vedette)", type: boolean }
+          - name: statut
+            label: Statut
+            type: select
+            options:
+              values:
+                - { name: vente, label: En vente }
+                - { name: bientot, label: Bientôt }
+                - { name: complet, label: Complet }
+          - { name: bandeau, label: Texte du bandeau noir, type: string }
+          - { name: bandeau_droite, label: "Bandeau, texte de droite (grande plaque)", type: string }
+          - { name: lien, label: "Lien d'achat (sinon lien général)", type: string }
+
+  # ------------------------------------------------------------------
+  - name: infos
+    label: Infos pratiques
+    type: file
+    path: content/infos.json
+    format: json
+    fields:
+      - { name: surtitre, label: Surtitre, type: string }
+      - { name: titre, label: Titre de la section, type: string }
+      - name: cartes
+        label: Cartes « Briefing pilotes »
+        type: object
+        list: true
+        fields:
+          - { name: titre, label: Titre, type: string, required: true }
+          - { name: resume, label: Résumé (sur la carte), type: text }
+          - { name: photo, label: Photo, type: image }
+          - { name: couleur, component: couleur }
+          - name: pictogramme
+            label: Pictogramme
+            type: select
+            options:
+              values:
+                - { name: triangle, label: Triangle }
+                - { name: hexagone, label: Hexagone }
+                - { name: tente, label: Rond + tente }
+                - { name: interdit, label: Rond barré }
+                - { name: rond, label: Rond avec texte }
+          - { name: texte_pictogramme, label: "Texte du pictogramme (ex. !!!)", type: string }
+          - { name: intro, label: "Popup : texte d'intro", type: text }
+          - name: horaires
+            label: "Popup : tableau des horaires"
+            type: object
+            list: true
+            fields:
+              - { name: jour, label: Jour, type: string }
+              - { name: ouverture, label: Ouverture, type: string }
+              - { name: premier_depart, label: Premier départ, type: string }
+              - { name: fermeture, label: Fermeture, type: string }
+          - name: lignes
+            label: "Popup : rubriques"
+            description: "[[…]] s'affiche surligné « à compléter »."
+            type: object
+            list: true
+            fields:
+              - { name: titre, label: Titre, type: string }
+              - { name: texte, label: Texte, type: text }
+          - { name: interdits, label: "Popup : liste d'objets interdits", type: string, list: true }
+          - { name: bouton_texte, label: "Popup : texte du bouton", type: string }
+          - { name: bouton_lien, label: "Popup : lien du bouton", type: string, description: "https://… ou #billetterie, #grille…" }
+
+  # ------------------------------------------------------------------
+  - name: replay
+    label: Médias (replay)
+    type: file
+    path: content/replay.json
+    format: json
+    fields:
+      - { name: surtitre, label: Surtitre, type: string }
+      - { name: titre, label: Titre, type: string }
+      - { name: bouton_texte, label: Texte du bouton, type: string }
+      - { name: lien_galerie, label: Lien de la galerie complète, type: string }
+      - { name: credit, label: Crédit photo, type: string }
+      - name: photos
+        label: Photos
+        type: object
+        list: true
+        fields:
+          - { name: image, label: Image, type: image, required: true }
+          - { name: description, label: "Description (accessibilité)", type: string }
+          - name: format
+            label: Taille dans la mosaïque
+            type: select
+            options:
+              values:
+                - { name: normal, label: Normale }
+                - { name: large, label: Large }
+                - { name: haut, label: Haute }
+                - { name: grand, label: Grande }
+          - { name: etiquette, label: Étiquette, type: string }
+          - { name: couleur, component: couleur }
+
+  # ------------------------------------------------------------------
+  - name: partenaires
+    label: Partenaires
+    type: file
+    path: content/partenaires.json
+    format: json
+    fields:
+      - { name: titre, label: Titre, type: string }
+      - { name: appel, label: Phrase d'appel, type: string }
+      - { name: email, label: E-mail partenariats, type: string }
+      - name: logos
+        label: Logos
+        description: "Tant qu'aucun logo n'est ajouté, des emplacements vides s'affichent."
+        type: object
+        list: true
+        fields:
+          - { name: nom, label: Nom, type: string }
+          - { name: logo, label: Logo, type: image }
+          - { name: lien, label: Site web, type: string }
+
+  # ------------------------------------------------------------------
+  - name: general
+    label: Réglages
+    type: file
+    path: content/general.json
+    format: json
+    fields:
+      - { name: dates_bandeau, label: "Dates (bandeau et pied de page)", type: string }
+      - { name: lieu, label: Lieu, type: string }
+      - { name: hexagone_jours, label: "Hexagone : jours (ex. 28-29)", type: string }
+      - { name: hexagone_mois, label: "Hexagone : mois", type: string }
+      - { name: accroche, label: Accroche sous le logo, type: string }
+      - name: depart
+        label: "Compte à rebours : ouverture (heure de Paris)"
+        type: date
+        options:
+          time: true
+          format: "yyyy-MM-dd'T'HH:mm"
+      - { name: depart_titre, label: "Compte à rebours : titre", type: string }
+      - { name: depart_texte, label: "Compte à rebours : date affichée", type: string }
+      - { name: depart_phrase, label: "Compte à rebours : phrase", type: string }
+      - { name: pied_de_page, label: Texte du pied de page, type: string }
+      - { name: lien_contact, label: Lien Contact, type: string }
+      - { name: lien_mentions, label: Lien Mentions légales, type: string }

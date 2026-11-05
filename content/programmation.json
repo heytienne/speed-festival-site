@@ -1,0 +1,26 @@
+{
+  "surtitre": "→ LINE-UP 2027",
+  "titre": "Grille de départ",
+  "intro": "Ouverture du site à 18h, extinction des moteurs à 3h. Entre les deux : 15 départs sur deux circuits.",
+  "vendredi": "Vendredi 28",
+  "vendredi_nom": "Qualifs",
+  "samedi": "Samedi 29",
+  "samedi_nom": "Course",
+  "artistes": [
+    { "nom": "Tremplin", "jour": "ven", "scene": "boiler", "debut": "19h00", "fin": "19h30", "photo": "", "bio": "Le lauréat du tremplin Speed ouvre le circuit : un talent local repéré par l’équipe, qui prend la pole avant tout le monde. Nom dévoilé bientôt.", "ecoute": "", "sans_ecoute": true, "publie": true },
+    { "nom": "DJ Stiff", "jour": "ven", "scene": "boiler", "debut": "19h30", "fin": "20h30", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Europe", "jour": "ven", "scene": "arena", "debut": "21h30", "fin": "22h30", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Notinbed", "jour": "ven", "scene": "boiler", "debut": "22h30", "fin": "23h30", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "St Graal", "jour": "ven", "scene": "arena", "debut": "23h30", "fin": "00h30", "photo": "", "bio": "Artiste français révélé en 2021 par le titre viral « Les dauphins », entre électro et pop aérienne. [[Texte à valider]]", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Noel Minitel", "jour": "ven", "scene": "boiler", "debut": "00h30", "fin": "01h30", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Benwal", "jour": "ven", "scene": "arena", "debut": "01h30", "fin": "02h50", "photo": "", "bio": "DJ et producteur néerlandais originaire de Groningue : des sets trance, hard house et techno à très haute énergie, passés par Pukkelpop et les grands clubs européens. [[Texte à valider]]", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Sheriff", "jour": "sam", "scene": "boiler", "debut": "19h00", "fin": "19h55", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Velvet Brothers", "jour": "sam", "scene": "arena", "debut": "20h00", "fin": "21h00", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "DJ Minou", "jour": "sam", "scene": "boiler", "debut": "21h00", "fin": "21h55", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Arone", "jour": "sam", "scene": "arena", "debut": "22h00", "fin": "22h50", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Solar Boys", "jour": "sam", "scene": "boiler", "debut": "23h00", "fin": "23h55", "photo": "", "bio": "", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Camoufly", "jour": "sam", "scene": "arena", "debut": "00h00", "fin": "01h00", "photo": "", "bio": "Producteur et DJ masqué venu d’Italie : house, UK garage et sons expérimentaux, un mélange de genres qui ne tient jamais en place. [[Texte à valider]]", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Snoritz", "jour": "sam", "scene": "arena", "debut": "01h00", "fin": "02h00", "photo": "", "bio": "DJ et producteur de Münster : du garage à la hard house en passant par les breaks, des sets qui accélèrent sans prévenir. [[Texte à valider]]", "ecoute": "", "sans_ecoute": false, "publie": true },
+    { "nom": "Speed All Stars End Show", "jour": "sam", "scene": "arena", "debut": "02h00", "fin": "02h45", "photo": "", "bio": "Le grand final du Speed : toute l’écurie monte sur la Speed Arena pour le dernier tour de piste. Programme surprise.", "ecoute": "", "sans_ecoute": true, "publie": true }
+  ]
+}

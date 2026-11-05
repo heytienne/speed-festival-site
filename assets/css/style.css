@@ -226,3 +226,23 @@ a.am-listen-btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 #000}
   .nav-billet{padding:4px 10px !important;font-size:16px !important;border-width:2px !important;box-shadow:0 0 0 3px #00FF97 !important}
   .nav-burger summary{padding:0 10px !important;font-size:17px !important;gap:6px !important;white-space:nowrap}
 }
+
+/* ---------- Contenus pilotés par le back-office ---------- */
+section[hidden], .checker-flat[hidden], nav li[hidden] { display: none !important; }
+.pass.is-sold { opacity: .55; filter: grayscale(.6); pointer-events: none; }
+#logos .logo-cell { height: clamp(80px, 8vw, 110px); border: 3px solid #000; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; padding: 10px 14px; text-decoration: none; color: #000; font-weight: 700; text-align: center; }
+#logos .logo-cell img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.bloc-libre { padding: clamp(48px, 6vw, 80px) clamp(16px, 2.5vw, 28px); color: #000; border-top: 5px solid #000; }
+.bloc-libre.is-dark { color: #fff; }
+.bloc-libre .bl-in { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: center; }
+.bloc-libre .bl-txt { flex: 1 1 min(480px, 100%); min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.bloc-libre .bl-img { flex: 1 1 min(420px, 100%); min-height: clamp(240px, 28vw, 380px); position: relative; border: 4px solid #000; border-radius: 10px; overflow: hidden; }
+.bloc-libre .bl-img img { position: absolute; inset: 0; }
+.bloc-libre .bl-kicker { margin: 0; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em; }
+.bloc-libre .bl-title { margin: 0; font-size: clamp(48px, 7vw, 96px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase; }
+.bloc-libre .bl-p { margin: 0; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.5; max-width: 620px; }
+.bloc-libre .bl-btn { display: inline-flex; align-items: center; min-height: 48px; text-decoration: none; background: #000; color: #fff; border-radius: 6px; padding: 6px 22px; font-size: clamp(20px, 2vw, 26px); font-weight: 900; font-style: italic; text-transform: uppercase; }
+.bloc-libre.is-dark .bl-btn { background: #FF5500; color: #000; }
+.bloc-annonce { padding-top: clamp(24px, 3vw, 36px); padding-bottom: clamp(24px, 3vw, 36px); }
+.bloc-annonce .bl-in { justify-content: center; text-align: center; gap: 14px 24px; }
+.bloc-annonce .bl-annonce { margin: 0; font-size: clamp(26px, 3.4vw, 46px); font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 1; }
