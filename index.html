@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/img/s-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
 <body>
 <div style="background: #FF5500; padding: clamp(6px, 1.2vw, 14px); font-family: Inter, system-ui, sans-serif; color: #000;">
@@ -207,7 +207,7 @@
       <div class="replay" id="replay-grid"></div>
 
       <!-- Visionneuse plein écran -->
-      <div id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo agrandie" style="position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; padding: clamp(12px, 3vw, 40px);">
+      <div id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo agrandie" style="position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.92); align-items: center; justify-content: center; padding: clamp(12px, 3vw, 40px);">
           <figure style="margin: 0; position: relative; max-width: min(1400px, 100%); max-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px;">
             <img id="lb-img" alt="" style="display: block; max-width: 100%; max-height: calc(100vh - 140px); width: auto; height: auto; object-fit: contain; border: 4px solid #FF5500; border-radius: 6px; background: #000;">
             <figcaption style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; width: 100%; color: #fff; font-size: 14px;"><span id="lb-alt"></span><span style="color: #FF5500; font-weight: 600;"><span id="lb-count"></span> · Photo : Morisseau Steeve Photographie</span></figcaption>
@@ -312,6 +312,6 @@
 
 </div>
 </div>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2"></script>
 </body>
 </html>
