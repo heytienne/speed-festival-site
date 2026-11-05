@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/img/s-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=4">
+<link rel="stylesheet" href="assets/css/style.css?v=7">
 </head>
 <body>
 <div style="background: #FF5500; padding: clamp(6px, 1.2vw, 14px); font-family: Inter, system-ui, sans-serif; color: #000;">
@@ -170,25 +170,25 @@
       <p style="margin: 0 0 6px; font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; letter-spacing: .12em;">→ AVANT DE PRENDRE LA PISTE</p>
       <h2 class="t" style="margin: 0 0 clamp(30px, 4vw, 50px); font-size: clamp(56px, 8.5vw, 120px); line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase; color: #fff; -webkit-text-stroke: clamp(2px, .25vw, 3px) #000;">Briefing pilotes</h2>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 22px;">
-        <a href="#infos" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
+        <a href="#infos" class="info-card" data-info="acces" aria-haspopup="dialog" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
           <div style="position: relative; height: 170px; border-bottom: 4px solid #000;"><img src="assets/img/p603.jpg" alt="Le site du festival en journée" class="ph">
             <svg viewBox="0 0 120 104" width="70" height="61" aria-hidden="true" style="position: absolute; right: 10px; bottom: -30px;"><polygon points="60,6 114,98 6,98" fill="#00BFFF" stroke="#000" stroke-width="7" stroke-linejoin="round"></polygon><text x="60" y="84" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-style="italic" font-size="44">!!!</text></svg></div>
-          <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">Accès &amp; covoit'</span><span style="font-size: 15px; line-height: 1.5;">Saint-Paul-du-Bois (49). Navettes, parkings et la ligne droite la plus rapide depuis Angers et Cholet.</span></div>
+          <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">Accès &amp; covoit'</span><span style="font-size: 15px; line-height: 1.5;">Saint-Paul-du-Bois (49). Navettes, parkings et la ligne droite la plus rapide depuis Angers et Cholet.</span><span class="info-more t">En savoir plus →</span></div>
         </a>
-        <a href="#infos" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
+        <a href="#infos" class="info-card" data-info="horaires" aria-haspopup="dialog" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
           <div style="position: relative; height: 170px; border-bottom: 4px solid #000;"><img src="assets/img/p013.jpg" alt="Les graduations du compteur géant de la scène" class="ph">
             <svg viewBox="0 0 120 104" width="70" height="61" aria-hidden="true" style="position: absolute; right: 10px; bottom: -30px;"><polygon points="32,4 88,4 116,52 88,100 32,100 4,52" fill="#FF5500" stroke="#000" stroke-width="7" stroke-linejoin="round"></polygon><text x="60" y="68" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="46">00h</text></svg></div>
-          <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">Horaires</span><span style="font-size: 15px; line-height: 1.5;">Ouverture des portes, premiers sets, dernier tour de piste. Tout le timing, sans pénalité.</span></div>
+          <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">Horaires</span><span style="font-size: 15px; line-height: 1.5;">Ouverture des portes, premiers sets, dernier tour de piste. Tout le timing, sans pénalité.</span><span class="info-more t">En savoir plus →</span></div>
         </a>
-        <a href="#infos" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
+        <a href="#infos" class="info-card" data-info="camping" aria-haspopup="dialog" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
           <div style="position: relative; height: 170px; border-bottom: 4px solid #000;"><img src="assets/img/p082.jpg" alt="Festivalière qui mange au camping" class="ph">
             <svg viewBox="0 0 104 104" width="62" height="62" aria-hidden="true" style="position: absolute; right: 12px; bottom: -30px;"><circle cx="52" cy="52" r="46" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M24 72 L52 30 L80 72 Z" fill="none" stroke="#000" stroke-width="6" stroke-linejoin="round"></path><path d="M52 30 V72" stroke="#000" stroke-width="5"></path></svg></div>
-          <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">Camping</span><span style="font-size: 15px; line-height: 1.5;">Le paddock des festivaliers. Plante ta tente, recharge les batteries, repars en piste.</span></div>
+          <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">Camping</span><span style="font-size: 15px; line-height: 1.5;">Le paddock des festivaliers. Plante ta tente, recharge les batteries, repars en piste.</span><span class="info-more t">En savoir plus →</span></div>
         </a>
-        <a href="#infos" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
+        <a href="#infos" class="info-card" data-info="interdits" aria-haspopup="dialog" style="text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
           <div style="position: relative; height: 170px; border-bottom: 4px solid #000;"><img src="assets/img/p041.jpg" alt="Le radar de vitesse du festival" class="ph">
             <svg viewBox="0 0 104 104" width="62" height="62" aria-hidden="true" style="position: absolute; right: 12px; bottom: -30px;"><circle cx="52" cy="52" r="46" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L84 84" stroke="#000" stroke-width="7"></path></svg></div>
-          <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">Objets interdits</span><span style="font-size: 15px; line-height: 1.5;">Pas de verre, pas de sound system perso, pas de drone. Ta perche à selfie reste au stand.</span></div>
+          <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="t" style="font-size: clamp(28px, 2.6vw, 34px); font-weight: 900; text-transform: uppercase; line-height: .95;">Objets interdits</span><span style="font-size: 15px; line-height: 1.5;">Pas de verre, pas de sound system perso, pas de drone. Ta perche à selfie reste au stand.</span><span class="info-more t">En savoir plus →</span></div>
         </a>
       </div>
     </div>
@@ -313,6 +313,21 @@
 </div>
 </div>
 
+<!-- Fiche info (s'ouvre au clic sur une carte « Briefing pilotes ») -->
+<div id="info-modal" hidden role="dialog" aria-modal="true" aria-labelledby="im-title">
+  <div class="im-card">
+    <button type="button" id="im-close" class="t am-close" aria-label="Fermer">FERMER ✕</button>
+    <div class="im-head">
+      <div class="im-photo" id="im-photo"></div>
+      <div class="im-headtxt">
+        <p class="am-kicker">→ BRIEFING PILOTES</p>
+        <h2 class="t im-title" id="im-title"></h2>
+      </div>
+    </div>
+    <div class="im-body" id="im-body"></div>
+  </div>
+</div>
+
 <!-- Fiche artiste (s'ouvre au clic sur une plaque de la grille de départ) -->
 <div id="artist-modal" hidden role="dialog" aria-modal="true" aria-labelledby="am-name">
   <div class="am-card">
@@ -332,6 +347,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js?v=5"></script>
+<script src="assets/js/main.js?v=7"></script>
 </body>
 </html>

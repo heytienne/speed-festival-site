@@ -26,6 +26,7 @@ Direction artistique « Grand Prix » : affiche orange, grille de départ, menu 
   - `bio` : texte de présentation (les textes « à valider » / « à venir » sont provisoires) ;
   - `photo` : chemin d'une photo presse (ex. `'assets/img/artistes/benwal.jpg'`). Sans photo, un visuel provisoire aux initiales s'affiche ;
   - `listen` : le « magic link » de l'artiste (une page qui laisse choisir sa plateforme : Spotify, Deezer, Apple Music…), ex. `listen: 'https://…'`. Il alimente le bouton unique « Écouter sur les plateformes ». Sans lien, le bouton s'affiche grisé avec « Lien d'écoute bientôt disponible ».
+- **Popups « Briefing pilotes »** (Accès, Horaires, Camping, Objets interdits) : objet `INFOS` dans `assets/js/main.js`. Les passages surlignés en jaune (`todo('…')`) sont à compléter : adresse exacte, covoiturage, navettes, parking, horaires et équipements du camping.
 - **Date du compte à rebours** : constante `DEPART` dans `assets/js/main.js` (0 = ouverture du vendredi à 18h).
 - **Photos du Replay** : liste `PHOTOS` dans `assets/js/main.js`.
 

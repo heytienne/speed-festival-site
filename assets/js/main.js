@@ -167,6 +167,79 @@
     else if (e.key === 'ArrowRight') show(cur + 1);
   });
 
+  /* ---------- Popups « Briefing pilotes » ----------
+     Contenus modifiables ci-dessous. Les passages en <span class="im-todo"> sont à compléter. */
+  function todo(t) { return '<span class="im-todo">' + t + '</span>'; }
+  function row(k, v) { return '<div class="im-row"><span class="im-k">' + k + '</span><div class="im-v">' + v + '</div></div>'; }
+  var NO = '<svg viewBox="0 0 110 110" width="64" height="64" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg>';
+  var INFOS = {
+    acces: {
+      title: 'Accès & covoit’', color: '#00BFFF', photo: 'assets/img/p603.jpg',
+      body: function () {
+        return row('Adresse', 'Saint-Paul-du-Bois (49), Maine-et-Loire. Adresse exacte du site : ' + todo('à compléter') + '.') +
+          row('En voiture', 'Depuis Angers ou Cholet, suivez les panneaux Speed à l’approche du village. Itinéraire détaillé : ' + todo('à compléter') + '.') +
+          row('Covoiturage', 'La solution la plus rapide (et la plus fun) : moins de voitures, plus de place au paddock. Groupe de covoiturage : ' + todo('lien à ajouter') + '.') +
+          row('Navettes', todo('Points de départ, horaires et tarifs à compléter') + '.') +
+          row('Parking', 'Parking à proximité du site. Conditions : ' + todo('à préciser') + '.') +
+          '<div class="im-actions"><a class="im-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Saint-Paul-du-Bois%2C%20Maine-et-Loire" target="_blank" rel="noopener">Ouvrir le plan ↗</a></div>';
+      }
+    },
+    horaires: {
+      title: 'Horaires', color: '#FF5500', photo: 'assets/img/p013.jpg',
+      body: function () {
+        return '<table class="im-sched"><thead><tr><th>Jour</th><th>Ouverture</th><th>Premier départ</th><th>Fermeture</th></tr></thead><tbody>' +
+          '<tr><td>Vendredi 28</td><td data-l="Ouverture">18h00</td><td data-l="Premier départ">19h00 · Boiler Vroom</td><td data-l="Fermeture">03h00</td></tr>' +
+          '<tr><td>Samedi 29</td><td data-l="Ouverture">18h00</td><td data-l="Premier départ">19h00 · Boiler Vroom</td><td data-l="Fermeture">03h00</td></tr>' +
+          '</tbody></table>' +
+          row('Derniers tours', 'Vendredi : Benwal jusqu’à 02h50 sur la Speed Arena. Samedi : le Speed All Stars End Show jusqu’à 02h45.') +
+          row('Camping', 'Horaires d’ouverture et de départ du camping : ' + todo('à compléter') + '.') +
+          row('Sortie définitive', 'Entre le festival et le camping, la sortie est définitive : pas d’aller-retour une fois sorti.') +
+          '<div class="im-actions"><a class="im-btn im-go" href="#grille">Voir la programmation →</a></div>';
+      }
+    },
+    camping: {
+      title: 'Camping', color: '#00FF97', photo: 'assets/img/p082.jpg',
+      body: function () {
+        return row('Le paddock', 'Le camping des festivaliers : plante ta tente, recharge les batteries, repars en piste. Accès avec le Pass Weekend + Camping.') +
+          row('Sortie définitive', 'Une fois sorti du festival vers le camping, pas de retour sur le site le même soir.') +
+          row('Interdits au camping', 'Verres, boissons et nourriture apportées, gaz, réchauds et barbecue, sound systems.') +
+          row('Sur place', 'Sanitaires, points d’eau, horaires : ' + todo('à compléter') + '.') +
+          '<div class="im-actions"><a class="im-btn im-go" href="#billetterie">Prendre le Pass Weekend + Camping →</a></div>';
+      }
+    },
+    interdits: {
+      title: 'Objets interdits', color: '#00FF97', photo: 'assets/img/p041.jpg',
+      body: function () {
+        var list = ['Couteaux et objets coupants', 'Animaux', 'Substances illicites et drogues', 'Armes', 'Projectiles potentiels', 'Substances explosives ou inflammables',
+          'Engins pyrotechniques', 'Boissons et nourriture (camping)', 'Drones, lasers et perches à selfies', 'Gaz, réchauds et barbecue', 'Sound systems', 'Verres (camping)'];
+        return '<p class="im-v" style="margin:0;">Ce qui reste au garage. Les contrôles se font à l’entrée du site et du camping.</p>' +
+          '<div class="im-ban">' + list.map(function (t) { return '<div>' + NO + '<span>' + t + '</span></div>'; }).join('') + '</div>';
+      }
+    }
+  };
+  var im = document.getElementById('info-modal'), imOpener = null;
+  function openInfo(key, opener) {
+    var d = INFOS[key]; if (!d) return;
+    imOpener = opener;
+    im.style.setProperty('--am-color', d.color);
+    document.getElementById('im-title').textContent = d.title;
+    document.getElementById('im-photo').innerHTML = d.photo ? '<img src="' + d.photo + '" alt="">' : '';
+    document.getElementById('im-body').innerHTML = d.body();
+    im.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('im-close').focus();
+  }
+  function closeInfo(restore) { im.hidden = true; document.body.style.overflow = ''; if (restore !== false && imOpener) imOpener.focus(); }
+  document.querySelectorAll('.info-card').forEach(function (c) {
+    c.addEventListener('click', function (e) { e.preventDefault(); openInfo(c.getAttribute('data-info'), c); });
+  });
+  document.getElementById('im-close').addEventListener('click', function () { closeInfo(); });
+  im.addEventListener('click', function (e) {
+    if (e.target === im) closeInfo();
+    var go = e.target.closest('.im-go'); if (go) closeInfo(false); /* lien interne : on ferme et on laisse défiler */
+  });
+  document.addEventListener('keydown', function (e) { if (!im.hidden && e.key === 'Escape') closeInfo(); });
+
   /* Le menu mobile se referme après un clic sur une rubrique */
   document.querySelectorAll('.nav-drop a').forEach(function (a) {
     a.addEventListener('click', function () { var d = document.querySelector('.nav-burger'); if (d) d.open = false; });
