@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Speed Festival — Code de la route</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#fff}
+a{color:#000}a:hover{color:#FF5500}
+.t{font-family:'Barlow Condensed','Arial Narrow',sans-serif}
+.u{text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:9px}
+.dots-b{background-image:radial-gradient(circle,#00BFFF 1.4px,transparent 1.8px);background-size:9px 9px}
+.dots-k{background-image:radial-gradient(circle,#000 1.3px,transparent 1.7px);background-size:9px 9px}
+.fade-bl{-webkit-mask-image:linear-gradient(to top right,#000,transparent 60%);mask-image:linear-gradient(to top right,#000,transparent 60%)}
+.splat{background:url(/_blob/a464a3267353eee6cba5a60d158d01bb) center/contain no-repeat}
+.bulge{background:#000;-webkit-mask:url(/_blob/4753aaf1376d776a34d09b2dc29caa3e) center/contain no-repeat;mask:url(/_blob/4753aaf1376d776a34d09b2dc29caa3e) center/contain no-repeat}
+.starsring{background:#000;-webkit-mask:url(/_blob/5499df34a29fe328240a0944e07ded85) center/contain no-repeat;mask:url(/_blob/5499df34a29fe328240a0944e07ded85) center/contain no-repeat}
+.sign{text-decoration:none;color:#000;transition:transform .15s}
+.sign:hover{transform:rotate(-3deg) scale(1.03);color:#000}
+.ans{text-align:left}
+.ans:hover{background:#F1FF00}
+</style>
+</helmet>
+
+<div style="background: #fff; color: #000; font-family: Inter, system-ui, sans-serif;">
+
+  <!-- En-tête -->
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 40px; border-bottom: 5px solid #000;">
+    <img src="/_blob/9ef3bf5a40d30efa3652df1bbf47c9ff" alt="Speed Festival" style="height: 58px; width: auto;">
+    <nav aria-label="Navigation principale" class="t" style="display: flex; flex-wrap: wrap; gap: 26px; font-size: 22px; font-weight: 800; text-transform: uppercase;">
+      <a href="#" style="text-decoration: none;">Programme</a>
+      <a href="#" style="text-decoration: none;">Infos</a>
+      <a href="#" style="text-decoration: none;">Le code</a>
+      <a href="#" style="text-decoration: none;">Bénévoles</a>
+      <a href="#" style="text-decoration: none;">Partenaires</a>
+    </nav>
+    <a href="#" class="t" style="text-decoration: none; background: #FF5500; border: 4px solid #000; border-radius: 8px; padding: 8px 20px; font-size: 22px; font-weight: 900; font-style: italic;">BILLETTERIE →</a>
+  </header>
+
+  <!-- Bandeau défilant -->
+  <div class="t" aria-hidden="true" style="background: #000; color: #00FF97; white-space: nowrap; overflow: hidden; font-size: 26px; font-weight: 800; padding: 8px 0; letter-spacing: .02em;">★ 28/29 AOÛT 2026 ★ SAINT-PAUL-DU-BOIS (49) ★ VITESSE CONSEILLÉE : 128 BPM ★ CÉDEZ LE PASSAGE AUX DANSEURS ★ 28/29 AOÛT 2026 ★ SAINT-PAUL-DU-BOIS (49) ★ VITESSE CONSEILLÉE : 128 BPM ★</div>
+
+  <!-- HERO -->
+  <section style="position: relative; background: #00FF97; padding: 80px 40px 90px; overflow: hidden; border-bottom: 5px solid #000;">
+    <div class="dots-b fade-bl" style="position: absolute; inset: 0;"></div>
+    <div class="bulge" aria-hidden="true" style="position: absolute; right: -60px; top: 40px; width: 520px; height: 520px; opacity: .12;"></div>
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 50px; align-items: center;">
+      <div style="flex: 1 1 560px;">
+        <p style="margin: 0 0 12px; font-weight: 600; letter-spacing: .14em; font-size: 15px;">→ ÉDITION 2026 · FESTIVAL DE MUSIQUE ÉLECTRONIQUE</p>
+        <h1 class="t" style="margin: 0; font-size: 150px; line-height: .8; font-weight: 900; font-style: italic; text-transform: uppercase;">Le code<br>de la route<br>du Speed</h1>
+        <p style="margin: 26px 0 0; font-size: 20px; line-height: 1.5; max-width: 560px;">Deux jours, un seul panneau de limitation : celui qui dit 140 BPM minimum. Révise bien, l'examen se passe sur le dancefloor.</p>
+      </div>
+      <!-- Totem BPM (panneaux empilés de la charte) -->
+      <div aria-hidden="true" style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;">
+        <svg viewBox="0 0 220 210" width="220" height="210"><circle cx="110" cy="105" r="98" fill="#FF5500" stroke="#000" stroke-width="10"></circle><circle cx="110" cy="105" r="80" fill="none" stroke="#000" stroke-width="5"></circle><text x="110" y="140" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="104">B</text></svg>
+        <svg viewBox="0 0 240 200" width="240" height="200" style="margin-top: -18px;"><polygon points="62,6 178,6 234,100 178,194 62,194 6,100" fill="#FF5500" stroke="#000" stroke-width="10" stroke-linejoin="round"></polygon><polygon points="72,24 168,24 214,100 168,176 72,176 26,100" fill="none" stroke="#000" stroke-width="5"></polygon><text x="120" y="136" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="104">P</text></svg>
+        <svg viewBox="0 0 240 210" width="240" height="210" style="margin-top: -18px;"><polygon points="120,8 234,202 6,202" fill="#FF5500" stroke="#000" stroke-width="10" stroke-linejoin="round"></polygon><polygon points="120,40 206,188 34,188" fill="none" stroke="#000" stroke-width="5"></polygon><text x="120" y="178" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="96">M</text></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARREFOUR : navigation en panneaux -->
+  <section style="padding: 90px 40px; background: #fff;">
+    <div style="max-width: 1280px; margin: 0 auto;">
+      <h2 class="t u" style="margin: 0 0 56px; font-size: 96px; line-height: .9; font-weight: 900; font-style: italic; text-transform: uppercase;">Choisis ta direction</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 30px;">
+        <a href="#" class="sign" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;">
+          <svg viewBox="0 0 220 220" width="210" height="210" aria-hidden="true"><circle cx="110" cy="110" r="100" fill="#FF5500" stroke="#000" stroke-width="10"></circle><circle cx="110" cy="110" r="82" fill="none" stroke="#000" stroke-width="5"></circle><g fill="#000"><polygon points="110,40 114,52 127,52 117,60 121,72 110,65 99,72 103,60 93,52 106,52"></polygon><polygon points="160,62 164,74 177,74 167,82 171,94 160,87 149,94 153,82 143,74 156,74"></polygon><polygon points="60,62 64,74 77,74 67,82 71,94 60,87 49,94 53,82 43,74 56,74"></polygon><polygon points="160,130 164,142 177,142 167,150 171,162 160,155 149,162 153,150 143,142 156,142"></polygon><polygon points="60,130 64,142 77,142 67,150 71,162 60,155 49,162 53,150 43,142 56,142"></polygon><polygon points="110,152 114,164 127,164 117,172 121,184 110,177 99,184 103,172 93,164 106,164"></polygon></g><text x="110" y="132" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-style="italic" font-size="64">S</text></svg>
+          <span class="t" style="font-size: 40px; font-weight: 900; text-transform: uppercase; line-height: .9;">Programme</span>
+          <span style="font-size: 15px; color: #333;">Line-up, scènes, horaires.</span>
+        </a>
+        <a href="#" class="sign" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;">
+          <svg viewBox="0 0 240 210" width="230" height="210" aria-hidden="true"><polygon points="120,8 234,202 6,202" fill="#00BFFF" stroke="#000" stroke-width="10" stroke-linejoin="round"></polygon><text x="120" y="168" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-style="italic" font-size="96">!!!</text><rect x="78" y="180" width="84" height="6" fill="#000"></rect></svg>
+          <span class="t" style="font-size: 40px; font-weight: 900; text-transform: uppercase; line-height: .9;">Infos pratiques</span>
+          <span style="font-size: 15px; color: #333;">Accès, horaires, cashless, prévention.</span>
+        </a>
+        <a href="#" class="sign" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;">
+          <svg viewBox="0 0 240 210" width="240" height="210" aria-hidden="true"><polygon points="62,6 178,6 234,105 178,204 62,204 6,105" fill="#F1FF00" stroke="#000" stroke-width="10" stroke-linejoin="round"></polygon><text x="120" y="146" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="110">00h</text></svg>
+          <span class="t" style="font-size: 40px; font-weight: 900; text-transform: uppercase; line-height: .9;">Camping</span>
+          <span style="font-size: 15px; color: #333;">Ouverture, règles, sortie définitive.</span>
+        </a>
+        <a href="#" class="sign" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;">
+          <svg viewBox="0 0 220 220" width="210" height="210" aria-hidden="true"><rect x="8" y="8" width="204" height="204" rx="22" fill="#FC8AFD" stroke="#000" stroke-width="10"></rect><rect x="26" y="26" width="168" height="168" rx="10" fill="none" stroke="#000" stroke-width="5"></rect><circle cx="110" cy="88" r="28" fill="#000"></circle><path d="M58 172 C 62 130, 158 130, 162 172 Z" fill="#000"></path></svg>
+          <span class="t" style="font-size: 40px; font-weight: 900; text-transform: uppercase; line-height: .9;">Bénévoles</span>
+          <span style="font-size: 15px; color: #333;">Rejoins l'équipe, le pass est offert.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMME en plaques -->
+  <section style="background: #FF5500; border-top: 5px solid #000; border-bottom: 5px solid #000; padding: 90px 40px; position: relative; overflow: hidden;">
+    <div class="starsring" aria-hidden="true" style="position: absolute; left: -90px; bottom: -90px; width: 380px; height: 380px; opacity: .25;"></div>
+    <div style="position: relative; max-width: 1280px; margin: 0 auto;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 44px;">
+        <h2 class="t" style="margin: 0; font-size: 110px; line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase; color: #fff; -webkit-text-stroke: 3px #000;">Itinéraire conseillé</h2>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="t" style="min-height: 48px; background: #000; color: #FF5500; border: 4px solid #000; border-radius: 6px; padding: 0 22px; font-size: 24px; font-weight: 900; cursor: pointer;">VEN 28</button>
+          <button type="button" class="t" style="min-height: 48px; background: #fff; color: #000; border: 4px solid #000; border-radius: 6px; padding: 0 22px; font-size: 24px; font-weight: 900; cursor: pointer;">SAM 29</button>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px;">
+        <div style="position: relative; border: 4px solid #000; box-shadow: 0 0 0 7px #00FF97; border-radius: 6px; background: #00FF97; overflow: hidden;">
+          <div class="splat" style="position: absolute; right: -40px; top: -20px; width: 300px; height: 110px;"></div>
+          <div class="t u" style="position: relative; text-align: center; font-size: 60px; font-weight: 900; font-style: italic; padding: 18px 0 22px;">ARTISTE</div>
+          <div style="position: relative; background: #000; color: #00FF97; display: flex; justify-content: space-between; padding: 8px 16px; font-size: 15px;"><span>→ SCÈNE</span><span>★★★</span><span>00h → 00h</span></div>
+        </div>
+        <div style="border: 4px solid #000; box-shadow: 0 0 0 7px #fff; border-radius: 6px; background: #fff; overflow: hidden;">
+          <div class="t u" style="text-align: center; font-size: 60px; font-weight: 900; font-style: italic; padding: 18px 0 22px;">ARTISTE</div>
+          <div style="background: #000; color: #fff; display: flex; justify-content: space-between; padding: 8px 16px; font-size: 15px;"><span>→ SCÈNE</span><span>★★</span><span>00h → 00h</span></div>
+        </div>
+        <div style="border: 4px solid #000; box-shadow: 0 0 0 7px #00BFFF; border-radius: 6px; background: #00BFFF; overflow: hidden;">
+          <div class="t u" style="text-align: center; font-size: 60px; font-weight: 900; font-style: italic; padding: 18px 0 22px;">ARTISTE</div>
+          <div style="background: #000; color: #00BFFF; display: flex; justify-content: space-between; padding: 8px 16px; font-size: 15px;"><span>→ SCÈNE</span><span>★★</span><span>00h → 00h</span></div>
+        </div>
+        <div style="border: 4px solid #000; box-shadow: 0 0 0 7px #FC8AFD; border-radius: 6px; background: #FC8AFD; overflow: hidden;">
+          <div class="t u" style="text-align: center; font-size: 60px; font-weight: 900; font-style: italic; padding: 18px 0 22px;">ARTISTE</div>
+          <div style="background: #000; color: #FC8AFD; display: flex; justify-content: space-between; padding: 8px 16px; font-size: 15px;"><span>→ SCÈNE</span><span>★</span><span>00h → 00h</span></div>
+        </div>
+        <div style="border: 4px solid #000; box-shadow: 0 0 0 7px #F1FF00; border-radius: 6px; background: #F1FF00; overflow: hidden;">
+          <div class="t u" style="text-align: center; font-size: 60px; font-weight: 900; font-style: italic; padding: 18px 0 22px;">ARTISTE</div>
+          <div style="background: #000; color: #F1FF00; display: flex; justify-content: space-between; padding: 8px 16px; font-size: 15px;"><span>→ SCÈNE</span><span>★</span><span>00h → 00h</span></div>
+        </div>
+        <div style="border: 4px solid #000; box-shadow: 0 0 0 7px #00FF97; border-radius: 6px; background: #00FF97; overflow: hidden;">
+          <div class="t u" style="text-align: center; font-size: 60px; font-weight: 900; font-style: italic; padding: 18px 0 22px;">ARTISTE</div>
+          <div style="background: #000; color: #00FF97; display: flex; justify-content: space-between; padding: 8px 16px; font-size: 15px;"><span>→ SCÈNE</span><span>★</span><span>00h → 00h</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMEN DU CODE (FAQ quiz) -->
+  <section style="background: #fff; padding: 90px 40px;">
+    <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 50px;">
+      <div style="flex: 1 1 360px;">
+        <p style="margin: 0 0 8px; font-weight: 600; letter-spacing: .14em; font-size: 15px;">→ FAQ</p>
+        <h2 class="t" style="margin: 0; font-size: 96px; line-height: .85; font-weight: 900; font-style: italic; text-transform: uppercase;">Examen du code</h2>
+        <p style="margin: 20px 0 0; font-size: 18px; line-height: 1.5; max-width: 380px;">Toutes les questions qu'on nous pose chaque année, sous forme de QCM. 35 bonnes réponses sur 40 et tu as ton permis de faire la fête.</p>
+        <div style="margin-top: 30px; display: inline-flex; align-items: center; gap: 14px; border: 4px solid #000; border-radius: 10px; padding: 12px 18px;">
+          <span class="t" style="font-size: 54px; font-weight: 900; line-height: 1;">12/40</span>
+          <span style="font-size: 14px; max-width: 120px;">questions de la FAQ</span>
+        </div>
+      </div>
+      <div style="flex: 2 1 600px; border: 5px solid #000; border-radius: 12px; overflow: hidden;">
+        <div style="background: #000; color: #F1FF00; display: flex; justify-content: space-between; padding: 12px 22px; font-size: 15px; font-weight: 600; letter-spacing: .08em;"><span>QUESTION 12</span><span>★★★</span><span>CAMPING</span></div>
+        <div style="padding: 28px;">
+          <p class="t" style="margin: 0 0 22px; font-size: 40px; font-weight: 800; line-height: 1.05;">Il est 4 h du matin, tu sors du site pour rejoindre le camping. Que fais-tu ?</p>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <button type="button" class="ans" style="display: flex; gap: 16px; align-items: center; min-height: 56px; background: #fff; border: 3px solid #000; border-radius: 8px; padding: 10px 16px; font-size: 17px; cursor: pointer;"><b class="t" style="font-size: 30px;">A</b> Je ressors acheter des frites. Sortie définitive, donc non.</button>
+            <button type="button" class="ans" style="display: flex; gap: 16px; align-items: center; min-height: 56px; background: #00FF97; border: 3px solid #000; border-radius: 8px; padding: 10px 16px; font-size: 17px; cursor: pointer;"><b class="t" style="font-size: 30px;">B</b> Je suis les flèches camping, je fais le moins de bruit possible et je bois un verre d'eau.</button>
+            <button type="button" class="ans" style="display: flex; gap: 16px; align-items: center; min-height: 56px; background: #fff; border: 3px solid #000; border-radius: 8px; padding: 10px 16px; font-size: 17px; cursor: pointer;"><b class="t" style="font-size: 30px;">C</b> Je lance mon sound system perso. (Interdit, voir panneau ci-dessous.)</button>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 22px;">
+            <a href="#" style="font-weight: 600;">← Question précédente</a>
+            <a href="#" style="font-weight: 600;">Question suivante →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERDITS -->
+  <section style="background: #F1FF00; border-top: 5px solid #000; border-bottom: 5px solid #000; padding: 80px 40px; position: relative; overflow: hidden;">
+    <div class="dots-k" style="position: absolute; inset: 0; opacity: .12;"></div>
+    <div style="position: relative; max-width: 1280px; margin: 0 auto;">
+      <h2 class="t u" style="margin: 0 0 46px; font-size: 88px; line-height: .9; font-weight: 900; font-style: italic; text-transform: uppercase;">Interdit de circuler</h2>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 30px 20px;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;"><svg viewBox="0 0 110 110" width="100" height="100" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg><span class="t" style="font-size: 22px; font-weight: 800; line-height: 1;">VERRES</span></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;"><svg viewBox="0 0 110 110" width="100" height="100" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg><span class="t" style="font-size: 22px; font-weight: 800; line-height: 1;">SOUND SYSTEMS</span></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;"><svg viewBox="0 0 110 110" width="100" height="100" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg><span class="t" style="font-size: 22px; font-weight: 800; line-height: 1;">DRONES, LASERS, PERCHES</span></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;"><svg viewBox="0 0 110 110" width="100" height="100" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg><span class="t" style="font-size: 22px; font-weight: 800; line-height: 1;">GAZ &amp; BARBECUE</span></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;"><svg viewBox="0 0 110 110" width="100" height="100" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg><span class="t" style="font-size: 22px; font-weight: 800; line-height: 1;">ANIMAUX</span></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;"><svg viewBox="0 0 110 110" width="100" height="100" aria-hidden="true"><circle cx="55" cy="55" r="50" fill="#00FF97" stroke="#000" stroke-width="7"></circle><path d="M20 20 L90 90" stroke="#000" stroke-width="7"></path></svg><span class="t" style="font-size: 22px; font-weight: 800; line-height: 1;">PYROTECHNIE</span></div>
+      </div>
+      <a href="#" style="display: inline-block; margin-top: 34px; font-weight: 700; font-size: 17px;">Voir la liste complète des 12 objets interdits →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER : sortie définitive -->
+  <footer style="background: #000; color: #fff; padding: 80px 40px 30px;">
+    <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 40px;">
+      <div style="transform: rotate(-3deg); width: 560px; max-width: 100%; border: 4px solid #000; box-shadow: 0 0 0 7px #FF5500; border-radius: 6px; background: #FF5500; color: #000; overflow: hidden;">
+        <div class="t u" style="text-align: center; font-size: 66px; font-weight: 900; font-style: italic; padding: 12px 0 18px;">SORTIE DÉFINITIVE</div>
+        <div style="background: #000; color: #FF5500; display: flex; justify-content: space-between; padding: 8px 16px; font-size: 16px;"><span>FESTIVAL</span><span>→→→</span><span>NEWSLETTER</span></div>
+      </div>
+      <form style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 10px;">
+        <label for="nl-c" style="font-size: 17px;">Reçois les annonces avant tout le monde (pas de spam, promis sur l'honneur du code).</label>
+        <div style="display: flex; gap: 8px;">
+          <input id="nl-c" type="email" placeholder="ton@email.fr" style="flex: 1; min-height: 52px; border: 3px solid #fff; background: #000; color: #fff; padding: 0 14px; font-size: 16px; border-radius: 8px;">
+          <button type="submit" class="t" style="min-height: 52px; background: #00FF97; border: 0; border-radius: 8px; padding: 0 22px; font-size: 24px; font-weight: 900; cursor: pointer;">JE M'INSCRIS</button>
+        </div>
+      </form>
+    </div>
+    <div style="max-width: 1280px; margin: 50px auto 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; border-top: 1px solid #333; padding-top: 16px; font-size: 14px; color: #aaa;">
+      <span>Speed Festival · Saint-Paul-du-Bois (49) · depuis 2021</span>
+      <span><a href="#" style="color: #aaa;">Instagram</a> · <a href="#" style="color: #aaa;">LinkedIn</a> · <a href="#" style="color: #aaa;">Contact</a> · <a href="#" style="color: #aaa;">Mentions légales</a></span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

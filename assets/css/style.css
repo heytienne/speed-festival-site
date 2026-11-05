@@ -1,0 +1,119 @@
+/* Speed Festival — feuille de style (charte 2026 : Barlow Condensed + Inter, orange #FF5500, vert #00FF97, rose #FC8AFD) */
+
+body{margin:0;background:#FF5500}
+*{box-sizing:border-box}
+img{max-width:100%}
+a{color:inherit}a:hover{color:#FF5500}
+.t{font-family:'Barlow Condensed','Arial Narrow',sans-serif}
+.dots{background-image:radial-gradient(circle,#000 1.7px,transparent 2.1px);background-size:11px 11px}
+.dots-sm{background-image:radial-gradient(circle,#000 1.1px,transparent 1.5px);background-size:8px 8px}
+.dots-o{background-image:radial-gradient(circle,#FF5500 2.2px,transparent 2.6px);background-size:11px 11px}
+.dots-w{background-image:radial-gradient(circle,rgba(255,255,255,.35) 2px,transparent 2.4px);background-size:12px 12px}
+.fade-up{-webkit-mask-image:linear-gradient(to top,#000 5%,transparent 60%);mask-image:linear-gradient(to top,#000 5%,transparent 60%)}
+.fade-top{-webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 35%);mask-image:linear-gradient(to bottom,#000 0%,transparent 35%)}
+.hex{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.plaque-u{text-decoration:underline;text-decoration-thickness:.1em;text-underline-offset:.14em}
+.splat{background:url(../img/splatter.png) center/contain no-repeat}
+.flames-o{background:#FF5500;-webkit-mask:url(../img/flames.png) bottom center/auto 100% repeat-x;mask:url(../img/flames.png) bottom center/auto 100% repeat-x}
+.checker-flat{background:#000;-webkit-mask:url(../img/checker-flat.png) left center/auto 100% repeat-x;mask:url(../img/checker-flat.png) left center/auto 100% repeat-x}
+.navlink{text-decoration:none}
+.navlink:hover{color:#FF5500}
+.ph{display:block;width:100%;height:100%;object-fit:cover}
+.tile{position:relative;overflow:hidden;border:4px solid #000;border-radius:8px;background:#000}
+.tile img{transition:transform .4s}
+.tile:hover img{transform:scale(1.05)}
+/* Bouton funky bénévoles */
+.btn-funky{position:relative;display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:12px 26px;text-decoration:none;color:#000;background:#00FF97;background-image:radial-gradient(circle,rgba(0,191,255,.45) 1.6px,transparent 2px);background-size:9px 9px;border:4px solid #000;border-radius:14px;box-shadow:6px 6px 0 #000,6px 6px 0 4px #FF5500;font-weight:900;font-style:italic;text-transform:uppercase;transition:transform .18s cubic-bezier(.3,1.6,.5,1),box-shadow .18s}
+.btn-funky:hover{color:#000;transform:translate(-3px,-3px) scale(1.03);box-shadow:10px 10px 0 #000,10px 10px 0 4px #FF5500}
+.btn-funky:active{transform:translate(4px,4px);box-shadow:2px 2px 0 #000}
+.btn-funky:focus-visible{outline:4px solid #000;outline-offset:6px}
+.bf-flag{width:34px;height:26px;flex:none;border:3px solid #000;border-radius:4px;background:repeating-conic-gradient(#000 0 25%,#fff 0 50%) 0 0/10px 10px}
+.bf-arrow{display:inline-block;transition:transform .2s}
+.btn-funky:hover .bf-arrow{transform:translateX(6px)}
+.bf-sticker{position:absolute;right:-18px;top:-20px;background:#F1FF00;border:3px solid #000;border-radius:999px;padding:2px 10px;font-size:13px;font-style:normal;font-weight:900;letter-spacing:.03em;white-space:nowrap;transform:rotate(8deg);font-family:Inter,system-ui,sans-serif}
+@media (prefers-reduced-motion:reduce){.btn-funky,.bf-arrow{transition:none}}
+.zoomable .zoom-ico{opacity:0;transition:opacity .2s}
+.zoomable:hover .zoom-ico,.zoomable:focus-visible .zoom-ico{opacity:1}
+.zoomable:focus-visible{outline:4px solid #FF5500;outline-offset:3px}
+@media (hover:none){.zoomable .zoom-ico{opacity:1}}
+
+/* ---------- Navigation ---------- */
+.nav{position:relative;z-index:20}
+/* Leaderboard F1 */
+.lb{list-style:none;margin:0;padding:0}
+.lb-row{display:flex;align-items:center;gap:8px;min-height:44px;padding:4px 10px 4px 4px;text-decoration:none;color:#fff;background:#141414;border:1px solid #2a2a2a;border-radius:6px;transition:background .15s,transform .15s}
+.lb-row:hover{background:#262626;color:#fff;transform:translateY(-2px)}
+.lb-pos{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 4px;background:#fff;color:#000;border-radius:4px;font-size:20px;font-weight:900}
+.lb-p1{background:#FF5500}
+.lb-pit{background:#00FF97;font-size:15px}
+.lb-team{width:4px;height:24px;border-radius:2px;flex:none}
+.lb-name{font-size:21px;font-weight:800;text-transform:uppercase;white-space:nowrap}
+.lb-gap{font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:600;color:#999;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lb-lead{color:#FC8AFD}
+.nav-links{display:flex;gap:6px}
+.nav-burger{display:none;position:static}
+.nav-burger summary{list-style:none;cursor:pointer}
+.nav-burger summary::-webkit-details-marker{display:none}
+.nav-drop{position:absolute;left:0;right:0;top:100%;background:#000;border-top:3px solid #FF5500;padding:0 0 14px}
+.lb-head{display:flex;justify-content:space-between;background:#FF5500;color:#000;padding:8px 16px;font-size:18px;font-weight:900;letter-spacing:.05em}
+.lb-tower{display:flex;flex-direction:column;gap:6px;padding:10px 12px 0}
+.lb-tower .lb-row{min-height:54px;padding:6px 14px 6px 6px}
+.lb-tower .lb-name{flex:1;font-size:24px}
+.lb-tower .lb-gap{font-size:13px}
+@media (max-width:1320px){.nav-links .lb-gap{display:none}}
+
+/* ---------- Hero ---------- */
+.hero-polaroid{position:absolute;right:70px;top:330px}
+.hero-star{position:absolute}
+.hero-cta{display:flex;justify-content:center;align-items:center}
+.hero-hex{margin-right:-22px}
+
+/* ---------- Grille de départ ---------- */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 56px}
+.sam-offset{padding-top:70px}
+.stg{margin-left:70px}
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px}
+
+/* ---------- Replay ---------- */
+.replay{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:210px;gap:14px}
+.span-c2{grid-column:span 2}.span-r2{grid-row:span 2}
+
+/* ---------- Bénévoles ---------- */
+.ben-photo{border-left:5px solid #000}
+
+/* Tablette */
+@media (max-width:1100px){
+  .ben-photo{border-left:0;border-top:5px solid #000}
+}
+@media (max-width:1140px){
+  .nav-links{display:none}
+  .nav-burger{display:block}
+}
+/* Le polaroid radar n'a de place qu'en grand écran */
+@media (max-width:1399px){
+  .hero-polaroid{display:none}
+}
+@media (max-width:900px){
+  .grid2{grid-template-columns:minmax(0,1fr);gap:28px}
+  .sam-offset{padding-top:12px}
+  .stg{margin-left:0}
+  .replay{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:180px;gap:10px}
+}
+/* Mobile */
+@media (max-width:640px){
+  .hero-polaroid,.hero-star{display:none}
+  /* CTA compact sur mobile : hexagone à gauche, plaque basse à droite, aucun chevauchement de texte */
+  .hero-cta{flex-direction:row;align-items:center}
+  .hero-hex{width:84px !important;margin:0 -10px 0 0}
+  .hex-d{font-size:26px !important}
+  .hex-m{font-size:17px !important}
+  .cta-title{font-size:30px !important;padding:8px 0 9px 12px !important}
+  .cta-bar{font-size:11px !important;padding:5px 10px 5px 18px !important;flex-wrap:nowrap !important}
+  .cta-stars{display:none}
+  .bandeau-stars{display:none}
+  .lights{gap:8px !important;padding:10px 12px !important}
+  .replay{grid-auto-rows:140px}
+}
+@media (max-width:400px){
+  .nav-billet{padding:6px 12px !important;font-size:18px !important}
+}

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Speed Festival — Accueil mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FC8AFD}
+a{color:#000}
+.t{font-family:'Barlow Condensed','Arial Narrow',sans-serif}
+.u{text-decoration:underline;text-decoration-thickness:4px;text-underline-offset:6px}
+.dots-w{background-image:radial-gradient(circle,rgba(255,255,255,.6) 1.5px,transparent 1.9px);background-size:9px 9px}
+.dots-o{background-image:radial-gradient(circle,#FF5500 1.6px,transparent 2px);background-size:9px 9px}
+.fade-b{-webkit-mask-image:linear-gradient(to top,#000,transparent 70%);mask-image:linear-gradient(to top,#000,transparent 70%)}
+.ph{display:block;width:100%;height:100%;object-fit:cover}
+.hs{display:flex;gap:12px;overflow-x:auto;padding:0 16px 8px;scroll-snap-type:x mandatory}
+.hs > *{scroll-snap-align:start}
+</style>
+</helmet>
+
+<div style="position: relative; width: 390px; background: #FC8AFD; color: #000; font-family: Inter, system-ui, sans-serif; overflow: hidden;">
+
+  <!-- Écran 1 -->
+  <section style="position: relative; height: 844px; overflow: hidden; border-bottom: 5px solid #000;">
+    <div class="dots-w" style="position: absolute; inset: 0;"></div>
+    <header style="position: relative; background: #000; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px;">
+      <img src="/_blob/a4bf8b271a2eebc5461dfb9b1b2f5210" alt="Speed Festival" style="height: 32px; width: auto;">
+      <a href="#" class="t" style="text-decoration: none; background: #FF5500; color: #000; border-radius: 999px; padding: 6px 14px; font-size: 17px; font-weight: 900; font-style: italic;">BILLETS →</a>
+    </header>
+    <div style="position: relative; padding: 22px 16px 0; text-align: center;">
+      <p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .1em;">28/29 AOÛT 2026 · SAINT-PAUL-DU-BOIS (49)</p>
+      <h1 class="t" style="margin: 10px 0 18px; font-size: 76px; line-height: .82; font-weight: 900; font-style: italic; text-transform: uppercase;">On monte dans les tours</h1>
+    </div>
+    <div style="position: relative; margin: 0 12px; aspect-ratio: 2 / 1;">
+      <div style="position: absolute; left: 7%; right: 7%; top: 14%; bottom: 0; border-radius: 300px 300px 0 0; overflow: hidden; border: 4px solid #000; border-bottom: 0;">
+        <img src="/_blob/9fb43f8b9b4b403b809378a010faa385" alt="La foule devant la scène principale illuminée en orange" class="ph">
+        <div class="dots-o fade-b" style="position: absolute; inset: 0; opacity: .7;"></div>
+      </div>
+      <svg viewBox="0 0 1100 550" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+        <path d="M 40 550 A 510 510 0 0 1 1060 550" fill="none" stroke="#000" stroke-width="80"></path>
+        <path d="M 40 550 A 510 510 0 0 1 1060 550" fill="none" stroke="#FF5500" stroke-width="64"></path>
+        <g font-family="Barlow Condensed" font-weight="900" font-size="50" fill="#000" text-anchor="middle">
+          <text x="195" y="255">40</text><text x="465" y="100">80</text><text x="780" y="155">120</text><text x="995" y="395">160</text>
+        </g>
+        <line x1="550" y1="550" x2="880" y2="230" stroke="#000" stroke-width="30" stroke-linecap="round"></line>
+        <line x1="550" y1="550" x2="880" y2="230" stroke="#fff" stroke-width="14" stroke-linecap="round"></line>
+        <circle cx="550" cy="550" r="56" fill="#000"></circle><circle cx="550" cy="550" r="26" fill="#FF5500"></circle>
+      </svg>
+    </div>
+    <div style="position: relative; display: flex; justify-content: center; margin-top: -4px;">
+      <div style="background: #000; color: #FF5500; border-radius: 8px; box-shadow: 0 0 0 4px #FF5500; padding: 6px 18px; display: flex; gap: 16px; align-items: baseline;">
+        <span class="t" style="font-size: 40px; font-weight: 900; font-style: italic; line-height: 1;">140<small style="font-size: 16px;"> BPM</small></span>
+        <span class="t" style="font-size: 22px; font-weight: 800; color: #fff;">28-29.08.26</span>
+      </div>
+    </div>
+    <div style="position: relative; padding: 22px 16px 0; display: flex; flex-direction: column; gap: 10px;">
+      <a href="#" class="t" style="text-decoration: none; text-align: center; background: #000; color: #FC8AFD; border-radius: 999px; padding: 14px; font-size: 24px; font-weight: 900; font-style: italic;">VOIR LE PROGRAMME</a>
+    </div>
+
+    <!-- Levier de vitesses : barre fixe bas d'écran -->
+    <nav aria-label="Navigation principale" style="position: absolute; left: 12px; right: 12px; bottom: 16px; background: #000; color: #fff; border-radius: 22px; padding: 10px 12px; box-shadow: 0 8px 0 rgba(0,0,0,.25);">
+      <div class="t" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; text-align: center; font-weight: 900;">
+        <a href="#" style="text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 44px;"><span style="width: 32px; height: 32px; border-radius: 50%; background: #FC8AFD; display: inline-flex; align-items: center; justify-content: center; font-size: 20px;">1</span><span style="font-size: 11px; color: #FC8AFD;">FESTIVAL</span></a>
+        <a href="#" style="text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 44px;"><span style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 20px;">2</span><span style="font-size: 11px;">LINE-UP</span></a>
+        <a href="#" style="text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 44px;"><span style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 20px;">3</span><span style="font-size: 11px;">VILLAGE</span></a>
+        <a href="#" style="text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 44px;"><span style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 20px;">4</span><span style="font-size: 11px;">BILLETS</span></a>
+        <a href="#" style="text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 44px;"><span style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 20px;">5</span><span style="font-size: 11px;">ÉQUIPE</span></a>
+        <a href="#" style="text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 44px;"><span style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 20px;">6</span><span style="font-size: 11px;">INFOS</span></a>
+        <a href="#" style="text-decoration: none; color: #FF5500; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 44px;"><span style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #FF5500; display: inline-flex; align-items: center; justify-content: center; font-size: 20px;">R</span><span style="font-size: 11px;">REPLAY</span></a>
+      </div>
+    </nav>
+  </section>
+
+  <!-- 1re -->
+  <section style="background: #FFF8E6; padding: 40px 16px; border-bottom: 5px solid #000;">
+    <p class="t" style="margin: 0; font-size: 20px; font-weight: 900; color: #FF5500;">1<sup>re</sup> — LE FESTIVAL</p>
+    <h2 class="t" style="margin: 4px 0 12px; font-size: 52px; line-height: .85; font-weight: 900; font-style: italic;">UNE BANDE DE POTES, UN CHAMP, DU SON.</h2>
+    <p style="margin: 0 0 18px; font-size: 15px; line-height: 1.55;">Né en 2021 à Saint-Paul-du-Bois. Une scène en forme de compteur, une autre sur une voiture rose, un camping qui ressemble à un paddock.</p>
+    <div style="position: relative; height: 250px;">
+      <figure style="position: absolute; left: 0; top: 0; width: 64%; margin: 0; background: #fff; border: 4px solid #000; padding: 6px; transform: rotate(-4deg);"><img src="/_blob/fd286a2b3057ad0aa34c35650cf2dc57" alt="Les bénévoles en t-shirts roses" style="display: block; width: 100%; height: 140px; object-fit: cover;"><figcaption class="t" style="font-size: 15px; font-weight: 900; padding-top: 4px;">L'ÉCURIE</figcaption></figure>
+      <figure style="position: absolute; right: 0; bottom: 0; width: 58%; margin: 0; background: #fff; border: 4px solid #000; padding: 6px; transform: rotate(4deg);"><img src="/_blob/928cf7bbdce3c1dc394fc92f56e25624" alt="Festivaliers au camping en combinaisons orange" style="display: block; width: 100%; height: 120px; object-fit: cover;"><figcaption class="t" style="font-size: 15px; font-weight: 900; padding-top: 4px;">LE PADDOCK</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 2e album -->
+  <section style="padding: 40px 0; border-bottom: 5px solid #000;">
+    <div style="padding: 0 16px 16px;">
+      <p class="t" style="margin: 0; font-size: 20px; font-weight: 900;">2<sup>e</sup> — LINE-UP</p>
+      <h2 class="t" style="margin: 4px 0 0; font-size: 56px; line-height: .85; font-weight: 900; font-style: italic;">L'ALBUM OFFICIEL</h2>
+    </div>
+    <div class="hs">
+      <a href="#" style="flex: 0 0 200px; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden;"><div class="t" style="display: flex; justify-content: space-between; background: #FF5500; padding: 4px 10px; border-bottom: 3px solid #000; font-size: 16px; font-weight: 900;"><span>SPEED 2026</span><span>N°01</span></div><div style="height: 180px; border-bottom: 3px solid #000;"><img src="/_blob/cc66199fca941c83691e096c2e569c37" alt="DJ en maillot rouge et noir" class="ph"></div><div style="padding: 8px; text-align: center;"><span class="t u" style="font-size: 30px; font-weight: 900; font-style: italic;">ARTISTE</span></div></a>
+      <a href="#" style="flex: 0 0 200px; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden;"><div class="t" style="display: flex; justify-content: space-between; background: #00FF97; padding: 4px 10px; border-bottom: 3px solid #000; font-size: 16px; font-weight: 900;"><span>SPEED 2026</span><span>N°02</span></div><div style="height: 180px; border-bottom: 3px solid #000;"><img src="/_blob/61a4653e4aac6464ce30e513eb5c7211" alt="DJ en maillot de foot" class="ph"></div><div style="padding: 8px; text-align: center;"><span class="t u" style="font-size: 30px; font-weight: 900; font-style: italic;">ARTISTE</span></div></a>
+      <a href="#" style="flex: 0 0 200px; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden;"><div class="t" style="display: flex; justify-content: space-between; background: #00BFFF; padding: 4px 10px; border-bottom: 3px solid #000; font-size: 16px; font-weight: 900;"><span>SPEED 2026</span><span>N°03</span></div><div style="height: 180px; border-bottom: 3px solid #000;"><img src="/_blob/4d773238a83f6fda87881f4308e18cfb" alt="Chanteuse sous une lumière rouge" class="ph"></div><div style="padding: 8px; text-align: center;"><span class="t u" style="font-size: 30px; font-weight: 900; font-style: italic;">ARTISTE</span></div></a>
+    </div>
+    <div style="padding: 14px 16px 0;"><a href="#" class="t" style="font-size: 20px; font-weight: 900;">TOUT LE PROGRAMME →</a></div>
+  </section>
+
+  <!-- 3e village -->
+  <section style="background: #000; color: #fff; padding: 40px 0; border-bottom: 5px solid #000;">
+    <div style="padding: 0 16px 16px;">
+      <p class="t" style="margin: 0; font-size: 20px; font-weight: 900; color: #FC8AFD;">3<sup>e</sup> — LE VILLAGE</p>
+      <h2 class="t" style="margin: 4px 0 0; font-size: 56px; line-height: .85; font-weight: 900; font-style: italic;">LE TOUR DU CIRCUIT</h2>
+    </div>
+    <div class="hs">
+      <article style="flex: 0 0 280px; position: relative; height: 360px; border-radius: 14px; overflow: hidden; border: 3px solid #FF5500;"><img src="/_blob/b72519f0f78681245f2b39e11fa328ad" alt="Les graduations de la scène compteur" class="ph"><div style="position: absolute; inset: 0; background: linear-gradient(transparent 45%, rgba(0,0,0,.9));"></div><h3 class="t" style="position: absolute; left: 14px; bottom: 12px; margin: 0; font-size: 34px; font-weight: 900; font-style: italic;">LA SCÈNE COMPTEUR</h3></article>
+      <article style="flex: 0 0 280px; position: relative; height: 360px; border-radius: 14px; overflow: hidden; border: 3px solid #FC8AFD;"><img src="/_blob/1e3694efd183684e67725cba82c94a71" alt="La scène VR'OOM sur une voiture rose" class="ph"><div style="position: absolute; inset: 0; background: linear-gradient(transparent 45%, rgba(0,0,0,.9));"></div><h3 class="t" style="position: absolute; left: 14px; bottom: 12px; margin: 0; font-size: 34px; font-weight: 900; font-style: italic;">VR'OOM</h3></article>
+      <article style="flex: 0 0 280px; position: relative; height: 360px; border-radius: 14px; overflow: hidden; border: 3px solid #00BFFF;"><img src="/_blob/bcc1f98474f180067b0af19938ce0ece" alt="Le radar de vitesse" class="ph"><div style="position: absolute; inset: 0; background: linear-gradient(transparent 45%, rgba(0,0,0,.9));"></div><h3 class="t" style="position: absolute; left: 14px; bottom: 12px; margin: 0; font-size: 34px; font-weight: 900; font-style: italic;">LE RADAR</h3></article>
+    </div>
+  </section>
+
+  <!-- 4e plaques -->
+  <section style="background: #FF5500; padding: 40px 16px; border-bottom: 5px solid #000; display: flex; flex-direction: column; gap: 14px;">
+    <p class="t" style="margin: 0; font-size: 20px; font-weight: 900;">4<sup>e</sup> — BILLETTERIE</p>
+    <h2 class="t" style="margin: 0 0 6px; font-size: 60px; line-height: .85; font-weight: 900; font-style: italic;">IMMATRICULE-TOI</h2>
+    <a href="#" style="display: flex; align-items: stretch; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; height: 76px;"><span style="width: 34px; background: #003DA5; color: #fff; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px;"><b class="t" style="font-size: 18px;">S</b></span><span style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;"><span class="t" style="font-size: 36px; font-weight: 900; line-height: 1;">WE-2026-KND</span><span style="font-size: 11px; font-weight: 600;">PASS WEEKEND · [PRIX]</span></span><span style="width: 34px; background: #003DA5; color: #fff; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px;"><b class="t" style="font-size: 18px;">49</b></span></a>
+    <a href="#" style="display: flex; align-items: stretch; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; overflow: hidden; height: 76px;"><span style="width: 34px; background: #003DA5; color: #fff; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px;"><b class="t" style="font-size: 18px;">S</b></span><span style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;"><span class="t" style="font-size: 36px; font-weight: 900; line-height: 1;">CA-MP-ING</span><span style="font-size: 11px; font-weight: 600;">WEEKEND + CAMPING · [PRIX]</span></span><span style="width: 34px; background: #003DA5; color: #fff; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px;"><b class="t" style="font-size: 18px;">49</b></span></a>
+    <a href="#" class="t" style="text-align: center; text-decoration: none; background: #000; color: #FF5500; border-radius: 999px; padding: 12px; font-size: 22px; font-weight: 900; font-style: italic;">TOUTES LES PLAQUES →</a>
+  </section>
+
+  <!-- 5e équipe -->
+  <section style="border-bottom: 5px solid #000;">
+    <div style="height: 240px;"><img src="/_blob/eb87140735bcf37af6079f2357c65c34" alt="Bénévole au bar en t-shirt rose" class="ph"></div>
+    <div style="padding: 26px 16px 34px; display: flex; flex-direction: column; gap: 10px;">
+      <p class="t" style="margin: 0; font-size: 20px; font-weight: 900;">5<sup>e</sup> — L'ÉQUIPE</p>
+      <h2 class="t" style="margin: 0; font-size: 56px; line-height: .85; font-weight: 900; font-style: italic;">PASSE EN MODE BÉNÉVOLE</h2>
+      <a href="#" class="t" style="align-self: flex-start; text-decoration: none; background: #000; color: #FC8AFD; border-radius: 999px; padding: 12px 22px; font-size: 22px; font-weight: 900; font-style: italic;">JE M'INSCRIS →</a>
+    </div>
+  </section>
+
+  <!-- 6e infos -->
+  <section style="background: #FFF8E6; padding: 40px 16px; border-bottom: 5px solid #000; display: flex; flex-direction: column; gap: 10px;">
+    <p class="t" style="margin: 0; font-size: 20px; font-weight: 900; color: #FF5500;">6<sup>e</sup> — INFOS</p>
+    <h2 class="t" style="margin: 0 0 6px; font-size: 56px; line-height: .85; font-weight: 900; font-style: italic;">CARNET D'ENTRETIEN</h2>
+    <a href="#" class="t" style="display: flex; justify-content: space-between; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; padding: 12px 14px; font-size: 24px; font-weight: 900; min-height: 44px; box-sizing: border-box;">COMMENT VENIR ?<span>→</span></a>
+    <a href="#" class="t" style="display: flex; justify-content: space-between; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; padding: 12px 14px; font-size: 24px; font-weight: 900; min-height: 44px; box-sizing: border-box;">HORAIRES<span>→</span></a>
+    <a href="#" class="t" style="display: flex; justify-content: space-between; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; padding: 12px 14px; font-size: 24px; font-weight: 900; min-height: 44px; box-sizing: border-box;">CAMPING<span>→</span></a>
+    <a href="#" class="t" style="display: flex; justify-content: space-between; text-decoration: none; color: #000; background: #fff; border: 4px solid #000; border-radius: 10px; padding: 12px 14px; font-size: 24px; font-weight: 900; min-height: 44px; box-sizing: border-box;">OBJETS INTERDITS<span>→</span></a>
+  </section>
+
+  <!-- R replay -->
+  <section style="background: #000; color: #fff; padding: 40px 0 0;">
+    <div style="padding: 0 16px 16px;">
+      <p class="t" style="margin: 0; font-size: 20px; font-weight: 900; color: #FF5500;">R — MARCHE ARRIÈRE</p>
+      <h2 class="t" style="margin: 4px 0 0; font-size: 56px; line-height: .85; font-weight: 900; font-style: italic;">REPLAY 2025</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px;">
+      <img src="/_blob/ff21e55dee7ce982e74d7ff34f5dcf06" alt="Drapeau à damier dans la foule" class="ph">
+      <img src="/_blob/6210eab1c056e184b706f1275ef5c64a" alt="La scène VR'OOM" class="ph">
+      <img src="/_blob/d3489a41199ca1480fad105cc9a9002b" alt="Foule et étincelles" class="ph">
+      <img src="/_blob/f3b241fdc26035af4dd19bd12c24c40d" alt="Festivalière en veste Racing" class="ph">
+    </div>
+    <div style="padding: 24px 16px 120px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #aaa;">
+      <img src="/_blob/f4f58c3c5c4f288aa330871d6f85e94a" alt="Speed Festival" style="width: 200px; height: auto;">
+      <span>Photos : Morisseau Steeve Photographie</span>
+      <span>Instagram · Contact · Mentions légales</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3400}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

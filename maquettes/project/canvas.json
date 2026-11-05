@@ -1,0 +1,136 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 6000,
+      "title": "A · Grand Prix — l'affiche qui défile (avec photos 2025)",
+      "w": 1440,
+      "x": 0,
+      "y": 0,
+      "page": "directions"
+    },
+    "PitWall.dc.html": {
+      "expand": "fill",
+      "h": 3700,
+      "title": "B · Pit Wall — tableau de bord télémétrie (avec photos 2025)",
+      "w": 1440,
+      "x": 1520,
+      "y": 0,
+      "page": "directions"
+    },
+    "Compteur.dc.html": {
+      "expand": "fill",
+      "h": 6600,
+      "title": "C · Boîte de vitesses — Accueil",
+      "w": 1440,
+      "x": 3040,
+      "y": 0,
+      "page": "directions",
+      "is_interactive": true
+    },
+    "Programme.dc.html": {
+      "expand": "fill",
+      "h": 4200,
+      "title": "C · 2e — Programme",
+      "w": 1440,
+      "x": 0,
+      "y": 0,
+      "page": "site",
+      "is_interactive": true
+    },
+    "Billetterie.dc.html": {
+      "expand": "fill",
+      "h": 3600,
+      "title": "C · 4e — Billetterie",
+      "w": 1440,
+      "x": 1520,
+      "y": 0,
+      "page": "site",
+      "is_interactive": true
+    },
+    "Infos.dc.html": {
+      "expand": "fill",
+      "h": 4400,
+      "title": "C · 6e — Infos pratiques",
+      "w": 1440,
+      "x": 3040,
+      "y": 0,
+      "page": "site",
+      "is_interactive": true
+    },
+    "Benevoles.dc.html": {
+      "expand": "fill",
+      "h": 3400,
+      "title": "C · 5e — Bénévoles",
+      "w": 1440,
+      "x": 4560,
+      "y": 0,
+      "page": "site",
+      "is_interactive": true
+    },
+    "MobileAccueil.dc.html": {
+      "h": 3400,
+      "title": "C · Mobile — Accueil",
+      "w": 390,
+      "x": 6080,
+      "y": 0,
+      "page": "site",
+      "radius": 32
+    },
+    "MobileProgramme.dc.html": {
+      "h": 2400,
+      "title": "C · Mobile — Programme",
+      "w": 390,
+      "x": 6550,
+      "y": 0,
+      "page": "site",
+      "radius": 32
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-03T10:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas",
+    "page": "site"
+  },
+  "notes": {
+    "titre": {
+      "kind": "title1",
+      "maxW": 6000,
+      "text": "Speed Festival 2026 — 3 directions pour le nouveau site",
+      "w": 240,
+      "x": -1315,
+      "y": -291,
+      "page": "directions"
+    },
+    "titresite": {
+      "kind": "title1",
+      "maxW": 6940,
+      "text": "Direction C · Boîte de vitesses — le site complet",
+      "x": 0,
+      "y": -320,
+      "page": "site"
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "PitWall.dc.html",
+    "Compteur.dc.html",
+    "Programme.dc.html",
+    "Billetterie.dc.html",
+    "Infos.dc.html",
+    "Benevoles.dc.html",
+    "MobileAccueil.dc.html",
+    "MobileProgramme.dc.html"
+  ],
+  "pages": [
+    {"id": "directions", "name": "Directions"},
+    {"id": "site", "name": "Site C complet"}
+  ],
+  "title": "Speed Festival — Maquettes site 2026"
+}

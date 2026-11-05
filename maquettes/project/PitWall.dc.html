@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Speed Festival — Pit Wall</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0A0A0A}
+a{color:#00FF97}a:hover{color:#F1FF00}
+.t{font-family:'Barlow Condensed','Arial Narrow',sans-serif}
+.mono{font-variant-numeric:tabular-nums}
+.dots-g{background-image:radial-gradient(circle,rgba(0,255,151,.5) 1.3px,transparent 1.7px);background-size:9px 9px}
+.dots-o{background-image:radial-gradient(circle,rgba(255,85,0,.55) 1.6px,transparent 2px);background-size:10px 10px}
+.fade-r{-webkit-mask-image:linear-gradient(to left,#000,transparent 70%);mask-image:linear-gradient(to left,#000,transparent 70%)}
+.orbit{background:#FF5500;-webkit-mask:url(/_blob/0b6dcb204d24b65f5a27ab2e9b17656d) center/contain no-repeat;mask:url(/_blob/0b6dcb204d24b65f5a27ab2e9b17656d) center/contain no-repeat}
+.checker-w{background:#fff;-webkit-mask:url(/_blob/92dfa23d22a796bd238748b8e2983812) left center/auto 100% repeat-x;mask:url(/_blob/92dfa23d22a796bd238748b8e2983812) left center/auto 100% repeat-x}
+.tower a{text-decoration:none;color:#fff}
+.tower a:hover{background:#1c1c1c}
+.row:hover{background:#151515}
+</style>
+</helmet>
+
+<div style="background: #0A0A0A; color: #fff; font-family: Inter, system-ui, sans-serif; min-height: 100vh;">
+
+  <!-- Barre live -->
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; justify-content: space-between; padding: 10px 24px; border-bottom: 1px solid #262626; font-size: 13px; letter-spacing: .08em; color: #aaa;">
+    <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #00FF97; box-shadow: 0 0 10px #00FF97;"></span> SESSION : AVANT-COURSE</span>
+    <span>CIRCUIT DE SAINT-PAUL-DU-BOIS (49)</span>
+    <span>DRAPEAU <b style="color: #00FF97;">VERT</b> · BILLETTERIE OUVERTE</span>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+
+    <!-- TIMING TOWER (nav) -->
+    <aside class="tower" style="flex: 1 1 280px; max-width: 320px; padding: 22px 16px; display: flex; flex-direction: column; gap: 18px; border-right: 1px solid #262626; box-sizing: border-box;">
+      <img src="/_blob/f4f58c3c5c4f288aa330871d6f85e94a" alt="Speed Festival" style="width: 100%; height: auto;">
+      <div style="background: #000; border: 1px solid #262626; border-radius: 10px; overflow: hidden;">
+        <div class="t" style="background: #FF5500; color: #000; padding: 8px 14px; font-size: 18px; font-weight: 800; letter-spacing: .05em; display: flex; justify-content: space-between;"><span>TOUR 1/2</span><span>★★★</span></div>
+        <nav aria-label="Navigation principale" class="t" style="display: flex; flex-direction: column; font-size: 21px; font-weight: 700;">
+          <a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1d1d1d; min-height: 44px; box-sizing: border-box;"><span style="width: 26px; color: #888;">1</span><span style="width: 4px; height: 20px; background: #FF5500;"></span><span style="flex: 1;">LINE-UP</span><span class="mono" style="font-size: 15px; color: #FC8AFD;">LEADER</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1d1d1d; min-height: 44px; box-sizing: border-box; background: #1a1a1a;"><span style="width: 26px; color: #888;">2</span><span style="width: 4px; height: 20px; background: #00FF97;"></span><span style="flex: 1; color: #00FF97;">BILLETTERIE</span><span class="mono" style="font-size: 15px; color: #aaa;">+0.001</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1d1d1d; min-height: 44px; box-sizing: border-box;"><span style="width: 26px; color: #888;">3</span><span style="width: 4px; height: 20px; background: #00BFFF;"></span><span style="flex: 1;">INFOS PRATIQUES</span><span class="mono" style="font-size: 15px; color: #aaa;">+0.412</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1d1d1d; min-height: 44px; box-sizing: border-box;"><span style="width: 26px; color: #888;">4</span><span style="width: 4px; height: 20px; background: #F1FF00;"></span><span style="flex: 1;">CAMPING</span><span class="mono" style="font-size: 15px; color: #aaa;">+0.880</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1d1d1d; min-height: 44px; box-sizing: border-box;"><span style="width: 26px; color: #888;">5</span><span style="width: 4px; height: 20px; background: #FC8AFD;"></span><span style="flex: 1;">BÉNÉVOLES</span><span class="mono" style="font-size: 15px; color: #aaa;">+1.204</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #1d1d1d; min-height: 44px; box-sizing: border-box;"><span style="width: 26px; color: #888;">6</span><span style="width: 4px; height: 20px; background: #804240;"></span><span style="flex: 1;">PARTENAIRES</span><span class="mono" style="font-size: 15px; color: #aaa;">+2.019</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; min-height: 44px; box-sizing: border-box;"><span style="width: 26px; color: #888;">7</span><span style="width: 4px; height: 20px; background: #fff;"></span><span style="flex: 1;">FAQ</span><span class="mono" style="font-size: 15px; color: #888;">PIT</span></a>
+        </nav>
+      </div>
+      <div style="background: #111; border: 1px solid #262626; border-radius: 10px; padding: 14px;">
+        <img src="/_blob/29ad970bf6765599f4b6b2c4a64fc39d" alt="L'équipe d'organisation en t-shirts vert canard" style="display: block; width: 100%; height: 130px; object-fit: cover; border-radius: 6px; margin-bottom: 12px;">
+        <p style="margin: 0 0 6px; font-size: 12px; letter-spacing: .1em; color: #888;">TEAM RADIO</p>
+        <p style="margin: 0; font-size: 15px; line-height: 1.45;">« Box box, on a besoin de toi au bar. Copy ? »</p>
+        <a href="#" style="display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600;">Devenir bénévole →</a>
+      </div>
+    </aside>
+
+    <!-- CONTENU -->
+    <main style="flex: 999 1 560px; min-width: 0; padding: 22px 24px 40px; display: flex; flex-direction: column; gap: 18px; box-sizing: border-box;">
+
+      <!-- HERO bento -->
+      <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px;">
+        <section style="grid-column: span 8; position: relative; background: #000; border: 1px solid #262626; border-radius: 16px; padding: 40px; overflow: hidden; min-height: 470px; display: flex; flex-direction: column; justify-content: space-between;">
+          <img src="/_blob/1a3b28b8f01488b5273d18e064d7302d" alt="La scène principale en arche de compteur, de nuit, devant la foule" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.6) 45%, rgba(0,0,0,.1) 100%);"></div>
+          <div class="dots-o fade-r" style="position: absolute; inset: 0; opacity: .5;"></div>
+          <div class="orbit" aria-hidden="true" style="position: absolute; right: -80px; top: -40px; width: 520px; height: 520px; opacity: .5;"></div>
+          <div style="position: absolute; right: 22px; top: 20px; display: flex; align-items: center; gap: 8px; background: #000; border: 1px solid #333; border-radius: 6px; padding: 6px 10px; font-size: 12px; letter-spacing: .1em; color: #fff;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #FF5500;"></span>ONBOARD · ÉDITION 2025</div>
+          <div style="position: relative;">
+            <p style="margin: 0 0 12px; color: #FF5500; font-size: 15px; font-weight: 600; letter-spacing: .14em;">→ 28/29 AOÛT 2026 · SAINT-PAUL-DU-BOIS</p>
+            <h1 class="t" style="margin: 0; font-size: 132px; line-height: .82; font-weight: 900; font-style: italic; text-transform: uppercase;">Extinction<br>des feux.</h1>
+            <p class="t" style="margin: 14px 0 0; font-size: 34px; font-weight: 700; color: #00FF97; text-transform: uppercase;">Et c'est parti pour 2 jours d'électro à fond.</p>
+          </div>
+          <div style="position: relative; display: flex; flex-wrap: wrap; gap: 14px; align-items: center;">
+            <a href="#" class="t" style="text-decoration: none; background: #00FF97; color: #000; border-radius: 8px; padding: 14px 28px; font-size: 28px; font-weight: 900; font-style: italic;">BILLETTERIE →</a>
+            <a href="#" class="t" style="text-decoration: none; color: #fff; border: 2px solid #fff; border-radius: 8px; padding: 12px 26px; font-size: 28px; font-weight: 800; font-style: italic;">LINE-UP</a>
+          </div>
+        </section>
+
+        <div style="grid-column: span 4; display: flex; flex-direction: column; gap: 18px;">
+          <section aria-label="Compte à rebours" style="background: #111; border: 1px solid #262626; border-radius: 16px; padding: 22px;">
+            <p style="margin: 0 0 12px; font-size: 12px; letter-spacing: .12em; color: #888;">FEUX DE DÉPART</p>
+            <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+              <span style="flex: 1; height: 34px; border-radius: 6px; background: #FF5500; box-shadow: 0 0 14px #FF5500;"></span>
+              <span style="flex: 1; height: 34px; border-radius: 6px; background: #FF5500; box-shadow: 0 0 14px #FF5500;"></span>
+              <span style="flex: 1; height: 34px; border-radius: 6px; background: #FF5500; box-shadow: 0 0 14px #FF5500;"></span>
+              <span style="flex: 1; height: 34px; border-radius: 6px; background: #2a2a2a;"></span>
+              <span style="flex: 1; height: 34px; border-radius: 6px; background: #2a2a2a;"></span>
+            </div>
+            <div class="t mono" style="display: flex; justify-content: space-between; font-size: 64px; font-weight: 800; line-height: .9;">
+              <span>000<small style="display: block; font-size: 14px; color: #888; font-family: Inter; font-weight: 500;">JOURS</small></span>
+              <span>00<small style="display: block; font-size: 14px; color: #888; font-family: Inter; font-weight: 500;">HEURES</small></span>
+              <span>00<small style="display: block; font-size: 14px; color: #888; font-family: Inter; font-weight: 500;">MIN</small></span>
+            </div>
+          </section>
+          <section style="background: #111; border: 1px solid #262626; border-radius: 16px; padding: 22px; flex: 1;">
+            <p style="margin: 0 0 12px; font-size: 12px; letter-spacing: .12em; color: #888;">MÉTÉO PISTE</p>
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#F1FF00" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+              <div>
+                <p class="t" style="margin: 0; font-size: 40px; font-weight: 800; line-height: 1;">PISTE SÈCHE</p>
+                <p style="margin: 4px 0 0; font-size: 14px; color: #aaa;">Probabilité de soleil : on y croit fort. Pneus pluie au fond du coffre quand même.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- CLASSEMENT LINE-UP -->
+      <section style="background: #000; border: 1px solid #262626; border-radius: 16px; overflow: hidden;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; padding: 22px 24px; border-bottom: 1px solid #262626;">
+          <h2 class="t" style="margin: 0; font-size: 56px; font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 1;">Classement line-up</h2>
+          <div role="tablist" aria-label="Jour" style="display: flex; gap: 6px; background: #151515; padding: 5px; border-radius: 10px;">
+            <button type="button" role="tab" aria-selected="true" class="t" style="min-height: 44px; border: 0; border-radius: 7px; padding: 0 20px; background: #fff; color: #000; font-size: 20px; font-weight: 800; cursor: pointer;">VEN 28</button>
+            <button type="button" role="tab" aria-selected="false" class="t" style="min-height: 44px; border: 0; border-radius: 7px; padding: 0 20px; background: transparent; color: #fff; font-size: 20px; font-weight: 800; cursor: pointer;">SAM 29</button>
+          </div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; min-width: 760px;">
+            <thead>
+              <tr style="font-size: 12px; letter-spacing: .12em; color: #888; text-align: left;">
+                <th style="padding: 12px 24px; font-weight: 500;">POS</th>
+                <th style="padding: 12px 8px; font-weight: 500;">ARTISTE</th>
+                <th style="padding: 12px 8px; font-weight: 500;">ÉCURIE / GENRE</th>
+                <th style="padding: 12px 8px; font-weight: 500;">SCÈNE</th>
+                <th style="padding: 12px 8px; font-weight: 500;">SECTEURS</th>
+                <th style="padding: 12px 24px; font-weight: 500; text-align: right;">DÉPART</th>
+              </tr>
+            </thead>
+            <tbody class="t" style="font-size: 26px; font-weight: 700;">
+              <tr class="row" style="border-top: 1px solid #1d1d1d;">
+                <td style="padding: 14px 24px;"><span style="display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; background: #FF5500; color: #000; border-radius: 6px; font-weight: 900;">1</span></td>
+                <td style="padding: 10px 8px;"><span style="display: flex; align-items: center; gap: 16px;"><img src="/_blob/cc66199fca941c83691e096c2e569c37" alt="DJ en maillot rouge et noir" style="width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 2px solid #333;"><span style="font-size: 34px; font-weight: 900; font-style: italic;">ARTISTE</span></span></td>
+                <td style="padding: 14px 8px; color: #aaa; font-family: Inter; font-size: 15px; font-weight: 500;">[Genre]</td>
+                <td style="padding: 14px 8px;">SCÈNE</td>
+                <td style="padding: 14px 8px;"><span style="display: inline-flex; gap: 4px;"><span style="width: 44px; height: 8px; border-radius: 4px; background: #FC8AFD;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #FC8AFD;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #00FF97;"></span></span></td>
+                <td class="mono" style="padding: 14px 24px; text-align: right; color: #00FF97;">00:00</td>
+              </tr>
+              <tr class="row" style="border-top: 1px solid #1d1d1d;">
+                <td style="padding: 14px 24px;"><span style="display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; background: #222; border-radius: 6px;">2</span></td>
+                <td style="padding: 10px 8px;"><span style="display: flex; align-items: center; gap: 16px;"><img src="/_blob/61a4653e4aac6464ce30e513eb5c7211" alt="DJ en maillot de foot devant un drapeau à damier" style="width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 2px solid #333;"><span style="font-size: 34px; font-weight: 900; font-style: italic;">ARTISTE</span></span></td>
+                <td style="padding: 14px 8px; color: #aaa; font-family: Inter; font-size: 15px; font-weight: 500;">[Genre]</td>
+                <td style="padding: 14px 8px;">SCÈNE</td>
+                <td style="padding: 14px 8px;"><span style="display: inline-flex; gap: 4px;"><span style="width: 44px; height: 8px; border-radius: 4px; background: #00FF97;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #FC8AFD;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #F1FF00;"></span></span></td>
+                <td class="mono" style="padding: 14px 24px; text-align: right;">00:00</td>
+              </tr>
+              <tr class="row" style="border-top: 1px solid #1d1d1d;">
+                <td style="padding: 14px 24px;"><span style="display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; background: #222; border-radius: 6px;">3</span></td>
+                <td style="padding: 10px 8px;"><span style="display: flex; align-items: center; gap: 16px;"><img src="/_blob/4d773238a83f6fda87881f4308e18cfb" alt="Chanteuse sous une lumière rouge" style="width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 2px solid #333;"><span style="font-size: 34px; font-weight: 900; font-style: italic;">ARTISTE</span></span></td>
+                <td style="padding: 14px 8px; color: #aaa; font-family: Inter; font-size: 15px; font-weight: 500;">[Genre]</td>
+                <td style="padding: 14px 8px;">SCÈNE</td>
+                <td style="padding: 14px 8px;"><span style="display: inline-flex; gap: 4px;"><span style="width: 44px; height: 8px; border-radius: 4px; background: #F1FF00;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #00FF97;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #00FF97;"></span></span></td>
+                <td class="mono" style="padding: 14px 24px; text-align: right;">00:00</td>
+              </tr>
+              <tr class="row" style="border-top: 1px solid #1d1d1d;">
+                <td style="padding: 14px 24px;"><span style="display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; background: #222; border-radius: 6px;">4</span></td>
+                <td style="padding: 10px 8px;"><span style="display: flex; align-items: center; gap: 16px;"><img src="/_blob/8435e4f7f2a91a98811d2942737a7278" alt="Duo de DJ devant un fond à damier" style="width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 2px solid #333;"><span style="font-size: 34px; font-weight: 900; font-style: italic;">ARTISTE</span></span></td>
+                <td style="padding: 14px 8px; color: #aaa; font-family: Inter; font-size: 15px; font-weight: 500;">[Genre]</td>
+                <td style="padding: 14px 8px;">SCÈNE</td>
+                <td style="padding: 14px 8px;"><span style="display: inline-flex; gap: 4px;"><span style="width: 44px; height: 8px; border-radius: 4px; background: #F1FF00;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #F1FF00;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #00FF97;"></span></span></td>
+                <td class="mono" style="padding: 14px 24px; text-align: right;">00:00</td>
+              </tr>
+              <tr class="row" style="border-top: 1px solid #1d1d1d;">
+                <td style="padding: 14px 24px;"><span style="display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; background: #222; border-radius: 6px;">5</span></td>
+                <td style="padding: 10px 8px;"><span style="display: flex; align-items: center; gap: 16px;"><img src="/_blob/77e6b7af03b2b6b2a61fd18bb6b57ebc" alt="Chanteuse en sweat pastel" style="width: 56px; height: 56px; border-radius: 8px; object-fit: cover; border: 2px solid #333;"><span style="font-size: 34px; font-weight: 900; font-style: italic;">ARTISTE</span></span></td>
+                <td style="padding: 14px 8px; color: #aaa; font-family: Inter; font-size: 15px; font-weight: 500;">[Genre]</td>
+                <td style="padding: 14px 8px;">SCÈNE</td>
+                <td style="padding: 14px 8px;"><span style="display: inline-flex; gap: 4px;"><span style="width: 44px; height: 8px; border-radius: 4px; background: #00FF97;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #F1FF00;"></span><span style="width: 44px; height: 8px; border-radius: 4px; background: #F1FF00;"></span></span></td>
+                <td class="mono" style="padding: 14px 24px; text-align: right;">00:00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin: 0; padding: 12px 24px 18px; font-size: 13px; color: #888;"><span style="color: #FC8AFD;">■</span> secteur le plus rapide du festival · <span style="color: #00FF97;">■</span> record perso · <span style="color: #F1FF00;">■</span> dans le rythme</p>
+      </section>
+
+      <!-- CAMÉRAS EMBARQUÉES = REPLAY 2025 -->
+      <section style="background: #000; border: 1px solid #262626; border-radius: 16px; padding: 22px 24px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 16px;">
+          <div>
+            <p style="margin: 0 0 4px; font-size: 12px; letter-spacing: .12em; color: #888;">CAMÉRAS EMBARQUÉES · REPLAY 2025</p>
+            <h2 class="t" style="margin: 0; font-size: 52px; font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 1;">Onboard</h2>
+          </div>
+          <a href="https://morisseausteevephotographie.pixieset.com/speedfestival/" style="font-size: 15px; font-weight: 600;">Toutes les photos →</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: 170px; gap: 10px;">
+          <div style="grid-column: span 2; grid-row: span 2; position: relative; border-radius: 10px; overflow: hidden;"><img src="/_blob/ff21e55dee7ce982e74d7ff34f5dcf06" alt="Drapeau à damier brandi dans la foule" style="width: 100%; height: 100%; object-fit: cover;"><span class="t" style="position: absolute; left: 10px; top: 10px; background: #000; color: #00FF97; padding: 2px 8px; font-size: 16px; font-weight: 800;">CAM 01 · MAIN STAGE</span></div>
+          <div style="grid-column: span 2; position: relative; border-radius: 10px; overflow: hidden;"><img src="/_blob/fb77861d6fcf9f1f2f08892f271a47dd" alt="La scène VR'OOM de nuit" style="width: 100%; height: 100%; object-fit: cover;"><span class="t" style="position: absolute; left: 10px; top: 10px; background: #000; color: #FC8AFD; padding: 2px 8px; font-size: 16px; font-weight: 800;">CAM 02 · VR'OOM</span></div>
+          <div style="position: relative; border-radius: 10px; overflow: hidden;"><img src="/_blob/7727dfee984927918692a01e64019447" alt="Gobelets Speed" style="width: 100%; height: 100%; object-fit: cover;"><span class="t" style="position: absolute; left: 10px; top: 10px; background: #000; color: #F1FF00; padding: 2px 8px; font-size: 16px; font-weight: 800;">CAM 03 · BAR</span></div>
+          <div style="position: relative; border-radius: 10px; overflow: hidden;"><img src="/_blob/928cf7bbdce3c1dc394fc92f56e25624" alt="Festivaliers en combinaisons orange au camping" style="width: 100%; height: 100%; object-fit: cover;"><span class="t" style="position: absolute; left: 10px; top: 10px; background: #000; color: #F1FF00; padding: 2px 8px; font-size: 16px; font-weight: 800;">CAM 04 · PADDOCK</span></div>
+          <div style="position: relative; border-radius: 10px; overflow: hidden;"><img src="/_blob/80fd62dfc38f0396996f8caeaeae623e" alt="Festivaliers en lunettes de soleil" style="width: 100%; height: 100%; object-fit: cover;"></div>
+          <div style="position: relative; border-radius: 10px; overflow: hidden;"><img src="/_blob/282f2713ffa18590372ccdb8ef5c6d49" alt="Festivalier déguisé en super-héros" style="width: 100%; height: 100%; object-fit: cover;"></div>
+          <div style="grid-column: span 2; position: relative; border-radius: 10px; overflow: hidden;"><img src="/_blob/d3489a41199ca1480fad105cc9a9002b" alt="Foule et étincelles devant la scène" style="width: 100%; height: 100%; object-fit: cover;"><span class="t" style="position: absolute; left: 10px; top: 10px; background: #000; color: #FF5500; padding: 2px 8px; font-size: 16px; font-weight: 800;">CAM 05 · CROWD</span></div>
+        </div>
+        <p style="margin: 10px 0 0; font-size: 12px; color: #777;">Photos : Morisseau Steeve Photographie</p>
+      </section>
+
+      <!-- PNEUS = BILLETS + CARTE CIRCUIT -->
+      <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px;">
+        <section style="grid-column: span 7; background: #111; border: 1px solid #262626; border-radius: 16px; padding: 26px;">
+          <p style="margin: 0 0 4px; font-size: 12px; letter-spacing: .12em; color: #888;">STRATÉGIE PNEUMATIQUE</p>
+          <h2 class="t" style="margin: 0 0 22px; font-size: 52px; font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 1;">Choisis ta gomme</h2>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;">
+            <a href="#" style="text-decoration: none; color: #fff; background: #000; border: 1px solid #262626; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
+              <svg width="96" height="96" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#1a1a1a"></circle><circle cx="50" cy="50" r="38" fill="none" stroke="#FC8AFD" stroke-width="7"></circle><circle cx="50" cy="50" r="22" fill="#333"></circle><text x="50" y="58" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="24" fill="#FC8AFD">S</text></svg>
+              <span class="t" style="font-size: 30px; font-weight: 900;">TENDRE</span>
+              <span style="font-size: 14px; color: #aaa;">Pass 1 jour. Ça accroche fort, ça s'use vite.</span>
+              <span class="t" style="font-size: 28px; font-weight: 800; color: #FC8AFD;">[PRIX]</span>
+            </a>
+            <a href="#" style="text-decoration: none; color: #fff; background: #000; border: 2px solid #F1FF00; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
+              <svg width="96" height="96" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#1a1a1a"></circle><circle cx="50" cy="50" r="38" fill="none" stroke="#F1FF00" stroke-width="7"></circle><circle cx="50" cy="50" r="22" fill="#333"></circle><text x="50" y="58" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="24" fill="#F1FF00">M</text></svg>
+              <span class="t" style="font-size: 30px; font-weight: 900;">MEDIUM</span>
+              <span style="font-size: 14px; color: #aaa;">Pass weekend. Le meilleur compromis endurance / plaisir.</span>
+              <span class="t" style="font-size: 28px; font-weight: 800; color: #F1FF00;">[PRIX]</span>
+            </a>
+            <a href="#" style="text-decoration: none; color: #fff; background: #000; border: 1px solid #262626; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
+              <svg width="96" height="96" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#1a1a1a"></circle><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="7"></circle><circle cx="50" cy="50" r="22" fill="#333"></circle><text x="50" y="58" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="24" fill="#fff">H</text></svg>
+              <span class="t" style="font-size: 30px; font-weight: 900;">DUR</span>
+              <span style="font-size: 14px; color: #aaa;">Weekend + camping. Tu tiens toute la course sans repasser au stand.</span>
+              <span class="t" style="font-size: 28px; font-weight: 800;">[PRIX]</span>
+            </a>
+          </div>
+        </section>
+
+        <section style="grid-column: span 5; position: relative; background: #000; border: 1px solid #262626; border-radius: 16px; padding: 26px; overflow: hidden;">
+          <div class="dots-g" style="position: absolute; inset: 0; opacity: .25;"></div>
+          <p style="position: relative; margin: 0 0 4px; font-size: 12px; letter-spacing: .12em; color: #888;">TRACÉ DU SITE</p>
+          <h2 class="t" style="position: relative; margin: 0 0 8px; font-size: 52px; font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 1;">Le circuit</h2>
+          <svg viewBox="0 0 400 260" role="img" aria-label="Plan du site : scène, bar, food, camping, entrée" style="position: relative; width: 100%; height: auto;">
+            <path d="M60 200 C 20 160, 40 80, 110 70 L 250 40 C 330 25, 380 80, 340 130 C 310 170, 250 150, 220 180 C 190 215, 120 240, 60 200 Z" fill="none" stroke="#fff" stroke-width="14" stroke-linejoin="round"></path>
+            <path d="M60 200 C 20 160, 40 80, 110 70 L 250 40" fill="none" stroke="#FF5500" stroke-width="5"></path>
+            <path d="M250 40 C 330 25, 380 80, 340 130" fill="none" stroke="#00FF97" stroke-width="5"></path>
+            <path d="M340 130 C 310 170, 250 150, 220 180 C 190 215, 120 240, 60 200" fill="none" stroke="#FC8AFD" stroke-width="5"></path>
+            <rect x="52" y="186" width="22" height="10" fill="#fff"></rect>
+            <circle cx="110" cy="70" r="9" fill="#FF5500"></circle><text x="110" y="52" text-anchor="middle" fill="#fff" font-family="Barlow Condensed" font-weight="800" font-size="20">SCÈNE</text>
+            <circle cx="345" cy="70" r="9" fill="#00FF97"></circle><text x="370" y="58" text-anchor="end" fill="#fff" font-family="Barlow Condensed" font-weight="800" font-size="20">BAR</text>
+            <circle cx="235" cy="170" r="9" fill="#FC8AFD"></circle><text x="250" y="205" text-anchor="middle" fill="#fff" font-family="Barlow Condensed" font-weight="800" font-size="20">FOOD</text>
+            <circle cx="40" cy="130" r="9" fill="#F1FF00"></circle><text x="14" y="112" fill="#fff" font-family="Barlow Condensed" font-weight="800" font-size="20">CAMPING</text>
+            <text x="100" y="236" fill="#aaa" font-family="Inter" font-size="12">ENTRÉE / LIGNE D'ARRIVÉE</text>
+          </svg>
+        </section>
+      </div>
+
+      <!-- Infos stand -->
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px;">
+        <a href="#" style="text-decoration: none; color: #fff; background: #111; border: 1px solid #262626; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 12px; letter-spacing: .12em; color: #00BFFF;">ACCÈS</span><span class="t" style="font-size: 32px; font-weight: 800; line-height: 1;">Venir au circuit</span><span style="font-size: 14px; color: #aaa;">Covoit', navettes, parkings.</span></a>
+        <a href="#" style="text-decoration: none; color: #fff; background: #111; border: 1px solid #262626; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 12px; letter-spacing: .12em; color: #F1FF00;">PADDOCK</span><span class="t" style="font-size: 32px; font-weight: 800; line-height: 1;">Camping</span><span style="font-size: 14px; color: #aaa;">Horaires, règles, sortie définitive.</span></a>
+        <a href="#" style="text-decoration: none; color: #fff; background: #111; border: 1px solid #262626; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 12px; letter-spacing: .12em; color: #FF5500;">RÈGLEMENT</span><span class="t" style="font-size: 32px; font-weight: 800; line-height: 1;">Objets interdits</span><span style="font-size: 14px; color: #aaa;">Ce qui reste au garage.</span></a>
+        <a href="#" style="text-decoration: none; color: #fff; background: #111; border: 1px solid #262626; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 12px; letter-spacing: .12em; color: #FC8AFD;">PRÉVENTION</span><span class="t" style="font-size: 32px; font-weight: 800; line-height: 1;">Safe place</span><span style="font-size: 14px; color: #aaa;">Écoute, eau, bouchons d'oreilles.</span></a>
+      </div>
+
+      <!-- Partenaires -->
+      <section style="background: #111; border: 1px solid #262626; border-radius: 16px; padding: 22px 24px;">
+        <p style="margin: 0 0 14px; font-size: 12px; letter-spacing: .12em; color: #888;">PARTENAIRES TECHNIQUES</p>
+        <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px;">
+          <div style="height: 70px; border: 1px dashed #444; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #888;">[LOGO]</div>
+          <div style="height: 70px; border: 1px dashed #444; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #888;">[LOGO]</div>
+          <div style="height: 70px; border: 1px dashed #444; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #888;">[LOGO]</div>
+          <div style="height: 70px; border: 1px dashed #444; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #888;">[LOGO]</div>
+          <div style="height: 70px; border: 1px dashed #444; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #888;">[LOGO]</div>
+          <div style="height: 70px; border: 1px dashed #444; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #888;">[LOGO]</div>
+        </div>
+      </section>
+
+      <footer style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; padding-top: 10px;">
+        <div class="checker-w" aria-hidden="true" style="height: 24px; width: 240px;"></div>
+        <span style="font-size: 13px; color: #888;">Speed Festival · une bande de potes depuis 2021 · <a href="#">Mentions légales</a> · <a href="#">Contact</a></span>
+      </footer>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3200}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
