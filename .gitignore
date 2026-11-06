@@ -4,3 +4,6 @@
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Back-office : données privées (comptes, brouillons, sauvegardes)
+admin/data/

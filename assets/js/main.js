@@ -1,5 +1,6 @@
 /* Speed Festival — scripts du site
-   Tous les contenus viennent des fichiers du dossier content/ (modifiables depuis le back-office Pages CMS).
+   Tous les contenus viennent des fichiers du dossier content/ (modifiables depuis le back-office admin/).
+   Mode aperçu (?apercu=1) : les brouillons non publiés du back-office s'affichent à la place.
    Ce script les charge puis remplit la page : textes, line-up, billetterie, infos, replay, partenaires, ordre des blocs. */
 (function () {
   'use strict';
@@ -17,10 +18,17 @@
   function img(p) { return p ? String(p).replace(/^\/+/, '') : ''; }
   function get(obj, path) { return path.split('.').reduce(function (o, k) { return o == null ? undefined : o[k]; }, obj); }
   function $(id) { return document.getElementById(id); }
+  /* Liens saisis dans le back-office : uniquement http(s), mailto, tel, ancres et chemins du site */
+  function url(u) {
+    u = String(u || '').trim();
+    if (/^javascript:|^data:|^vbscript:/i.test(u)) return '';
+    return /^(https?:\/\/|mailto:|tel:|#|\/|[\w.-]+(\/|\.html|$))/i.test(u) ? u : '';
+  }
+  var APERCU = /[?&]apercu=1(&|$)/.test(location.search);
 
   function charger() {
     return Promise.all(FICHIERS.map(function (f) {
-      return fetch('content/' + f + '.json', { cache: 'no-cache' })
+      return fetch(APERCU ? 'admin/api.php?a=apercu&f=' + f : 'content/' + f + '.json', { cache: 'no-cache', credentials: 'same-origin' })
         .then(function (r) { if (!r.ok) throw new Error(f + ' : ' + r.status); return r.json(); });
     })).then(function (list) {
       var d = {};
@@ -38,6 +46,7 @@
     });
     document.querySelectorAll('[data-href]').forEach(function (el) {
       var v = get(d, el.getAttribute('data-href'));
+      v = url(v);
       if (v) { el.href = v; if (/^https?:/.test(v)) { el.target = '_blank'; el.rel = 'noopener'; } }
     });
     document.querySelectorAll('[data-src]').forEach(function (el) {
@@ -69,13 +78,13 @@
     s.style.background = fond;
     if (b.type === 'annonce') {
       s.innerHTML = '<div class="bl-in"><p class="t bl-annonce">' + txt(b.texte) + '</p>' +
-        (b.bouton_texte ? '<a class="t bl-btn" href="' + esc(b.bouton_lien || '#') + '">' + esc(b.bouton_texte) + '</a>' : '') + '</div>';
+        (b.bouton_texte ? '<a class="t bl-btn" href="' + esc(url(b.bouton_lien) || '#') + '">' + esc(b.bouton_texte) + '</a>' : '') + '</div>';
     } else {
       s.innerHTML = '<div class="bl-in' + (b.image ? ' has-img' : '') + '"><div class="bl-txt">' +
         (b.surtitre ? '<p class="bl-kicker">' + esc(b.surtitre) + '</p>' : '') +
         (b.titre ? '<h2 class="t bl-title">' + esc(b.titre) + '</h2>' : '') +
         (b.texte ? '<p class="bl-p">' + txt(b.texte) + '</p>' : '') +
-        (b.bouton_texte ? '<a class="t bl-btn" href="' + esc(b.bouton_lien || '#') + '">' + esc(b.bouton_texte) + '</a>' : '') +
+        (b.bouton_texte ? '<a class="t bl-btn" href="' + esc(url(b.bouton_lien) || '#') + '">' + esc(b.bouton_texte) + '</a>' : '') +
         '</div>' + (b.image ? '<div class="bl-img"><img src="' + esc(img(b.image)) + '" alt="" class="ph"></div>' : '') + '</div>';
     }
     return s;
@@ -152,7 +161,7 @@
       : '<div class="am-ph" aria-hidden="true"><span class="am-ph-init">' + esc(initials(a.name)) + '</span><span class="am-ph-note">PHOTO PRESSE À VENIR</span></div>';
     var listen = $('am-listen');
     if (info.sans_ecoute) listen.innerHTML = '';
-    else if (info.ecoute) listen.innerHTML = '<a class="am-listen-btn t" href="' + esc(info.ecoute) + '" target="_blank" rel="noopener">' + PLAY + 'Écouter sur les plateformes <span aria-hidden="true">↗</span></a>';
+    else if (url(info.ecoute)) listen.innerHTML = '<a class="am-listen-btn t" href="' + esc(url(info.ecoute)) + '" target="_blank" rel="noopener">' + PLAY + 'Écouter sur les plateformes <span aria-hidden="true">↗</span></a>';
     else listen.innerHTML = '<span class="am-listen-btn t is-soon" aria-disabled="true">' + PLAY + 'Écouter sur les plateformes</span><span class="am-soon">Lien d’écoute bientôt disponible</span>';
     am.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -170,7 +179,7 @@
   var STATUTS = { bientot: 'BIENTÔT', complet: 'COMPLET' };
   function billetterie(b) {
     var pass = b.pass || [], lienGen = b.lien || '#billetterie';
-    function lien(p) { return p.lien || lienGen; }
+    function lien(p) { return url(p.lien) || url(lienGen) || '#billetterie'; }
     function ext(u) { return /^https?:/.test(u) ? ' target="_blank" rel="noopener"' : ''; }
     function prix(p) { return p.statut === 'complet' ? 'COMPLET' : (p.prix ? esc(p.prix) : (STATUTS[p.statut] || 'BIENTÔT')); }
     var vedettes = pass.filter(function (p) { return p.en_vedette; }), autres = pass.filter(function (p) { return !p.en_vedette; });
@@ -254,9 +263,9 @@
     }
     (c.lignes || []).forEach(function (r) { h += '<div class="im-row"><span class="im-k">' + esc(r.titre) + '</span><div class="im-v">' + txt(r.texte) + '</div></div>'; });
     if (c.interdits && c.interdits.length) h += '<div class="im-ban">' + c.interdits.map(function (t) { return '<div>' + NO + '<span>' + esc(t) + '</span></div>'; }).join('') + '</div>';
-    if (c.bouton_texte && c.bouton_lien) {
+    if (c.bouton_texte && url(c.bouton_lien)) {
       var interne = c.bouton_lien.charAt(0) === '#';
-      h += '<div class="im-actions"><a class="im-btn' + (interne ? ' im-go' : '') + '" href="' + esc(c.bouton_lien) + '"' + (interne ? '' : ' target="_blank" rel="noopener"') + '>' + esc(c.bouton_texte) + '</a></div>';
+      h += '<div class="im-actions"><a class="im-btn' + (interne ? ' im-go' : '') + '" href="' + esc(url(c.bouton_lien)) + '"' + (interne ? '' : ' target="_blank" rel="noopener"') + '>' + esc(c.bouton_texte) + '</a></div>';
     }
     return h;
   }
@@ -290,7 +299,7 @@
     if (logos.length) {
       $('logos').innerHTML = logos.map(function (l) {
         var inner = l.logo ? '<img src="' + esc(img(l.logo)) + '" alt="' + esc(l.nom || 'Partenaire') + '">' : '<span>' + esc(l.nom) + '</span>';
-        return l.lien ? '<a class="logo-cell" href="' + esc(l.lien) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="logo-cell">' + inner + '</div>';
+        return url(l.lien) ? '<a class="logo-cell" href="' + esc(url(l.lien)) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="logo-cell">' + inner + '</div>';
       }).join('');
     }
     var mail = $('partner-mail');
@@ -313,6 +322,12 @@
     infos(d.infos);
     partenaires(d.partenaires);
     document.documentElement.classList.add('contenus-ok');
+    if (APERCU) {
+      var ban = document.createElement('div');
+      ban.className = 'apercu-ban';
+      ban.innerHTML = 'APERÇU · modifications non publiées <a href="admin/">Retour au back-office</a>';
+      document.body.appendChild(ban);
+    }
     try { var t = location.hash && document.querySelector(location.hash); if (t) t.scrollIntoView(); } catch (e) {}
   }).catch(function (err) {
     console.error('Speed : contenus non chargés', err);

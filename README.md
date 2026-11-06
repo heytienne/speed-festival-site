@@ -6,35 +6,38 @@ Direction artistique « Grand Prix » : affiche orange, grille de départ, menu 
 
 ## Voir le site
 
-- En ligne (GitHub Pages) : https://heytienne.github.io/speed-festival-site/
-- En local : le site charge ses contenus depuis `content/`, il faut donc le servir via un petit serveur web (ouvrir `index.html` directement ne suffit pas).
+- Version de démonstration (GitHub Pages, sans back-office) : https://heytienne.github.io/speed-festival-site/
+- En local : le site charge ses contenus depuis `content/`, il faut le servir via un serveur web. Avec PHP installé : `php -S localhost:8766` à la racine, puis http://localhost:8766 (site) et http://localhost:8766/admin/ (back-office).
 
-## Modifier les contenus : le back-office
+## Le back-office (`admin/`)
 
-Les contenus se modifient sans toucher au code, avec **Pages CMS** :
+Back-office sur mesure, hébergé avec le site, sans service externe ni base de données : PHP 7.4 ou plus, les contenus restent dans les fichiers `content/*.json`.
 
-1. Aller sur https://app.pagescms.org et se connecter avec son compte GitHub.
-2. Installer l'application Pages CMS sur le dépôt `speed-festival-site` (une seule fois).
-3. Ouvrir le dépôt : les rubriques du back-office apparaissent à gauche.
-4. Modifier, puis **Enregistrer** : la modification part sur GitHub et le site se met à jour en 1 à 2 minutes.
+| Écran | Ce qu'on y fait |
+|---|---|
+| Tableau de bord | État du site, chiffres clés, liste « À compléter avant l'annonce », dernières modifications |
+| Pages & blocs | Ordre des blocs de l'accueil (glisser-déposer), afficher / masquer, ajouter un bloc texte + image ou un bandeau annonce, textes de chaque section, bandeau & en-tête, pied de page |
+| Programmation | Tableau des artistes filtrable par jour ; fiche : photo presse, jour, scène, horaires, présentation, magic link d'écoute, publié ou masqué |
+| Billetterie | Lien de vente, pass (prix, couleur, statut, lien d'achat, grande plaque) avec aperçu des plaques en direct |
+| Infos pratiques | Cartes « Briefing pilotes » et contenu complet de leurs popups (horaires, rubriques, objets interdits, bouton) |
+| Médias | Photos du Replay (envoi direct, taille dans la mosaïque, étiquette) et bibliothèque d'images |
+| Partenaires | Logos, liens, e-mail partenariats |
+| Réglages | Dates, compte à rebours, pied de page, équipe (comptes), mot de passe, sauvegardes |
 
-| Rubrique | Ce qu'on y fait | Fichier |
-|---|---|---|
-| Pages & blocs | Ordre des blocs de l'accueil, afficher / masquer, ajouter un bloc texte ou un bandeau annonce, textes du bloc bénévoles | `content/accueil.json` |
-| Programmation | Artistes : jour, scène, horaires, photo presse, présentation, magic link d'écoute, publié ou non | `content/programmation.json` |
-| Billetterie | Lien de billetterie, pass (prix, couleur, statut en vente / bientôt / complet, lien d'achat) | `content/billetterie.json` |
-| Infos pratiques | Cartes « Briefing pilotes » et contenu de leurs popups | `content/infos.json` |
-| Médias (replay) | Photos de la mosaïque Replay | `content/replay.json` |
-| Partenaires | Logos, liens, e-mail partenariats | `content/partenaires.json` |
-| Réglages | Dates, lieu, accroche, date du compte à rebours, liens du pied de page | `content/general.json` |
+Fonctionnement :
+- **Brouillon puis publication** : chaque modification est enregistrée automatiquement en brouillon (invisible du public). Le bouton **Aperçu** ouvre le site avec les brouillons ; **Publier** met tout en ligne d'un coup ; **Annuler** revient à la version publiée.
+- **Sauvegardes** : une copie des contenus est gardée à chaque publication (les 30 dernières). Réglages → Sauvegardes → « Restaurer en brouillon », puis vérifier et publier.
+- Dans les textes, `[[…]]` s'affiche surligné en jaune « à compléter » sur le site.
+- Sécurité : comptes avec mot de passe chiffré (10 caractères minimum), blocage 15 min après 5 essais ratés, jeton anti-falsification sur chaque action, liens filtrés, images vérifiées (JPG, PNG, WebP, GIF, 12 Mo max). Les données privées (comptes, brouillons, sauvegardes, journal) sont dans `admin/data/`, interdit d'accès depuis le web.
 
-Astuces :
-- Dans les textes, `[[…]]` s'affiche surligné en jaune (« à compléter »).
-- Les artistes sont triés automatiquement par heure de passage (format `23h30`).
-- Un prix vide affiche « BIENTÔT ».
-- Pour inviter un autre membre de l'équipe : l'ajouter comme collaborateur du dépôt GitHub (ou l'inviter depuis Pages CMS).
+## Mise en ligne chez OVH
 
-La configuration du back-office est dans `.pages.yml`.
+1. **PHP** : dans l'espace client OVH (Hébergements → Informations générales), vérifier que la version PHP est 7.4 ou plus (8.2 / 8.3 recommandé).
+2. **HTTPS** : activer le certificat SSL gratuit de l'hébergement si ce n'est pas déjà fait (indispensable pour se connecter de façon sûre).
+3. **Envoyer les fichiers par FTP** (FileZilla, identifiants FTP de l'espace client) dans le dossier `www/` : `index.html`, `assets/`, `content/`, `admin/`. Ne pas envoyer `maquettes/`, `README.md`, `.git/`, `.claude/`. ⚠️ Cela remplace le site actuel : garder une copie de l'ancien `www/` avant.
+4. **Tout de suite après l'envoi**, ouvrir https://speedfestival.fr/admin/ et créer le compte administrateur : le premier compte se crée librement, il faut donc le faire immédiatement. Les autres membres s'ajoutent ensuite dans Réglages → Équipe.
+
+Ensuite, **les contenus vivent sur le serveur** : ne plus renvoyer `content/` ni `admin/data/` par FTP, sinon les modifications faites dans le back-office seraient écrasées. Pour mettre à jour le code du site plus tard, n'envoyer que `index.html`, `assets/css`, `assets/js` et `admin/` (sans `admin/data/`).
 
 ## Structure
 
@@ -42,9 +45,9 @@ La configuration du back-office est dans `.pages.yml`.
 |---|---|
 | `index.html` | La page d'accueil (une seule page, responsive mobile → grand écran) |
 | `content/` | Les contenus du site (modifiés par le back-office) |
-| `assets/css/style.css` | Styles |
-| `assets/js/main.js` | Charge les contenus et construit la page : line-up et fiches artistes, billetterie, popups infos, replay + visionneuse, compte à rebours, ordre des blocs |
-| `assets/img/` | Logos, éléments de la charte, photos (les images envoyées depuis le back-office arrivent ici) |
+| `assets/css/style.css`, `assets/js/main.js` | Styles et script du site (charge les contenus et construit la page ; `?apercu=1` affiche les brouillons) |
+| `assets/img/` | Logos, éléments de la charte, photos ; les images envoyées depuis le back-office vont dans `assets/img/uploads/` |
+| `admin/` | Back-office : `index.php` (connexion), `api.php` (actions), `lib.php`, `assets/` (interface) ; `data/` est créé sur le serveur |
 | `maquettes/` | Sources des maquettes de travail (canevas Claude), dont celles du back-office |
 
 ## À compléter
