@@ -78,7 +78,7 @@
     annonce: { t: 'Bandeau annonce', ic: '📣', libre: true, d: 'Un message court et voyant, avec un bouton.' }
   };
   const TPL = {
-    artiste: () => ({ nom: 'Nouvel artiste', jour: UI.jour === 'sam' ? 'sam' : 'ven', scene: 'arena', debut: '20h00', fin: '21h00', photo: '', bio: '', ecoute: '', sans_ecoute: false, publie: false }),
+    artiste: () => ({ nom: 'Nouvel artiste', jour: UI.jour === 'sam' ? 'sam' : 'ven', scene: 'arena', debut: '20h00', fin: '21h00', style: '', photo: '', bio: '', ecoute: '', sans_ecoute: false, publie: false }),
     pass: () => ({ nom: 'Nouveau pass', prix: '', couleur: 'jaune', en_vedette: false, statut: 'bientot', bandeau: '→ ', bandeau_droite: '', lien: '' }),
     carte: () => ({ titre: 'Nouvelle carte', resume: '', photo: '', couleur: 'bleu', pictogramme: 'rond', texte_pictogramme: '?', intro: '', lignes: [], horaires: [], interdits: [], bouton_texte: '', bouton_lien: '' }),
     ligne: () => ({ titre: '', texte: '' }), horaire: () => ({ jour: '', ouverture: '', premier_depart: '', fermeture: '' }), interdit: () => '',
@@ -320,6 +320,7 @@
     const A = S.c.programmation.artistes || [], i = UI.sel.prog, a = A[i];
     const P = 'artistes.' + i + '.';
     const editor = a ? card('Fiche artiste', imgField('programmation', P + 'photo', 'Photo presse', true) + inp('programmation', P + 'nom', 'Nom', { req: true }) +
+        inp('programmation', P + 'style', 'Style musical', { ph: 'House · UK garage', hint: 'Affiché sous le nom dans la grille et dans la fiche. Vide : rien n’est affiché.' }) +
         seg('programmation', P + 'jour', 'Jour', [['ven', S.c.programmation.vendredi || 'Vendredi'], ['sam', S.c.programmation.samedi || 'Samedi']]) +
         seg('programmation', P + 'scene', 'Scène', [['arena', 'Speed Arena', '#FF5500'], ['boiler', 'Boiler Vroom', '#00FF97']]) +
         `<div class="g2">${inp('programmation', P + 'debut', 'Début', { req: true, pattern: TIME, ph: '23h30' })}${inp('programmation', P + 'fin', 'Fin', { req: true, pattern: TIME, ph: '00h30' })}</div>` +

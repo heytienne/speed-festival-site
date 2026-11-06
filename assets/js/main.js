@@ -122,7 +122,7 @@
   function slot(a) {
     var sc = SCENES[a.scene] || SCENES.arena;
     return { name: a.nom, scene: SCENES[a.scene] ? a.scene : 'arena', stage: sc.stage, color: sc.color, t0: minutes(a.debut),
-      start: heure(a.debut), end: heure(a.fin), time: (a.debut || '') + ' → ' + (a.fin || ''), info: a };
+      start: heure(a.debut), end: heure(a.fin), time: (a.debut || '') + ' → ' + (a.fin || ''), style: String(a.style || '').trim(), info: a };
   }
   /* Une ligne par set : heure de début / fin, nom, pastille de scène. Séparateur « minuit » avant le premier set après 00h. */
   function ligne(day) { var minuit = false; return function (a, i) {
@@ -132,7 +132,8 @@
     return '<li>' + sep + '<button type="button" class="lu-row" data-day="' + day + '" data-i="' + i + '" aria-haspopup="dialog" aria-label="' + esc(a.name + ', ' + a.time + ', ' + a.stage) + ' : voir la fiche artiste">' +
       '<span class="t lu-time"><b>' + esc(a.start) + '</b><span>' + esc(a.end) + '</span></span>' +
       '<span class="lu-who"><span class="t lu-name">' + esc(a.name) + '</span>' +
-        '<span class="lu-stg" style="background:' + a.color + ';"><i></i>' + a.stage + '</span></span>' +
+        '<span class="lu-meta"><span class="lu-stg" style="background:' + a.color + ';"><i></i>' + a.stage + '</span>' +
+        (a.style ? '<span class="lu-style">' + esc(a.style) + '</span>' : '') + '</span></span>' +
       '<span class="t lu-go" aria-hidden="true"><span class="lu-go-l">FICHE&#160;</span>→</span></button></li>';
   }; }
   function court(label, nom) { var m = String(label || '').match(/^\s*(\S{1,3})\S*\s+(\S+)/); return (m ? m[1] + ' ' + m[2] : label || '') + (nom ? ' · ' + nom : ''); }
@@ -175,6 +176,8 @@
     $('am-name').textContent = a.name;
     $('am-day').textContent = JOURS[dayKey].label || '';
     $('am-time').textContent = a.time;
+    $('am-style').textContent = a.style;
+    $('am-style').hidden = !a.style;
     $('am-stage').textContent = a.stage;
     $('am-bio').innerHTML = txt(info.bio || 'Présentation de l’artiste à venir.');
     $('am-photo').innerHTML = info.photo
