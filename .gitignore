@@ -7,3 +7,7 @@ desktop.ini
 
 # Back-office : données privées (comptes, brouillons, sauvegardes)
 admin/data/
+
+# Version de test du back-office (à envoyer par FTP, contient des comptes)
+test-backoffice/
+test-backoffice-IDENTIFIANTS.txt

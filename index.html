@@ -130,29 +130,28 @@
         <p style="margin: 0; max-width: 380px; font-size: clamp(15px, 1.5vw, 17px); line-height: 1.5;" data-c="programmation.intro">Ouverture du site à 18h, extinction des moteurs à 3h. Entre les deux : 15 départs sur deux circuits.</p>
       </div>
 
-      <!-- Légende des scènes -->
-      <div aria-label="Code couleur des scènes" style="display: flex; flex-wrap: wrap; gap: 12px 16px; margin-bottom: clamp(30px, 4vw, 50px);">
-        <div style="display: flex; align-items: center; gap: 14px; background: #000; color: #fff; border-radius: 10px; padding: 10px 18px 10px 10px;">
-          <span style="width: 46px; height: 46px; flex: none; border-radius: 8px; background: #FF5500; border: 3px solid #fff;"></span>
-          <span><span class="t" style="display: block; font-size: clamp(24px, 2.4vw, 30px); font-weight: 900; font-style: italic; line-height: 1;">SPEED ARENA</span><span style="font-size: 13px; color: #bbb;">Le compteur de vitesse</span></span>
+      <!-- Commandes : onglets jour (mobile) + filtre par scène (code couleur) -->
+      <div class="lu-ctrl">
+        <div class="lu-tabs" role="tablist" aria-label="Choisir le jour">
+          <button type="button" role="tab" class="t lu-tab" id="lu-tab-ven" data-day="ven" aria-selected="true" aria-controls="lu-day-ven">Ven 28 · Qualifs</button>
+          <button type="button" role="tab" class="t lu-tab" id="lu-tab-sam" data-day="sam" aria-selected="false" aria-controls="lu-day-sam">Sam 29 · Course</button>
         </div>
-        <div style="display: flex; align-items: center; gap: 14px; background: #000; color: #fff; border-radius: 10px; padding: 10px 18px 10px 10px;">
-          <span style="width: 46px; height: 46px; flex: none; border-radius: 8px; background: #00FF97; border: 3px solid #fff;"></span>
-          <span><span class="t" style="display: block; font-size: clamp(24px, 2.4vw, 30px); font-weight: 900; font-style: italic; line-height: 1;">BOILER VROOM</span><span style="font-size: 13px; color: #bbb;">Son 360° autour de la Speed Mobile</span></span>
+        <div class="lu-chips" role="group" aria-label="Filtrer par scène">
+          <button type="button" class="t lu-chip" data-scene="all" aria-pressed="true">Tout</button>
+          <button type="button" class="t lu-chip" data-scene="arena" aria-pressed="false"><span class="lu-dot" style="background: #FF5500;"></span>Speed Arena</button>
+          <button type="button" class="t lu-chip" data-scene="boiler" aria-pressed="false"><span class="lu-dot" style="background: #00FF97;"></span>Boiler Vroom</button>
         </div>
       </div>
 
-      <div class="grid2">
-        <!-- Vendredi -->
-        <div style="display: flex; flex-direction: column; gap: clamp(18px, 2.2vw, 28px); min-width: 0;">
-          <div class="t" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: clamp(30px, 3vw, 40px); font-weight: 900; text-transform: uppercase;"><span style="background: #000; color: #FF5500; padding: 2px 14px; border-radius: 4px;" data-c="programmation.vendredi">VENDREDI 28</span> <span data-c="programmation.vendredi_nom">Qualifs</span></div>
-          <div id="ven-list" style="display: contents;"></div>
+      <!-- Une colonne par jour sur desktop, un jour à la fois (onglets) sur mobile -->
+      <div class="lu-days" data-day="ven">
+        <div class="lu-day" id="lu-day-ven" role="tabpanel" aria-labelledby="lu-tab-ven" data-day="ven">
+          <h3 class="t lu-dayh"><b data-c="programmation.vendredi">VENDREDI 28</b> <span data-c="programmation.vendredi_nom">Qualifs</span></h3>
+          <ul class="lu-list" id="ven-list"></ul>
         </div>
-
-        <!-- Samedi décalé (aligné sur mobile) -->
-        <div class="sam-offset" style="display: flex; flex-direction: column; gap: clamp(18px, 2.2vw, 28px); min-width: 0;">
-          <div class="t" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: clamp(30px, 3vw, 40px); font-weight: 900; text-transform: uppercase;"><span style="background: #000; color: #FF5500; padding: 2px 14px; border-radius: 4px;" data-c="programmation.samedi">SAMEDI 29</span> <span data-c="programmation.samedi_nom">Course</span></div>
-          <div id="sam-list" style="display: contents;"></div>
+        <div class="lu-day" id="lu-day-sam" role="tabpanel" aria-labelledby="lu-tab-sam" data-day="sam">
+          <h3 class="t lu-dayh"><b data-c="programmation.samedi">SAMEDI 29</b> <span data-c="programmation.samedi_nom">Course</span></h3>
+          <ul class="lu-list" id="sam-list"></ul>
         </div>
       </div>
       <div style="display: flex; justify-content: center; margin-top: clamp(36px, 4vw, 56px);">

@@ -70,8 +70,15 @@ function is_https(): bool {
 }
 function start_session(): void {
     if (session_status() === PHP_SESSION_ACTIVE) return;
-    session_name('speed_bo');
-    session_set_cookie_params(['lifetime' => 0, 'path' => '/', 'httponly' => true, 'samesite' => 'Strict', 'secure' => is_https()]);
+    /* Un cookie propre à chaque installation (ex. /admin/ et /test-backoffice/admin/ ne partagent pas la connexion) */
+    $path = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/admin/x')), '/') . '/';
+    session_name('speed_bo_' . substr(hash('sha256', __DIR__), 0, 8));
+    if (!is_dir(DATA_DIR . '/sessions')) mkdir(DATA_DIR . '/sessions', 0700, true);
+    session_save_path(DATA_DIR . '/sessions'); /* sessions rangées avec les données privées de cette installation */
+    ini_set('session.gc_probability', '1');
+    ini_set('session.gc_divisor', '100');
+    ini_set('session.gc_maxlifetime', '28800');
+    session_set_cookie_params(['lifetime' => 0, 'path' => $path, 'httponly' => true, 'samesite' => 'Strict', 'secure' => is_https()]);
     session_start();
     if (empty($_SESSION['csrf'])) $_SESSION['csrf'] = bin2hex(random_bytes(24));
 }

@@ -117,30 +117,51 @@
   /* ---------- Grille de départ ---------- */
   var JOURS = {};
   function minutes(h) { var p = String(h || '0').toLowerCase().split(/[h:]/); var m = (+p[0] || 0) * 60 + (+p[1] || 0); return m < 12 * 60 ? m + 1440 : m; }
+  var luScene = 'all';
+  function heure(h) { return String(h || '').toUpperCase(); }
   function slot(a) {
-    var sc = SCENES[a.scene] || SCENES.arena, p = String(a.debut || '').toLowerCase().split(/[h:]/);
-    return { name: a.nom, stage: sc.stage, color: sc.color, h: (p[0] || '--') + 'H', m: p[1] || '00', time: (a.debut || '') + ' → ' + (a.fin || ''),
-      size: (a.nom || '').length > 14 ? 'clamp(26px, 2.6vw, 36px)' : 'clamp(32px, 3.4vw, 46px)', info: a };
+    var sc = SCENES[a.scene] || SCENES.arena;
+    return { name: a.nom, scene: SCENES[a.scene] ? a.scene : 'arena', stage: sc.stage, color: sc.color, t0: minutes(a.debut),
+      start: heure(a.debut), end: heure(a.fin), time: (a.debut || '') + ' → ' + (a.fin || ''), info: a };
   }
-  function plaque(day) { return function (a, i) {
-    return '<button type="button" class="artist-btn' + (i % 2 ? ' stg' : '') + '" data-day="' + day + '" data-i="' + i + '" aria-haspopup="dialog" aria-label="' + esc(a.name) + ' : voir la fiche artiste">' +
-      '<div style="display:flex;align-items:stretch;border:4px solid #000;box-shadow:0 0 0 6px ' + a.color + ';border-radius:6px;background:' + a.color + ';overflow:hidden;">' +
-      '<div class="t" style="width:clamp(78px,8vw,104px);flex:none;background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;line-height:.9;">' +
-        '<span style="font-size:clamp(30px,3vw,40px);font-weight:900;font-style:italic;">' + esc(a.h) + '</span>' +
-        '<span style="font-size:clamp(18px,1.8vw,22px);font-weight:800;color:' + a.color + ';">' + esc(a.m) + '</span></div>' +
-      '<div style="flex:1;min-width:0;display:flex;flex-direction:column;">' +
-        '<div class="t plaque-u" style="flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:' + a.size + ';line-height:1;font-weight:900;font-style:italic;text-transform:uppercase;padding:14px 10px 16px;">' + esc(a.name) + '</div>' +
-        '<div class="bar" style="background:#000;color:' + a.color + ';padding:6px 14px;font-size:clamp(12px,1.2vw,15px);font-weight:600;"><span>→ ' + a.stage + '</span><span>' + esc(a.time) + '</span></div>' +
-      '</div></div></button>';
+  /* Une ligne par set : heure de début / fin, nom, pastille de scène. Séparateur « minuit » avant le premier set après 00h. */
+  function ligne(day) { var minuit = false; return function (a, i) {
+    if (luScene !== 'all' && a.scene !== luScene) return '';
+    var sep = '';
+    if (!minuit && a.t0 >= 1440) { minuit = true; sep = '<div class="t lu-mid" aria-hidden="true">MINUIT</div>'; }
+    return '<li>' + sep + '<button type="button" class="lu-row" data-day="' + day + '" data-i="' + i + '" aria-haspopup="dialog" aria-label="' + esc(a.name + ', ' + a.time + ', ' + a.stage) + ' : voir la fiche artiste">' +
+      '<span class="t lu-time"><b>' + esc(a.start) + '</b><span>' + esc(a.end) + '</span></span>' +
+      '<span class="lu-who"><span class="t lu-name">' + esc(a.name) + '</span>' +
+        '<span class="lu-stg" style="background:' + a.color + ';"><i></i>' + a.stage + '</span></span>' +
+      '<span class="t lu-go" aria-hidden="true"><span class="lu-go-l">FICHE&#160;</span>→</span></button></li>';
   }; }
+  function court(label, nom) { var m = String(label || '').match(/^\s*(\S{1,3})\S*\s+(\S+)/); return (m ? m[1] + ' ' + m[2] : label || '') + (nom ? ' · ' + nom : ''); }
+  function luRender() {
+    ['ven', 'sam'].forEach(function (day) { $(day + '-list').innerHTML = (JOURS[day] ? JOURS[day].list : []).map(ligne(day)).join(''); });
+  }
+  function luDay(day) {
+    document.querySelector('.lu-days').setAttribute('data-day', day);
+    document.querySelectorAll('.lu-tab').forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-day') === day)); });
+  }
   function grille(p) {
     ['ven', 'sam'].forEach(function (day) {
       var list = (p.artistes || []).filter(function (a) { return a.jour === day && a.nom && a.publie !== false; })
         .sort(function (x, y) { return minutes(x.debut) - minutes(y.debut); }).map(slot);
       JOURS[day] = { list: list, label: day === 'ven' ? p.vendredi : p.samedi };
-      $(day + '-list').innerHTML = list.map(plaque(day)).join('');
+      $('lu-tab-' + day).textContent = court(day === 'ven' ? p.vendredi : p.samedi, day === 'ven' ? p.vendredi_nom : p.samedi_nom);
     });
+    luRender();
   }
+  document.querySelectorAll('.lu-tab').forEach(function (t) {
+    t.addEventListener('click', function () { luDay(t.getAttribute('data-day')); });
+  });
+  document.querySelectorAll('.lu-chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      luScene = c.getAttribute('data-scene');
+      document.querySelectorAll('.lu-chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+      luRender();
+    });
+  });
 
   /* ---------- Popup fiche artiste ---------- */
   var am = $('artist-modal'), amOpener = null;
@@ -169,7 +190,7 @@
   }
   function closeArtist() { am.hidden = true; document.body.style.overflow = ''; if (amOpener) amOpener.focus(); }
   $('grille').addEventListener('click', function (e) {
-    var b = e.target.closest('.artist-btn'); if (b) openArtist(b.getAttribute('data-day'), +b.getAttribute('data-i'), b);
+    var b = e.target.closest('.lu-row'); if (b) openArtist(b.getAttribute('data-day'), +b.getAttribute('data-i'), b);
   });
   $('am-close').addEventListener('click', closeArtist);
   am.addEventListener('click', function (e) { if (e.target === am) closeArtist(); });
