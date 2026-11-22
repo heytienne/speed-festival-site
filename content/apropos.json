@@ -1,0 +1,33 @@
+{
+  "surtitre": "→ LE PROJET",
+  "titre": "Le tour de piste",
+  "intro": "En 2021, une bande de potes de Saint-Paul-du-Bois s'est mise en tête de monter un festival électro dans le Maine-et-Loire. Lunettes de vitesse sur le nez, elle n'a jamais levé le pied depuis.",
+  "etapes": [
+    { "annee": "2021", "titre": "Le départ", "texte": "Une bande de potes, un terrain à Saint-Paul-du-Bois et la première édition.", "couleur": "orange" },
+    { "annee": "2022", "titre": "[[À compléter]]", "texte": "[[Ce qui a changé cette année-là]]", "couleur": "jaune" },
+    { "annee": "2023", "titre": "[[À compléter]]", "texte": "[[Ce qui a changé cette année-là]]", "couleur": "jaune" },
+    { "annee": "2024", "titre": "[[À compléter]]", "texte": "[[Ce qui a changé cette année-là]]", "couleur": "jaune" },
+    { "annee": "2025", "titre": "Deux circuits", "texte": "La Speed Arena et son compteur, la Boiler Vroom autour de la Speed Mobile.", "couleur": "vert" },
+    { "annee": "2026", "titre": "[[À compléter]]", "texte": "[[Ce qui a changé cette année-là]]", "couleur": "jaune" },
+    { "annee": "2027", "titre": "15 au départ", "texte": "15 artistes, 2 scènes, 2 nuits. La course continue.", "couleur": "rose" }
+  ],
+  "chapitres": [
+    { "surtitre": "TOUR 1", "titre": "La naissance", "texte": "Au départ, il y a des copains, un terrain et beaucoup trop d'idées. Le premier Speed se monte à la débrouille, entre deux blagues et trois rallonges électriques.\n[[Anecdote de la première édition à compléter]]", "photo": "assets/img/p090.jpg", "description": "Une bande de potes en combinaisons orange au camping" },
+    { "surtitre": "TOUR 2", "titre": "Le développement", "texte": "Édition après édition, le Speed accélère : une scène en forme de compteur de vitesse, la Boiler Vroom en son 360° autour de la Speed Mobile, des bénévoles en t-shirt rose et toujours le même esprit.\n[[Chiffres clés à compléter : public, bénévoles…]]", "photo": "assets/img/p350.jpg", "description": "La scène compteur de vitesse, de nuit, devant la foule" }
+  ],
+  "valeurs_surtitre": "→ NOS VALEURS",
+  "valeurs_titre": "Le code de la route",
+  "valeurs_intro": "Ici on roule vite, mais pas n'importe comment. Avant de prendre la piste, chaque pilote s'engage à respecter ces règles.",
+  "valeurs": [
+    { "titre": "Tout le monde sur la grille", "texte": "Quels que soient ton âge, ton origine, ton genre, ton orientation, ton handicap ou ton look : ta place est sur la piste.", "forme": "rond", "couleur": "vert", "picto": "GO" },
+    { "titre": "Zéro discrimination", "texte": "Racisme, sexisme, homophobie, transphobie, validisme : carton rouge et sortie de piste immédiate.", "forme": "rond-barre", "couleur": "orange", "picto": "" },
+    { "titre": "Respect des genres", "texte": "Chacun·e est appelé·e comme il, elle ou iel le souhaite. On ne devine pas, on demande.", "forme": "hexagone", "couleur": "rose", "picto": "iel" },
+    { "titre": "Sans oui, c'est non", "texte": "Le consentement, c'est la priorité à droite : on s'arrête, on demande, on respecte la réponse.", "forme": "triangle", "couleur": "jaune", "picto": "STOP" },
+    { "titre": "On prend soin des autres", "texte": "Un·e pilote pas en forme ? On s'arrête au stand avec lui ou elle, on prévient, on reste. Personne ne finit la course seul·e.", "forme": "triangle", "couleur": "bleu", "picto": "!!!" },
+    { "titre": "Respect du circuit", "texte": "Le site, les bénévoles, les voisins et le village nous accueillent : on les laisse comme on les a trouvés.", "forme": "hexagone", "couleur": "orange", "picto": "♥" }
+  ],
+  "aide_titre": "Un souci sur le site ?",
+  "aide_texte": "Tu es témoin ou victime d'un comportement qui ne respecte pas ce code : viens voir [[les référent·es prévention / le stand · à préciser]]. On t'écoute, sans jugement.",
+  "aide_bouton_texte": "Qui contacter →",
+  "aide_bouton_lien": ""
+}

@@ -5,7 +5,7 @@ declare(strict_types=1);
 define('SITE_ROOT', dirname(__DIR__));
 define('DATA_DIR', __DIR__ . '/data');
 define('UPLOAD_DIR', SITE_ROOT . '/assets/img/uploads');
-define('CONTENUS', ['general', 'accueil', 'programmation', 'billetterie', 'infos', 'replay', 'partenaires']);
+define('CONTENUS', ['general', 'accueil', 'programmation', 'billetterie', 'infos', 'replay', 'partenaires', 'apropos']);
 
 /* ---------- Fichiers ---------- */
 function ensure_dirs(): void {

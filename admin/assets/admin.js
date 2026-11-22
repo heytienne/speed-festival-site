@@ -73,7 +73,7 @@
   const SCENES = { arena: ['Speed Arena', '#FF5500'], boiler: ['Boiler Vroom', '#00FF97'] };
   const BLOCS = {
     'compte-a-rebours': { t: 'Compte à rebours', ic: '⏱' }, programmation: { t: 'Grille de départ', ic: '🏁' }, infos: { t: 'Briefing pilotes', ic: 'ℹ' },
-    replay: { t: 'Le replay', ic: '📷' }, billetterie: { t: 'Billetterie', ic: '🎟' }, benevoles: { t: 'Rejoins le stand', ic: '🙋' }, partenaires: { t: 'Partenaires', ic: '🤝' },
+    replay: { t: 'Le replay', ic: '📷' }, projet: { t: 'Le tour de piste (projet)', ic: '🛣' }, valeurs: { t: 'Le code de la route (valeurs)', ic: '⚠' }, billetterie: { t: 'Billetterie', ic: '🎟' }, benevoles: { t: 'Rejoins le stand', ic: '🙋' }, partenaires: { t: 'Partenaires', ic: '🤝' },
     'texte-libre': { t: 'Bloc texte + image', ic: '¶', libre: true, d: 'Titre, texte, image et bouton, sur le fond de ton choix.' },
     annonce: { t: 'Bandeau annonce', ic: '📣', libre: true, d: 'Un message court et voyant, avec un bouton.' }
   };
@@ -83,6 +83,9 @@
     carte: () => ({ titre: 'Nouvelle carte', resume: '', photo: '', couleur: 'bleu', pictogramme: 'rond', texte_pictogramme: '?', intro: '', lignes: [], horaires: [], interdits: [], bouton_texte: '', bouton_lien: '' }),
     ligne: () => ({ titre: '', texte: '' }), horaire: () => ({ jour: '', ouverture: '', premier_depart: '', fermeture: '' }), interdit: () => '',
     photo: () => ({ image: '', description: '', format: 'normal', etiquette: '', couleur: 'orange' }), logo: () => ({ nom: '', logo: '', lien: '' }),
+    etape: () => ({ annee: '', titre: '', texte: '', couleur: 'jaune' }),
+    chapitre: () => ({ surtitre: 'TOUR', titre: 'Nouveau chapitre', texte: '', photo: '', description: '' }),
+    valeur: () => ({ titre: 'Nouvelle valeur', texte: '', forme: 'rond', couleur: 'vert', picto: '' }),
     'texte-libre': () => ({ type: 'texte-libre', visible: true, fond: 'creme', surtitre: '', titre: 'Nouveau bloc', texte: '', image: '', bouton_texte: '', bouton_lien: '' }),
     annonce: () => ({ type: 'annonce', visible: true, fond: 'jaune', texte: 'Ton message ici', bouton_texte: '', bouton_lien: '' })
   };
@@ -137,9 +140,10 @@
     medias: '<rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path>',
     partenaires: '<path d="M12 3 4 7v6c0 4 3.4 7.4 8 8 4.6-.6 8-4 8-8V7z"></path>',
     benevoles: '<circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.7c1.6.8 2.7 2.6 3 5.3"></path>',
-    reglages: '<circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path>'
+    reglages: '<circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path>',
+    apropos: '<path d="M4 21V4"></path><path d="M4 4h13l-2 4 2 4H4"></path>'
   };
-  const TITRES = { tableau: 'Tableau de bord', pages: 'Pages & blocs', programmation: 'Programmation', billetterie: 'Billetterie', infos: 'Infos pratiques', medias: 'Médias', partenaires: 'Partenaires', reglages: 'Réglages' };
+  const TITRES = { tableau: 'Tableau de bord', pages: 'Pages & blocs', programmation: 'Programmation', billetterie: 'Billetterie', infos: 'Infos pratiques', apropos: 'Projet & valeurs', medias: 'Médias', partenaires: 'Partenaires', reglages: 'Réglages' };
   function route() {
     const h = (location.hash || '#tableau').slice(1).split('/');
     return { r: TITRES[h[0]] || h[0] === 'benevoles' ? h[0] : 'tableau', arg: h[1] };
@@ -147,11 +151,11 @@
   function navHtml(cur) {
     const a = (id, t, cnt, warn) => `<a href="#${id}" class="${cur === id ? 'on' : ''}"${cur === id ? ' aria-current="page"' : ''}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[id]}</svg><span class="nav-t">${t}</span>${cnt != null ? `<span class="cnt${warn ? ' warn' : ''}" data-cnt="${id}">${cnt}</span>` : ''}</a>`;
     const nArt = (S.c.programmation.artistes || []).length, nPass = (S.c.billetterie.pass || []).length, nTodo = todos(S.c.infos);
-    return `<nav class="nav" aria-label="Navigation du back-office">${a('tableau', 'Tableau de bord')}<p class="lbl">Contenus</p>${a('pages', 'Pages &amp; blocs')}${a('programmation', 'Programmation', nArt)}${a('billetterie', 'Billetterie', nPass)}${a('infos', 'Infos pratiques', nTodo || null, true)}${a('medias', 'Médias')}${a('partenaires', 'Partenaires')}${a('benevoles', 'Bénévoles')}<p class="lbl">Site</p>${a('reglages', 'Réglages')}</nav>`;
+    return `<nav class="nav" aria-label="Navigation du back-office">${a('tableau', 'Tableau de bord')}<p class="lbl">Contenus</p>${a('pages', 'Pages &amp; blocs')}${a('programmation', 'Programmation', nArt)}${a('billetterie', 'Billetterie', nPass)}${a('infos', 'Infos pratiques', nTodo || null, true)}${a('apropos', 'Projet &amp; valeurs', todos(S.c.apropos) || null, true)}${a('medias', 'Médias')}${a('partenaires', 'Partenaires')}${a('benevoles', 'Bénévoles')}<p class="lbl">Site</p>${a('reglages', 'Réglages')}</nav>`;
   }
   function navCounts() {
     const set2 = (id, v) => { const e = app.querySelector(`[data-cnt="${id}"]`); if (e) e.textContent = v; };
-    set2('programmation', (S.c.programmation.artistes || []).length); set2('billetterie', (S.c.billetterie.pass || []).length); set2('infos', todos(S.c.infos));
+    set2('programmation', (S.c.programmation.artistes || []).length); set2('billetterie', (S.c.billetterie.pass || []).length); set2('infos', todos(S.c.infos)); set2('apropos', todos(S.c.apropos));
   }
   function topStatus() {
     const z = $('#top-status'); if (!z) return;
@@ -201,6 +205,7 @@
       { t: 'Prix des pass', d: passes.filter((p) => p.prix).length, n: passes.length, r: 'billetterie' },
       { t: 'Lien de la billetterie', d: B.lien || (passes.length && passes.every((p) => p.lien)) ? 1 : 0, n: 1, r: 'billetterie' },
       { t: 'Infos pratiques (passages à compléter)', d: todos(S.c.infos) ? 0 : 1, n: 1, r: 'infos', note: todos(S.c.infos) ? plural(todos(S.c.infos), 'passage') + ' à compléter' : '' },
+      { t: 'Projet & valeurs (passages à compléter)', d: todos(S.c.apropos) ? 0 : 1, n: 1, r: 'apropos', note: todos(S.c.apropos) ? plural(todos(S.c.apropos), 'passage') + ' à compléter' : '' },
       { t: 'Logos partenaires', d: Math.min((S.c.partenaires.logos || []).length, 1), n: 1, r: 'partenaires', note: (S.c.partenaires.logos || []).length ? '' : 'Aucun logo' },
       { t: 'E-mail partenariats', d: S.c.partenaires.email ? 1 : 0, n: 1, r: 'partenaires' },
       { t: 'Lien d’inscription bénévoles', d: ben.bouton_lien ? 1 : 0, n: 1, r: 'benevoles' }
@@ -274,6 +279,8 @@
         `<div class="g2">${inp('programmation', 'vendredi', 'Vendredi : libellé')}${inp('programmation', 'vendredi_nom', 'Vendredi : surnom')}${inp('programmation', 'samedi', 'Samedi : libellé')}${inp('programmation', 'samedi_nom', 'Samedi : surnom')}</div>` + go('programmation', 'Gérer les artistes'); break;
       case 'infos': body = inp('infos', 'surtitre', 'Surtitre') + inp('infos', 'titre', 'Titre') + go('infos', 'Gérer les cartes et popups'); break;
       case 'replay': body = inp('replay', 'surtitre', 'Surtitre') + inp('replay', 'titre', 'Titre') + `<div class="g2">${inp('replay', 'bouton_texte', 'Texte du bouton')}${inp('replay', 'lien_galerie', 'Lien de la galerie')}</div>` + inp('replay', 'credit', 'Crédit photo') + go('medias', 'Gérer les photos'); break;
+      case 'projet': body = inp('apropos', 'surtitre', 'Surtitre') + inp('apropos', 'titre', 'Titre') + inp('apropos', 'intro', 'Introduction', { area: true, rows: 3 }) + go('apropos', 'Gérer les étapes et chapitres'); break;
+      case 'valeurs': body = inp('apropos', 'valeurs_surtitre', 'Surtitre') + inp('apropos', 'valeurs_titre', 'Titre') + inp('apropos', 'valeurs_intro', 'Introduction', { area: true, rows: 2 }) + go('apropos', 'Gérer les valeurs'); break;
       case 'billetterie': body = inp('billetterie', 'titre', 'Titre') + inp('billetterie', 'texte', 'Texte', { area: true, rows: 3 }) + imgField('billetterie', 'photo', 'Photo') + go('billetterie', 'Gérer les pass'); break;
       case 'partenaires': body = inp('partenaires', 'titre', 'Titre') + inp('partenaires', 'appel', 'Phrase d’appel') + inp('partenaires', 'email', 'E-mail partenariats', { type: 'email', req: true }) + go('partenaires', 'Gérer les logos'); break;
       case 'benevoles': body = inp('accueil', P + 'surtitre', 'Surtitre') + inp('accueil', P + 'titre', 'Titre') + inp('accueil', P + 'texte', 'Texte', { area: true, rows: 3 }) +
@@ -412,6 +419,29 @@
     return card('Section « Replay »', `<div class="g2">${inp('replay', 'surtitre', 'Surtitre')}${inp('replay', 'titre', 'Titre')}</div><div class="g2">${inp('replay', 'bouton_texte', 'Texte du bouton')}${inp('replay', 'lien_galerie', 'Lien de la galerie complète')}</div>${inp('replay', 'credit', 'Crédit photo')}`) +
       `<section class="card"><div class="card-h"><h2>Photos de la mosaïque (${ph.length})</h2><div class="acts"><button type="button" class="btn btn-dark" data-act="addphotos">+ Envoyer des photos</button><button type="button" class="btn" data-act="add" data-file="replay" data-path="photos" data-tpl="photo">+ Depuis la bibliothèque</button></div></div><div class="items">${items || '<p class="empty-state">Aucune photo.</p>'}</div></section>` +
       card('Bibliothèque d’images', `<p class="hint" style="margin:0">Toutes les images du site. Seules celles envoyées depuis le back-office peuvent être supprimées.</p><div class="media-grid">${lib}</div>`, '<button type="button" class="btn" data-act="uploadlib">+ Envoyer</button>');
+  };
+
+  /* ---------- Écran : à propos (le projet + nos valeurs) ---------- */
+  SCREENS.apropos = function () {
+    const A = S.c.apropos, E = A.etapes || [], C = A.chapitres || [], V = A.valeurs || [];
+    const etapes = E.map((e, i) => `<div class="item">${tools('apropos', 'etapes', i, E.length, 'Supprimer l’étape')}<div style="display:flex;flex-direction:column;gap:10px">
+      <div class="g3">${inp('apropos', 'etapes.' + i + '.annee', 'Année', { req: true, ph: '2022' })}${inp('apropos', 'etapes.' + i + '.titre', 'Titre', { req: true })}</div>
+      ${inp('apropos', 'etapes.' + i + '.texte', 'Texte', { area: true, rows: 2 })}${seg('apropos', 'etapes.' + i + '.couleur', 'Couleur de la borne', COUL.slice(0, 5))}</div></div>`).join('');
+    const chap = C.map((c, i) => `<div class="item">${tools('apropos', 'chapitres', i, C.length, 'Supprimer le chapitre')}<div class="photo-card">${imgField('apropos', 'chapitres.' + i + '.photo', 'Photo')}
+      <div style="display:flex;flex-direction:column;gap:10px"><div class="g2">${inp('apropos', 'chapitres.' + i + '.surtitre', 'Surtitre', { ph: 'TOUR 1' })}${inp('apropos', 'chapitres.' + i + '.titre', 'Titre')}</div>
+      ${inp('apropos', 'chapitres.' + i + '.texte', 'Texte', { area: true, rows: 5, hint: 'Un retour à la ligne = un nouveau paragraphe. ' + TODO_HINT })}${inp('apropos', 'chapitres.' + i + '.description', 'Description de la photo')}</div></div></div>`).join('');
+    const vals = V.map((v, i) => `<div class="item">${tools('apropos', 'valeurs', i, V.length, 'Supprimer la valeur')}<div style="display:flex;flex-direction:column;gap:10px">
+      ${inp('apropos', 'valeurs.' + i + '.titre', 'Titre', { req: true })}${inp('apropos', 'valeurs.' + i + '.texte', 'Texte', { area: true, rows: 3 })}
+      <div class="g3">${sel('apropos', 'valeurs.' + i + '.forme', 'Panneau', [['rond', 'Rond'], ['rond-barre', 'Rond barré'], ['hexagone', 'Hexagone'], ['triangle', 'Triangle']])}${inp('apropos', 'valeurs.' + i + '.picto', 'Texte du panneau', { ph: 'GO' })}</div>
+      ${seg('apropos', 'valeurs.' + i + '.couleur', 'Couleur', COUL.slice(0, 5))}</div></div>`).join('');
+    const add = (path, tpl, label) => `<button type="button" class="btn" data-act="add" data-file="apropos" data-path="${path}" data-tpl="${tpl}">${label}</button>`;
+    return card('Section « Le projet »', `<div class="g2">${inp('apropos', 'surtitre', 'Surtitre')}${inp('apropos', 'titre', 'Titre')}</div>` + inp('apropos', 'intro', 'Introduction', { area: true, rows: 3, hint: TODO_HINT })) +
+      `<section class="card"><div class="card-h"><h2>Le tour de piste : étapes (${E.length})</h2>${add('etapes', 'etape', '+ Ajouter une année')}</div><div class="items">${etapes || '<p class="empty-state">Aucune étape.</p>'}</div></section>` +
+      `<section class="card"><div class="card-h"><h2>Chapitres (${C.length})</h2>${add('chapitres', 'chapitre', '+ Ajouter un chapitre')}</div><div class="items">${chap || '<p class="empty-state">Aucun chapitre.</p>'}</div></section>` +
+      card('Section « Nos valeurs »', `<div class="g2">${inp('apropos', 'valeurs_surtitre', 'Surtitre')}${inp('apropos', 'valeurs_titre', 'Titre')}</div>` + inp('apropos', 'valeurs_intro', 'Introduction', { area: true, rows: 2 })) +
+      `<section class="card"><div class="card-h"><h2>Valeurs (${V.length})</h2>${add('valeurs', 'valeur', '+ Ajouter une valeur')}</div><div class="items">${vals || '<p class="empty-state">Aucune valeur.</p>'}</div></section>` +
+      card('Encadré « Un souci sur le site ? »', inp('apropos', 'aide_titre', 'Titre (vide = encadré masqué)') + inp('apropos', 'aide_texte', 'Texte', { area: true, rows: 3, req: true, hint: TODO_HINT }) +
+        `<div class="g2">${inp('apropos', 'aide_bouton_texte', 'Texte du bouton')}${inp('apropos', 'aide_bouton_lien', 'Lien du bouton', { req: true, ph: 'mailto:… ou https://…' })}</div>`);
   };
 
   /* ---------- Écran : partenaires ---------- */
@@ -577,7 +607,8 @@
   function reloadJournal() { return api('etat').then((j) => { S.journal = j.journal; }); }
   api('etat').then((j) => {
     S.c = j.contenus; S.brouillons = j.brouillons; S.journal = j.journal; S.medias = j.medias; S.equipe = j.equipe; S.sauvegardes = j.sauvegardes; S.user = j.utilisateur; S.pub = j.derniere_publication;
-    ['accueil', 'programmation', 'billetterie', 'infos', 'replay', 'partenaires', 'general'].forEach((k) => { if (!S.c[k] || Array.isArray(S.c[k])) S.c[k] = {}; });
+    ['accueil', 'programmation', 'billetterie', 'infos', 'replay', 'partenaires', 'general', 'apropos'].forEach((k) => { if (!S.c[k] || Array.isArray(S.c[k])) S.c[k] = {}; });
+    ['etapes', 'chapitres', 'valeurs'].forEach((k) => { if (!Array.isArray(S.c.apropos[k])) S.c.apropos[k] = []; });
     if (!Array.isArray(S.c.accueil.blocs)) S.c.accueil.blocs = [];
     if (!Array.isArray(S.c.programmation.artistes)) S.c.programmation.artistes = [];
     if (!Array.isArray(S.c.billetterie.pass)) S.c.billetterie.pass = [];

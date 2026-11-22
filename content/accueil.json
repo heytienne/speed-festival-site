@@ -4,6 +4,8 @@
     { "type": "programmation", "visible": true },
     { "type": "infos", "visible": true },
     { "type": "replay", "visible": true },
+    { "type": "projet", "visible": true },
+    { "type": "valeurs", "visible": true },
     { "type": "billetterie", "visible": true },
     {
       "type": "benevoles",

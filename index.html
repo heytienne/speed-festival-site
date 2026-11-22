@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/img/s-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=11">
+<link rel="stylesheet" href="assets/css/style.css?v=14">
 </head>
 <body>
 <div style="background: #FF5500; padding: clamp(6px, 1.2vw, 14px); font-family: Inter, system-ui, sans-serif; color: #000;">
@@ -33,8 +33,9 @@
       <li><a class="lb-row" href="#grille"><span class="lb-pos lb-p1">1</span><span class="lb-team" style="background: #FF5500;"></span><span class="lb-name">Line-up</span><span class="lb-gap lb-lead">LEADER</span></a></li>
       <li><a class="lb-row" href="#infos"><span class="lb-pos">2</span><span class="lb-team" style="background: #00BFFF;"></span><span class="lb-name">Infos</span><span class="lb-gap">+0.412</span></a></li>
       <li><a class="lb-row" href="#replay"><span class="lb-pos">3</span><span class="lb-team" style="background: #FC8AFD;"></span><span class="lb-name">Replay 2025</span><span class="lb-gap">+0.880</span></a></li>
-      <li><a class="lb-row" href="#benevoles"><span class="lb-pos">4</span><span class="lb-team" style="background: #00FF97;"></span><span class="lb-name">Bénévoles</span><span class="lb-gap">+1.204</span></a></li>
-      <li><a class="lb-row" href="#partenaires"><span class="lb-pos">5</span><span class="lb-team" style="background: #F1FF00;"></span><span class="lb-name">Partenaires</span><span class="lb-gap">+2.019</span></a></li>
+      <li><a class="lb-row" href="#projet"><span class="lb-pos">4</span><span class="lb-team" style="background: #804240;"></span><span class="lb-name">Le Speed</span><span class="lb-gap">+1.031</span></a></li>
+      <li><a class="lb-row" href="#benevoles"><span class="lb-pos">5</span><span class="lb-team" style="background: #00FF97;"></span><span class="lb-name">Bénévoles</span><span class="lb-gap">+1.204</span></a></li>
+      <li><a class="lb-row" href="#partenaires"><span class="lb-pos">6</span><span class="lb-team" style="background: #F1FF00;"></span><span class="lb-name">Partenaires</span><span class="lb-gap">+2.019</span></a></li>
     </ol>
     <div style="display: flex; align-items: center; gap: 10px;">
       <a href="#billetterie" class="t nav-billet" style="text-decoration: none; background: #00FF97; color: #000; border: 3px solid #000; box-shadow: 0 0 0 4px #00FF97; border-radius: 6px; padding: 8px 22px; font-size: 22px; font-weight: 800; font-style: italic; text-transform: uppercase; white-space: nowrap;">Billetterie →</a>
@@ -48,8 +49,9 @@
             <li><a class="lb-row" href="#grille"><span class="lb-pos lb-p1">1</span><span class="lb-team" style="background: #FF5500;"></span><span class="lb-name">Line-up</span><span class="lb-gap lb-lead">LEADER</span></a></li>
             <li><a class="lb-row" href="#infos"><span class="lb-pos">2</span><span class="lb-team" style="background: #00BFFF;"></span><span class="lb-name">Infos pratiques</span><span class="lb-gap">+0.412</span></a></li>
             <li><a class="lb-row" href="#replay"><span class="lb-pos">3</span><span class="lb-team" style="background: #FC8AFD;"></span><span class="lb-name">Replay 2025</span><span class="lb-gap">+0.880</span></a></li>
-            <li><a class="lb-row" href="#benevoles"><span class="lb-pos">4</span><span class="lb-team" style="background: #00FF97;"></span><span class="lb-name">Bénévoles</span><span class="lb-gap">+1.204</span></a></li>
-            <li><a class="lb-row" href="#partenaires"><span class="lb-pos">5</span><span class="lb-team" style="background: #F1FF00;"></span><span class="lb-name">Partenaires</span><span class="lb-gap">+2.019</span></a></li>
+            <li><a class="lb-row" href="#projet"><span class="lb-pos">4</span><span class="lb-team" style="background: #804240;"></span><span class="lb-name">Le Speed</span><span class="lb-gap">+1.031</span></a></li>
+            <li><a class="lb-row" href="#benevoles"><span class="lb-pos">5</span><span class="lb-team" style="background: #00FF97;"></span><span class="lb-name">Bénévoles</span><span class="lb-gap">+1.204</span></a></li>
+            <li><a class="lb-row" href="#partenaires"><span class="lb-pos">6</span><span class="lb-team" style="background: #F1FF00;"></span><span class="lb-name">Partenaires</span><span class="lb-gap">+2.019</span></a></li>
             <li><a class="lb-row" href="#billetterie"><span class="lb-pos lb-pit">PIT</span><span class="lb-team" style="background: #fff;"></span><span class="lb-name">Billetterie</span><span class="lb-gap lb-lead">BOX BOX</span></a></li>
           </ol>
         </div>
@@ -240,6 +242,39 @@
     </div>
   </section>
 
+  <!-- LE PROJET : le tour de piste (étapes par année + chapitres) -->
+  <section id="projet" class="ap" aria-labelledby="ap-title">
+    <div class="ap-wrap">
+      <div class="ap-head">
+        <div>
+          <p class="ap-kick" data-c="apropos.surtitre">→ LE PROJET</p>
+          <h2 id="ap-title" class="t ap-h2" data-c="apropos.titre">Le tour de piste</h2>
+        </div>
+        <p class="ap-lead" id="ap-intro"></p>
+      </div>
+      <div class="ap-track-w">
+        <div class="ap-road" aria-hidden="true"></div>
+        <ol class="ap-track" id="ap-etapes" aria-label="Les grandes étapes du Speed Festival"></ol>
+      </div>
+      <div class="ap-chap" id="ap-chapitres"></div>
+    </div>
+  </section>
+
+  <!-- NOS VALEURS : le code de la route -->
+  <section id="valeurs" class="ap-val" aria-labelledby="val-title">
+    <div class="ap-wrap">
+      <div class="ap-head">
+        <div>
+          <p class="ap-kick" data-c="apropos.valeurs_surtitre">→ NOS VALEURS</p>
+          <h2 id="val-title" class="t ap-h2" data-c="apropos.valeurs_titre">Le code de la route</h2>
+        </div>
+        <p class="ap-lead" id="val-intro"></p>
+      </div>
+      <div class="ap-signs" id="ap-valeurs"></div>
+      <div class="ap-help" id="ap-aide"></div>
+    </div>
+  </section>
+
   <!-- BILLETTERIE -->
   <section id="billetterie" style="position: relative; background: #FFF8E6; padding: clamp(56px, 8vw, 100px) clamp(16px, 2.5vw, 28px);">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: clamp(36px, 5vw, 60px); align-items: center;">
@@ -372,6 +407,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js?v=10"></script>
+<script src="assets/js/main.js?v=11"></script>
 </body>
 </html>

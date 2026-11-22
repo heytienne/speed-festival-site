@@ -73,7 +73,7 @@ $user = current_user();
 <link rel="icon" href="../assets/img/s-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@1,800;1,900&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/admin.css?v=2">
+<link rel="stylesheet" href="assets/admin.css?v=3">
 </head>
 <body>
 <?php if (!$user): ?>
@@ -98,7 +98,7 @@ $user = current_user();
   </main>
 <?php else: ?>
   <div id="app" data-csrf="<?= h($_SESSION['csrf']) ?>" data-sortie="?sortie=1&amp;t=<?= h($_SESSION['csrf']) ?>"><p class="boot">Chargement…</p></div>
-  <script src="assets/admin.js?v=2"></script>
+  <script src="assets/admin.js?v=3"></script>
 <?php endif; ?>
 </body>
 </html>

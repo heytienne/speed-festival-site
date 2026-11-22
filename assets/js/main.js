@@ -5,7 +5,8 @@
 (function () {
   'use strict';
 
-  var FICHIERS = ['general', 'accueil', 'programmation', 'billetterie', 'infos', 'replay', 'partenaires'];
+  var FICHIERS = ['general', 'accueil', 'programmation', 'billetterie', 'infos', 'replay', 'partenaires', 'apropos'];
+  var FACULTATIFS = { apropos: true }; /* fichiers ajoutés plus tard : leur absence ne bloque pas le site */
   var COULEURS = { orange: '#FF5500', jaune: '#F1FF00', vert: '#00FF97', rose: '#FC8AFD', bleu: '#00BFFF', marron: '#804240', noir: '#000000', creme: '#FFF8E6', blanc: '#FFFFFF' };
   var SCENES = { arena: { stage: 'SPEED ARENA', color: '#FF5500' }, boiler: { stage: 'BOILER VROOM', color: '#00FF97' } };
 
@@ -29,7 +30,8 @@
   function charger() {
     return Promise.all(FICHIERS.map(function (f) {
       return fetch(APERCU ? 'admin/api.php?a=apercu&f=' + f : 'content/' + f + '.json', { cache: 'no-cache', credentials: 'same-origin' })
-        .then(function (r) { if (!r.ok) throw new Error(f + ' : ' + r.status); return r.json(); });
+        .then(function (r) { if (!r.ok) throw new Error(f + ' : ' + r.status); return r.json(); })
+        .catch(function (e) { if (FACULTATIFS[f]) return {}; throw e; });
     })).then(function (list) {
       var d = {};
       FICHIERS.forEach(function (f, i) { d[f] = list[i]; });
@@ -70,7 +72,7 @@
   }
 
   /* ---------- Ordre et visibilité des blocs de l'accueil ---------- */
-  var SECTIONS = { 'compte-a-rebours': 'compte-a-rebours', programmation: 'grille', infos: 'infos', replay: 'replay', billetterie: 'billetterie', benevoles: 'benevoles', partenaires: 'partenaires' };
+  var SECTIONS = { 'compte-a-rebours': 'compte-a-rebours', programmation: 'grille', infos: 'infos', replay: 'replay', projet: 'projet', valeurs: 'valeurs', billetterie: 'billetterie', benevoles: 'benevoles', partenaires: 'partenaires' };
   function blocLibre(b) {
     var fond = col(b.fond, '#FFF8E6'), sombre = /^(noir|marron)$/.test(b.fond || '');
     var s = document.createElement('section');
@@ -422,6 +424,37 @@
     a.addEventListener('click', function () { var d = document.querySelector('.nav-burger'); if (d) d.open = false; });
   });
 
+  /* ---------- Le projet (tour de piste) et nos valeurs (code de la route) ---------- */
+  function panneau(v) {
+    var c = col(v.couleur), t = esc(v.picto || ''), f = v.forme, s = '';
+    if (f === 'triangle') s = '<polygon points="55,6 104,94 6,94" fill="' + c + '" stroke="#fff" stroke-width="7" stroke-linejoin="round"></polygon><text x="55" y="80" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="28">' + t + '</text>';
+    else if (f === 'hexagone') s = '<polygon points="30,4 80,4 106,50 80,96 30,96 4,50" fill="' + c + '" stroke="#fff" stroke-width="7" stroke-linejoin="round"></polygon><text x="55" y="61" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="30">' + t + '</text>';
+    else s = '<circle cx="55" cy="50" r="44" fill="' + c + '" stroke="#fff" stroke-width="7"></circle>' + (f === 'rond-barre' ? '<path d="M24 19 L86 81" stroke="#000" stroke-width="9"></path>' : '') + '<text x="55" y="61" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="30">' + t + '</text>';
+    return '<svg viewBox="0 0 110 100" width="88" height="80" aria-hidden="true">' + s + '</svg>';
+  }
+  function apropos(a) {
+    if (!a || !a.titre) { ['projet', 'valeurs'].forEach(function (id) { $(id).hidden = true; document.querySelectorAll('nav a[href="#' + id + '"]').forEach(function (l) { var li = l.closest('li'); if (li) li.hidden = true; }); }); return; }
+    $('ap-intro').innerHTML = txt(a.intro);
+    $('ap-etapes').innerHTML = (a.etapes || []).map(function (e, i) {
+      return '<li class="ap-cp"><svg class="ap-flag" viewBox="0 0 72 62" aria-hidden="true"><polygon points="18,2 54,2 70,31 54,60 18,60 2,31" fill="' + col(e.couleur, '#F1FF00') + '" stroke="#000" stroke-width="5"></polygon>' +
+        '<text x="36" y="40" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="22">' + (i === 0 ? 'KM 0' : i) + '</text></svg>' +
+        '<span class="t ap-yr">' + esc(e.annee) + '</span><span class="t ap-cpt">' + txt(e.titre) + '</span><p>' + txt(e.texte) + '</p></li>';
+    }).join('');
+    $('ap-chapitres').innerHTML = (a.chapitres || []).map(function (c) {
+      return '<article class="ap-ch">' + (c.photo ? '<img src="' + esc(img(c.photo)) + '" alt="' + esc(c.description || '') + '" loading="lazy">' : '') +
+        '<div class="ap-chb"><p class="ap-kick">' + esc(c.surtitre) + '</p><h3 class="t">' + esc(c.titre) + '</h3>' +
+        String(c.texte || '').split(/\n+/).map(function (p) { return '<p>' + txt(p) + '</p>'; }).join('') + '</div></article>';
+    }).join('');
+    $('val-intro').innerHTML = txt(a.valeurs_intro);
+    $('ap-valeurs').innerHTML = (a.valeurs || []).map(function (v) {
+      return '<article class="ap-sign">' + panneau(v) + '<h3 class="t">' + esc(v.titre) + '</h3><p>' + txt(v.texte) + '</p></article>';
+    }).join('');
+    var lien = url(a.aide_bouton_lien);
+    $('ap-aide').innerHTML = a.aide_titre ? '<strong class="t">' + esc(a.aide_titre) + '</strong><span>' + txt(a.aide_texte) + '</span>' +
+      (a.aide_bouton_texte && lien ? '<a href="' + esc(lien) + '"' + (/^https?:/.test(lien) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(a.aide_bouton_texte) + '</a>' : '') : '';
+    $('ap-aide').hidden = !a.aide_titre;
+  }
+
   /* ---------- Lancement ---------- */
   charger().then(function (d) {
     remplirTextes(d);
@@ -432,6 +465,7 @@
     replay(d.replay);
     infos(d.infos);
     partenaires(d.partenaires);
+    apropos(d.apropos);
     document.documentElement.classList.add('contenus-ok');
     if (APERCU) {
       var ban = document.createElement('div');
