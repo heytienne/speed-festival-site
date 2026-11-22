@@ -152,7 +152,70 @@
       $('lu-tab-' + day).textContent = court(day === 'ven' ? p.vendredi : p.samedi, day === 'ven' ? p.vendredi_nom : p.samedi_nom);
     });
     luRender();
+    ['ven', 'sam'].forEach(function (day) { $('ca-chip-' + day).textContent = court(day === 'ven' ? p.vendredi : p.samedi, ''); });
+    caRender();
   }
+
+  /* ---------- Carrousel des artistes ----------
+     Une carte par artiste (ordre chronologique, vendredi puis samedi). Sans photo presse,
+     une photo de l'édition 2025 sert de visuel provisoire. Défilement natif (glisser au doigt) + flèches. */
+  var PROVISOIRES = ['assets/img/p350.jpg', 'assets/img/p166.jpg', 'assets/img/p448.jpg', 'assets/img/p723.jpg', 'assets/img/p444.jpg', 'assets/img/p159.jpg', 'assets/img/p013.jpg'];
+  var caDay = 'all', CA = [], caVp = $('ca-vp'), caTrack = $('ca-track');
+  var REDUIT = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function caRender() {
+    CA = [];
+    ['ven', 'sam'].forEach(function (day) {
+      (JOURS[day] ? JOURS[day].list : []).forEach(function (a, i) {
+        var g = (day === 'sam' && JOURS.ven ? JOURS.ven.list.length : 0) + i;
+        if (caDay === 'all' || caDay === day) CA.push({ day: day, i: i, a: a, g: g });
+      });
+    });
+    caTrack.innerHTML = CA.map(function (x, k) {
+      var a = x.a, presse = a.info.photo ? img(a.info.photo) : '', ph = presse || PROVISOIRES[x.g % PROVISOIRES.length];
+      var jour = court(JOURS[x.day].label, '');
+      return '<li class="ca-item"><button type="button" class="ca-card" data-k="' + k + '" aria-haspopup="dialog" style="--c:' + a.color + ';" aria-label="' +
+          esc(a.name + ', ' + (JOURS[x.day].label || '') + ', ' + a.time + ', ' + a.stage) + ' : voir la fiche artiste">' +
+        '<span class="ca-ph"><img src="' + esc(ph) + '" alt="" loading="lazy"><span class="ca-tint"></span>' +
+          '<span class="t ca-slot">' + esc(jour.toUpperCase()) + ' · <b>' + esc(a.start) + '</b></span>' +
+          (presse ? '' : '<span class="ca-prov">VISUEL PROVISOIRE</span>') + '</span>' +
+        '<span class="ca-plate"><span class="t ca-nm">' + esc(a.name) + '</span>' +
+          '<span class="ca-meta"><span class="ca-stg"><i></i>' + a.stage + '</span>' + (a.style ? '<span>' + esc(a.style) + '</span>' : '') + '</span></span>' +
+        '</button></li>';
+    }).join('');
+    caVp.scrollLeft = 0;
+    caUpdate();
+  }
+  function caUpdate() {
+    var items = caTrack.children, n = items.length, right = caVp.getBoundingClientRect().right + 2, vus = 0;
+    for (var k = 0; k < n; k++) if (items[k].getBoundingClientRect().right <= right) vus = k + 1;
+    vus = Math.max(vus, n ? 1 : 0);
+    $('ca-count').textContent = pad2(vus) + ' / ' + pad2(n);
+    $('ca-bar').style.width = (n ? Math.round(vus / n * 100) : 0) + '%';
+    var debut = caVp.scrollLeft <= 2, fin = caVp.scrollLeft + caVp.clientWidth >= caVp.scrollWidth - 2;
+    $('ca-prev').disabled = debut; $('ca-next').disabled = fin;
+  }
+  var caTick = false;
+  caVp.addEventListener('scroll', function () { if (caTick) return; caTick = true; requestAnimationFrame(function () { caTick = false; caUpdate(); }); }, { passive: true });
+  window.addEventListener('resize', caUpdate);
+  function caScroll(dir) { caVp.scrollBy({ left: dir * Math.max(200, caVp.clientWidth * 0.9), behavior: REDUIT ? 'auto' : 'smooth' }); }
+  $('ca-prev').addEventListener('click', function () { caScroll(-1); });
+  $('ca-next').addEventListener('click', function () { caScroll(1); });
+  document.querySelectorAll('.ca-chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      caDay = c.getAttribute('data-day');
+      document.querySelectorAll('.ca-chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+      caRender();
+    });
+  });
+  $('ca-more').addEventListener('click', function () {
+    var h = $('horaires'), ouvrir = h.hidden;
+    h.hidden = !ouvrir;
+    this.setAttribute('aria-expanded', String(ouvrir));
+    this.textContent = ouvrir ? 'Masquer les horaires ↑' : 'Voir les horaires →';
+    if (ouvrir) h.scrollIntoView({ behavior: REDUIT ? 'auto' : 'smooth', block: 'start' });
+  });
+
   document.querySelectorAll('.lu-tab').forEach(function (t) {
     t.addEventListener('click', function () { luDay(t.getAttribute('data-day')); });
   });
@@ -168,9 +231,24 @@
   var am = $('artist-modal'), amOpener = null;
   function initials(name) { return name.split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 3).toUpperCase(); }
   var PLAY = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#000"></circle><path d="M10 7.5v9l7-4.5z" fill="#fff"></path></svg>';
-  function openArtist(dayKey, i, btn) {
+  var amListe = [], amPos = 0;
+  function ordreComplet() {
+    var l = [];
+    ['ven', 'sam'].forEach(function (day) { (JOURS[day] ? JOURS[day].list : []).forEach(function (a, i) { l.push({ day: day, i: i }); }); });
+    return l;
+  }
+  /* liste = ordre de navigation « précédent / suivant » dans la fiche (celui du carrousel ou des horaires) */
+  function openArtist(dayKey, i, btn, liste) {
     var a = JOURS[dayKey].list[i], info = a.info;
     amOpener = btn;
+    amListe = liste && liste.length ? liste : ordreComplet();
+    amPos = Math.max(0, amListe.findIndex(function (x) { return x.day === dayKey && x.i === i; }));
+    var nb = amListe.length, pv = amListe[(amPos - 1 + nb) % nb], nx = amListe[(amPos + 1) % nb];
+    $('am-nav').hidden = nb < 2;
+    $('am-prev').textContent = '← ' + JOURS[pv.day].list[pv.i].name;
+    $('am-prev').setAttribute('aria-label', 'Artiste précédent : ' + JOURS[pv.day].list[pv.i].name);
+    $('am-next').textContent = JOURS[nx.day].list[nx.i].name + ' →';
+    $('am-next').setAttribute('aria-label', 'Artiste suivant : ' + JOURS[nx.day].list[nx.i].name);
     am.style.setProperty('--am-color', a.color);
     $('am-kicker').textContent = '→ LINE-UP · ' + a.stage;
     $('am-name').textContent = a.name;
@@ -193,8 +271,17 @@
   }
   function closeArtist() { am.hidden = true; document.body.style.overflow = ''; if (amOpener) amOpener.focus(); }
   $('grille').addEventListener('click', function (e) {
-    var b = e.target.closest('.lu-row'); if (b) openArtist(b.getAttribute('data-day'), +b.getAttribute('data-i'), b);
+    var b = e.target.closest('.lu-row'); if (b) return openArtist(b.getAttribute('data-day'), +b.getAttribute('data-i'), b);
+    var c = e.target.closest('.ca-card');
+    if (c) { var x = CA[+c.getAttribute('data-k')]; openArtist(x.day, x.i, c, CA.map(function (y) { return { day: y.day, i: y.i }; })); }
   });
+  function amGo(d) {
+    var nb = amListe.length, x = amListe[(amPos + d + nb) % nb];
+    openArtist(x.day, x.i, amOpener, amListe);
+    $(d < 0 ? 'am-prev' : 'am-next').focus();
+  }
+  $('am-prev').addEventListener('click', function () { amGo(-1); });
+  $('am-next').addEventListener('click', function () { amGo(1); });
   $('am-close').addEventListener('click', closeArtist);
   am.addEventListener('click', function (e) { if (e.target === am) closeArtist(); });
   document.addEventListener('keydown', function (e) { if (!am.hidden && e.key === 'Escape') closeArtist(); });

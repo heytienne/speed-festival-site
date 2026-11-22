@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/img/s-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=10">
+<link rel="stylesheet" href="assets/css/style.css?v=11">
 </head>
 <body>
 <div style="background: #FF5500; padding: clamp(6px, 1.2vw, 14px); font-family: Inter, system-ui, sans-serif; color: #000;">
@@ -130,6 +130,29 @@
         <p style="margin: 0; max-width: 380px; font-size: clamp(15px, 1.5vw, 17px); line-height: 1.5;" data-c="programmation.intro">Ouverture du site à 18h, extinction des moteurs à 3h. Entre les deux : 15 départs sur deux circuits.</p>
       </div>
 
+      <!-- Carrousel des artistes : filtre par jour, flèches, glisser au doigt -->
+      <div class="ca-ctrl">
+        <div class="ca-chips" role="group" aria-label="Filtrer les artistes par jour">
+          <button type="button" class="t ca-chip" data-day="all" aria-pressed="true">Tout</button>
+          <button type="button" class="t ca-chip" data-day="ven" aria-pressed="false" id="ca-chip-ven">Ven 28</button>
+          <button type="button" class="t ca-chip" data-day="sam" aria-pressed="false" id="ca-chip-sam">Sam 29</button>
+        </div>
+        <div class="ca-nav">
+          <button type="button" class="ca-arrow" id="ca-prev" aria-label="Artistes précédents"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+          <span class="t ca-count" id="ca-count" aria-live="polite">00 / 00</span>
+          <button type="button" class="ca-arrow" id="ca-next" aria-label="Artistes suivants"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+        </div>
+      </div>
+      <div class="ca-vp" id="ca-vp" role="region" aria-roledescription="carrousel" aria-label="Artistes de la line-up" tabindex="0">
+        <ul class="ca-track" id="ca-track"></ul>
+      </div>
+      <div class="ca-foot">
+        <div class="ca-bar" aria-hidden="true"><span id="ca-bar"></span></div>
+        <button type="button" class="t ca-more" id="ca-more" aria-expanded="false" aria-controls="horaires">Voir les horaires →</button>
+      </div>
+
+      <!-- Horaires (liste par jour), dépliés depuis le bouton « Voir les horaires » -->
+      <div id="horaires" class="lu-wrap" hidden>
       <!-- Commandes : onglets jour (mobile) + filtre par scène (code couleur) -->
       <div class="lu-ctrl">
         <div class="lu-tabs" role="tablist" aria-label="Choisir le jour">
@@ -153,6 +176,7 @@
           <h3 class="t lu-dayh"><b data-c="programmation.samedi">SAMEDI 29</b> <span data-c="programmation.samedi_nom">Course</span></h3>
           <ul class="lu-list" id="sam-list"></ul>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -340,10 +364,14 @@
       </dl>
       <p class="am-bio" id="am-bio"></p>
       <div class="am-listen" id="am-listen"></div>
+      <div class="am-nav" id="am-nav">
+        <button type="button" class="t" id="am-prev"></button>
+        <button type="button" class="t" id="am-next"></button>
+      </div>
     </div>
   </div>
 </div>
 
-<script src="assets/js/main.js?v=9"></script>
+<script src="assets/js/main.js?v=10"></script>
 </body>
 </html>
